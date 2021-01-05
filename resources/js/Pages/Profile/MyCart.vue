@@ -1,37 +1,80 @@
 <template>
     <app-layout>
         <template #content>
-            <div class='my-cart-container' v-if='cart_details != 0'>
-                <div class='card' v-for='(product,index) in cart_details' :key='product[0].product_id'>
-                    <div class='image'>
-                        <img :src='"/storage/product_photos/"+product[0].photos_folder+"/" + product[2][0].photo_name' alt="" v-if='product[2].length!=0'>
-                        <img v-else src="/storage/product_photos/no-image.png" alt="">
-                    </div>
-                    <div class='product-information'>
-                        <h1>{{product[0].product_name}}</h1>
-                        <h1 >Quantity:
-                            <form>
-                                <input @change='changeQuantity(index)' :id='`cart_no`+index' type="number" :value='product[1]'>
-                            </form>
-                        </h1>
-                    </div>
-                    <div class='product-price'>
-                        <h1>Price = {{product[0].product_price * product[1]}}</h1>
+            <div class='my-cart'>
+                <div id='show-orders' class='my-cart-container' v-if='sumCartOrders(cart_details) != 0'>
+                    <div :id='"item-no"+index' v-for='(product,index) in cart_details' :key='product[0].product_id'>
+                        <div class='card' v-if='product[1] > 0'>
+                            <div class='image'>
+                                <img :src='"/storage/product_photos/"+product[0].photos_folder+"/" + product[2][0].photo_name' alt="" v-if='product[2].length!=0'>
+                                <img v-else src="/storage/product_photos/no-image.png" alt="">
+                            </div>
+                            <div class='product-information'>
+                                <h1><a :href='"/product_details/"+product[0].product_id'>{{product[0].product_name}}</a></h1>
+                                <div class='quantity-container'>
+                                    <h1 >Qty:</h1>
+                                    <form>
+                                        <input @change='changeQuantity(index,product[0].product_price)' :id='`cart_no`+index' type="number" :value='product[1]'>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class='product-price'>
+                                <h1 :id='"product-price-"+index'>{{product[0].product_price * product[1]}}</h1>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class='total-price-container'>
-                    <h1>{{getTotalPrice()}}</h1>
+                <div class='my-cart-container' id='dont-show-orders' v-if='cart_details === 0'>
+                    <h1>You have no orders</h1>
                 </div>
+                <div class='checkout-container'>
+                    <div class='checkout'>
+                        <div class='addresses'>
+                            <h1>Shipping Address</h1>
+                            <div class='shipping-address'>
+                                <h1>Talamban Cebu City</h1>
+                                <button @click='editShippingAddress'>Edit</button>
+                            </div>
+                            <h1>Billing Address</h1>
+                            <div class='billing-address'>
+                                <h1>Talamban Cebu City</h1>
+                                <button @click='editBillingAddress'>Edit</button>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class='order-summary'>
+                            <h1>Order Summary</h1>
+                            <div class='summary-details'>
+                                <div id='subtotal'>
+                                    <h1>Subtotal</h1>
+                                    <h1>{{getTotalPrice()}}</h1>
+                                </div>
+                                <div id='shipping-fee'>
+                                    <h1>Shipping Fee</h1>
+                                    <h1>P100</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class='checkout-section'>
+                            <div class='total-price-section'>
+                                <button class='checkout-button'>Checkout</button>
+                                <h1 class='total-price'>{{getTotalPrice()}}</h1>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <ShippingAddressPopup :class='"popup"'/>
             </div>
-            <div class='my-cart-container' v-else>
-                <h1>You have no orders</h1>
-            </div>
+            
         </template>
     </app-layout>    
 </template>
 
 <script>
 import AppLayout from '@/Layouts/AppLayout.vue'
+import ShippingAddressPopup from '@/Pages/Modals/ShippingAddressPopup.vue'
 
 export default {
     data() {
@@ -40,20 +83,28 @@ export default {
             product_quantity: 0
         }
     },
-    components: { AppLayout },
+    components: { AppLayout , ShippingAddressPopup},
     props:['cart_details','cart_cookie'],
     mounted() {
         this.cart_products = this.cart_details
     },
     methods: {
         getTotalPrice:function() {
-            let total = this.cart_details.reduce((total_val,current) => {
-                return total_val + (current[0].product_price * current[1])
-            },0)
+            if(this.cart_details) {
+                return this.cart_details.reduce((total_val,current) => {
+                    return total_val + (current[0].product_price * current[1])
+                },0)
+            }
 
-            return total;
         },
-        changeQuantity(index) {
+        sumCartOrders(cart) {
+            if(cart) {
+                return cart.reduce( (total,item) => {
+                    return total + item[1]
+                }, 0)
+            }
+        },
+        changeQuantity(index,price) {
             const quantity_value = document.querySelector(`#cart_no`+index).value;
             const date = new Date();
 
@@ -62,7 +113,24 @@ export default {
             this.cart_products[index][1] = quantity_value;
 
             document.cookie = `cart_orders=${JSON.stringify(this.cart_cookie)};expires=`+ date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000) + `;path=/`
+            
+            if(quantity_value == 0) {
+                document.querySelector(`#item-no${index}`).style.display = 'none';
+            }
+
+            document.querySelector(`#product-price-`+index).innerHTML = price * quantity_value;
+
+            if(this.sumCartOrders(this.cart_details) == 0){
+                document.cookie = `cart_orders=0;expires=`+ new Date(0,0,0) + `;path=/`
+            }
         },
+        editShippingAddress() {
+            document.querySelector('.popup').style.display='block';
+        },
+        editBillingAddress() {
+            console.log('working')
+        }
+        
         
     },
         
@@ -70,19 +138,95 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.popup{
+    display:none;
+    position: absolute;
+    left:50vw;
+    top:50vh;
+    z-index: 1;
+    background-color:white;
+}
+.my-cart{
+    display:flex;
+    padding:100px; 
+    gap:1rem;
+    @media screen and (max-width:1000px){
+        display:grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2,minmax(400px,1fr));
+        grid-template-columns: repeat(auto-fit,minmax(400px,1fr));
+    }
+    .checkout-container{
+        flex:1;
+        .checkout{
+            width:90%;
+            padding:25px;
+            border:1px solid black;
+            background:white;
+            .addresses{
+                gap:1rem;
+            }
+            .checkout-section{
+                display:grid;
+                font-size:20px;
+                .total-price-section{
+                    margin-top:20px;
+                    display:flex;
+                    flex:3;
+                    justify-content: space-between;
+                    .total-price{
+                        padding:25px 0 25px 25px;
+                    }
+                }
+                .checkout-button{
+                    padding:25px 40px 25px 40px;
+                    background: #ebebeb63;
+                    transition: all .45s;
+                    border-radius: 10px 0 0 0;
+                    
+                }
+                .checkout-button:hover, .checkout-button:focus{
+                        box-shadow: 1px 1px 1px;
+                        outline: none;
+                }
+            }
+            .shipping-address, .billing-address{
+                display:flex;
+                justify-content: space-between;
+                button:focus{
+                    outline:none;
+                }
+                padding:0 0 25px 0;
+            }
+            .order-summary{
+                .summary-details{
+                    #subtotal{
+                        display:flex;
+                        align-items: center;
+                        justify-content: space-between;
+                    }
+                    #shipping-fee{
+                        display:flex;
+                        align-items: center;
+                        justify-content: space-between;
+                    }
+                }
+            }
+        }
+    }
     .my-cart-container{
+        flex:2;
         width:70vw;
         display:grid;
-        margin:250px auto;
-        gap:2rem;
+        gap:1rem;
         .card{
-            border:1px solid grey;
             box-shadow: 1px 1px 3px;
             display:flex;
+            background:white;
             .image{
                 flex:1;
-                width:250px;
-                height:250px;
+                width:200px;
+                height:200px;
                 display:flex;
                 align-items: center;
                 justify-content: center;
@@ -92,9 +236,43 @@ export default {
             }
             .product-information{
                 flex:3;
+                display:flex;
+                align-items: center;
+                font-size: 20px;
+                padding:20px;
+                h1{
+                    padding:25px;
+                    flex:2;
+                }
+                .quantity-container{
+                    flex:1;
+                    display:flex;
+                    align-items: center;
+                    input{
+                        width:40px;
+                        padding:5px;
+                        border-radius: 5px 5px 5px 5px;
+                        box-shadow: 1px 1px 1px;
+                        text-align: center;
+                    }
+                    input:focus{
+                        outline: none;
+                    }
+                    input::-webkit-outer-spin-button,
+                    input::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                }
             }
             .product-price{
                 flex:1;
+                display:flex;
+                align-items: center;
+                justify-content: center;
+                #price{
+                    font-size:30px;
+                }
             }
             
         }
@@ -107,4 +285,5 @@ export default {
                     grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
                 }
             }
+}
 </style>

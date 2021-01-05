@@ -98,8 +98,8 @@ export default {
         grid-template-columns: repeat(4,minmax(300px,1fr));
         
         @media screen and (max-width:1400px){
-            grid-template-columns: repeat(4,minmax(200px,1fr));
-            grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+            grid-template-columns: repeat(4,minmax(300px,1fr));
+            grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
         }
         margin:auto;
         gap:4rem;

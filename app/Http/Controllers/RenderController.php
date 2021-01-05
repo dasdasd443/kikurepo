@@ -71,6 +71,7 @@ class RenderController extends Controller
             }
         }else{
             $cart_array = 0;
+            $decoded_cart_cookie = 0;
         }
         
         //return $cart_array;
