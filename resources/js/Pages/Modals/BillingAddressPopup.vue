@@ -2,7 +2,7 @@
     <div class='popup'>
         <div class='popup-container'>
             <div class='popup-header'>
-                <h1>Shipping Address</h1>
+                <h1>Billing Address</h1>
                 <button @click='$emit("closePopup")'>Close</button>
             </div>
             <hr>
@@ -41,8 +41,8 @@
                     </form>
                 </div>
                 <div class='edit-confirmation-container'>
-                    <div class='shipping-address-list-container'>
-                        <h1>Here is a list of available shipping addresses</h1>
+                    <div class='billing-address-list-container'>
+                        <h1>Here is a list of available billing addresses</h1>
                     </div>
                     
                 </div>
@@ -135,7 +135,7 @@ export default {
         }
         .edit-confirmation-container{
             flex:1;
-            .shipping-address-list-container{
+            .billing-address-list-container{
                 padding:20px;
             }
         }

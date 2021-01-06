@@ -1,19 +1,19 @@
 <template>
-    <div class="min-h-screen bg-gray-100">
+    <div>
         
         <!-- Page Heading -->
         <!--<header class="bg-white shadow">
                 <slot name="header"></slot>
         </header>-->
 
-        <header class='bg-white shadow'>
-            <div class='header-container'>
+        <header class='header shadow'>
+            <nav class='header-container'>
                 <div class='title-container'>
                     <h2><inertia-link href='/'>Kiku Trading Company</inertia-link></h2>
                 </div>
                 <div class='search-container'>
                     <form action="GET" @submit.prevent='search'>
-                        <button class='category-button'>All</button>
+                        <label for="search-text"><button class='category-button'>All</button></label>
                         <input type="text" id='search-text' placeholder='Search for a product'>
                         <button type='submit' class='search-button'>Search</button>
                     </form>
@@ -36,7 +36,7 @@
                     </div>
                     <h1><a href="/user/my_cart">My Cart</a></h1>
                 </div>
-            </div>
+            </nav>
         </header>
         <div class='bg-white shadow categories-container'>
             <h1>Browse by Categories: </h1>
@@ -156,7 +156,7 @@
 </script>
 <style>
 *{
-    scroll-behavior: smooth;   
+    scroll-behavior: smooth;    
 }
 ::-webkit-scrollbar{
     width:10px;
@@ -167,10 +167,14 @@
 
 </style>
 <style lang='scss' scoped>
+body{
+    background: #f7f7f7; 
+}
     *{
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        font-family: 'Roboto';
     }
     .category-list{
         display:flex;
@@ -187,10 +191,11 @@
     }
     .header-container{
         display:flex;
-        color:black;
         font-size:20px;
-        height: 70px;
+        height: 100px;
         z-index: 2;
+        background: #393e46; 
+        color:white;
         .title-container{
             display:flex;
             flex:1;

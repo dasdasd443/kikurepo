@@ -43,12 +43,12 @@
                             <h1>Shipping Address</h1>
                             <div class='shipping-address'>
                                 <h1>Talamban Cebu City</h1>
-                                <button @click='editShippingAddress'>Edit</button>
+                                <button @click='editAddress(".ShippingAddress")'>Edit</button>
                             </div>
                             <h1>Billing Address</h1>
                             <div class='billing-address'>
                                 <h1>Talamban Cebu City</h1>
-                                <button @click='editBillingAddress'>Edit</button>
+                                <button @click='editAddress(".BillingAddress")'>Edit</button>
                             </div>
                         </div>
                         <hr>
@@ -75,7 +75,8 @@
                         
                     </div>
                 </div>
-                <ShippingAddressPopup @closePopup='closePopup' :class='"popup"'/>
+                <ShippingAddressPopup @closePopup='closePopup' :class='"ShippingAddress popup"'/>
+                <BillingAddressPopup @closePopup='closePopup' :class='"BillingAddress popup"'/>
             </div>
             
         </template>
@@ -85,6 +86,7 @@
 <script>
 import AppLayout from '@/Layouts/AppLayout.vue'
 import ShippingAddressPopup from '@/Pages/Modals/ShippingAddressPopup.vue'
+import BillingAddressPopup from '@/Pages/Modals/BillingAddressPopup.vue'
 
 export default {
     data() {
@@ -94,7 +96,7 @@ export default {
             checkoutKey: 0
         }
     },
-    components: { AppLayout , ShippingAddressPopup},
+    components: { AppLayout , ShippingAddressPopup, BillingAddressPopup},
     props:['cart_details','cart_cookie'],
     mounted() {
         this.cart_products = this.cart_details
@@ -145,14 +147,16 @@ export default {
 
             this.checkoutKey+=1;
         },
-        editShippingAddress() {
-            document.querySelector('.popup').style.display='block';
+        editAddress(address) {
+            document.querySelector(address).style.display='block';
         },
         editBillingAddress() {
             console.log('working')
         },
         closePopup() {
-            document.querySelector('.popup').style.display='none';
+            document.querySelectorAll('.popup').forEach(elem => {
+                elem.style.display='none';
+            });
         }
         
         
