@@ -41,7 +41,6 @@ export default {
         AppLayout
     },
     methods:{
-        ...mapActions(['displayProductsData']),
         addToCart(product_id) {
             console.log(product_id);
         },
@@ -51,11 +50,9 @@ export default {
         }
     },
     computed:{
-        ...mapGetters(['productsData'])
     },
     props:['products'],
     created(){
-        this.displayProductsData();
     },
     mounted() {
         
@@ -98,8 +95,8 @@ export default {
         grid-template-columns: repeat(4,minmax(300px,1fr));
         
         @media screen and (max-width:1400px){
-            grid-template-columns: repeat(4,minmax(200px,1fr));
-            grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+            grid-template-columns: repeat(4,minmax(300px,1fr));
+            grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
         }
         margin:auto;
         gap:4rem;

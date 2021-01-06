@@ -5,7 +5,9 @@
                 <div class='photos-container'>
                     <div class='display-photo'>
                         <div class='photo-collection' v-if='product_photos.length != 0'>
+                            <button>X</button>
                             <img v-for='photo in product_photos' :key='photo.photo_id' :src='"/storage/product_photos/"+product_details.photos_folder+"/" + photo.photo_name' alt="">
+                            <button>Y</button>
                         </div>
                         <div v-else>
                             <img src="/storage/product_photos/no-image.png" alt="no-product-image">
@@ -43,7 +45,7 @@
                         <a href="#products-description-container">>See more about this product</a>
                     </div>
                     <div class='product-buttons'>
-                        <button id='add-to-cart-button' @click='addToCart(product_details.product_id)'>Add to Cart</button>
+                        <button id='add-to-cart-button' @click='addToCart(product_details.product_id)'><a href="javascript:history.back()">Add to Cart</a></button>
                         <button id='add-to-wishlist-button' @click='addToWishlist(product_details.product_id)'>Add to Wishlist</button>
                     </div>
                 </div>
@@ -71,7 +73,6 @@ export default {
                  return id.split('=')[0]==='cart_orders'
             })
 
-            console.log(cart_orders_cookie);
 
             //if there is an existing cookie for cart orders
             if(cart_orders_cookie.length > 0)
@@ -93,7 +94,6 @@ export default {
                     get_cart_orders.map(cart_item => {
                         if (cart_item.product_id === product_id)
                             cart_item.quantity++
-                            console.log(document.cookie)
                     })
 
                     //set the cookie and give it to /my_cart route
@@ -118,7 +118,6 @@ export default {
             //if there are no existing cart orders
             else
             {
-                console.log('yes');
                 const date = new Date();
                 const new_cart_order = [
                     {product_id,quantity: 1}
@@ -156,6 +155,11 @@ export default {
     grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
     .photos-container{
         flex: 1;
+        .display-photo{
+            .photo-collection{
+                display:flex;
+            }
+        }
     }
     .product-details{
         flex:2;

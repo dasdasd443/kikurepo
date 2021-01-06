@@ -2,9 +2,7 @@
     <app-layout>
 
         <template #content>
-            <div v-for='n in products' :key='n.product_id'>
-                {{n.product_name}}
-            </div>
+            Hello and Welcome
         </template>
     </app-layout>
 </template>
@@ -34,7 +32,6 @@
             },
         },
         mounted(){
-            this.displayProducts();
         }
     }
 </script>
