@@ -19,7 +19,7 @@
                 </div>
                 <div class='payment-container'>
                     <h1>Payment</h1>
-                    <button>Proceed to checkout</button>
+                    <button @click='checkoutPayment'>Proceed to checkout</button>
                 </div>
             </div>
         </template>
@@ -33,6 +33,15 @@ export default {
     components: { BasicModalLayout } ,
     props: ['totalPayment'],
     methods: {
+        checkoutPayment() {
+            var response = fetch('/secret').then(function(response) {
+                return response.json();
+            }).then(function(responseJson) {
+                var clientSecret = responseJson.client_secret;
+                // Call stripe.confirmCardPayment() with the client secret.
+                console.log(clientSecret)
+            });
+        }
     },
     mounted() {
     }

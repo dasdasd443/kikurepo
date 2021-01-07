@@ -3555,7 +3555,17 @@ __webpack_require__.r(__webpack_exports__);
     BasicModalLayout: _layouts_BasicModalLayout_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: ['totalPayment'],
-  methods: {},
+  methods: {
+    checkoutPayment: function checkoutPayment() {
+      var response = fetch('/secret').then(function (response) {
+        return response.json();
+      }).then(function (responseJson) {
+        var clientSecret = responseJson.client_secret; // Call stripe.confirmCardPayment() with the client secret.
+
+        console.log(clientSecret);
+      });
+    }
+  },
   mounted: function mounted() {}
 });
 
@@ -49807,7 +49817,9 @@ var render = function() {
               _c("div", { staticClass: "payment-container" }, [
                 _c("h1", [_vm._v("Payment")]),
                 _vm._v(" "),
-                _c("button", [_vm._v("Proceed to checkout")])
+                _c("button", { on: { click: _vm.checkoutPayment } }, [
+                  _vm._v("Proceed to checkout")
+                ])
               ])
             ])
           ]
