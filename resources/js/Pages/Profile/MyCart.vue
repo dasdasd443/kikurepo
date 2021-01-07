@@ -237,7 +237,7 @@ export default {
         },
 
         //edits the address depending on which type of address is being passed on the parameter (billing or shipping)
-        
+
         editAddress(address) {
             document.querySelector(address).style.display='block';
         },
@@ -294,8 +294,8 @@ export default {
     justify-content: center;
     align-items: center;
     margin:auto;
-    padding:20px;
-    width:70%;
+    padding:10px;
+    width:100%;
 }
 .popup{
     display:none;
