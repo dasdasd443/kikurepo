@@ -68,7 +68,7 @@
                         <hr>
                         <div class='checkout-section' :key="checkoutKey">
                             <div class='total-price-section'>
-                                <button class='checkout-button'>Checkout</button>
+                                <button class='checkout-button' @click='checkoutPayment'>Checkout</button>
                                 <h1 class='total-price'>{{getTotalPrice()}}</h1>
                             </div>
                         </div>
@@ -77,6 +77,7 @@
                 </div>
                 <ShippingAddressPopup @closePopup='closePopup' :class='"ShippingAddress popup"'/>
                 <BillingAddressPopup @closePopup='closePopup' :class='"BillingAddress popup"'/>
+                <CheckoutModal @closePopup='closePopup' :class='"Checkout popup"'/>
             </div>
             
         </template>
@@ -87,6 +88,7 @@
 import AppLayout from '@/Layouts/AppLayout.vue'
 import ShippingAddressPopup from '@/Pages/Modals/ShippingAddressPopup.vue'
 import BillingAddressPopup from '@/Pages/Modals/BillingAddressPopup.vue'
+import CheckoutModal from '@/Pages/Modals/CheckoutModal.vue'
 
 export default {
     data() {
@@ -96,7 +98,7 @@ export default {
             checkoutKey: 0
         }
     },
-    components: { AppLayout , ShippingAddressPopup, BillingAddressPopup},
+    components: { AppLayout , ShippingAddressPopup, BillingAddressPopup, CheckoutModal},
     props:['cart_details','cart_cookie'],
     mounted() {
         this.cart_products = this.cart_details
@@ -150,14 +152,15 @@ export default {
         editAddress(address) {
             document.querySelector(address).style.display='block';
         },
-        editBillingAddress() {
-            console.log('working')
-        },
         closePopup() {
             document.querySelectorAll('.popup').forEach(elem => {
                 elem.style.display='none';
             });
+        },
+        checkoutPayment() {
+            document.querySelector(".Checkout").style.display='block';
         }
+
         
         
     },
@@ -180,7 +183,7 @@ export default {
     top: 0;
     left: 0;
     width:100vw;
-    height:100vw;
+    height:100vh;
     z-index: 1;
     background-color:rgba(0,0,0,0.5);
 }

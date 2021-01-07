@@ -1,58 +1,56 @@
 <template>
-    <div class='popup'>
-        <div class='popup-container'>
-            <div class='popup-header'>
-                <h1>Billing Address</h1>
-                <button @click='$emit("closePopup")'>Close</button>
-            </div>
-            <hr>
-            <div class='popup-content'>
-                <div class="address-form">
-                    <form @submit.prevent="$emit('closePopup')" method='POST'>
-                        <div class='form-group'>
-                            <label for="name">Name: </label>
-                            <input type="text" id='name'>
-                        </div>
-                        <br>
-                        <div class='form-group'>
-                            <label for="house-no">House No: </label>
-                            <input type="text" id='house-no'>
-                        </div>
-                        <br>
-                        <div class='form-group'>
-                            <label for="street">Street: </label>
-                            <input type="text" id='street'>
-                        </div>
-                        <br>
-                        <div class='form-group city-form'>
-                            <label for="city">City: </label>
-                            <input type="text" id='city'>
-                            <label for="zip-code">Zip Code: </label>
-                            <input type="text" id='zip-code'>
-                        </div>  
-                        <br>
-                        <div class='form-group'>
-                            <label for="propvince">Province: </label>
-                            <input type="text" id='province'>
-                        </div>
-                        <div class='submit-form'>
-                            <button type='submit'>Edit Address</button>
-                        </div>
-                    </form>
-                </div>
-                <div class='edit-confirmation-container'>
-                    <div class='billing-address-list-container'>
-                        <h1>Here is a list of available billing addresses</h1>
+    <basic-modal-layout>
+        <template #header>
+            <h1>Billing Address</h1>
+            <button @click='$emit("closePopup")'>Close</button>
+        </template>
+        <template #content>
+            <div class="address-form">
+                <form @submit.prevent="$emit('closePopup')" method='POST'>
+                    <div class='form-group'>
+                        <label for="name">Name: </label>
+                        <input type="text" id='name'>
                     </div>
-                    
+                    <br>
+                    <div class='form-group'>
+                        <label for="house-no">House No: </label>
+                        <input type="text" id='house-no'>
+                    </div>
+                    <br>
+                    <div class='form-group'>
+                        <label for="street">Street: </label>
+                        <input type="text" id='street'>
+                    </div>
+                    <br>
+                    <div class='form-group city-form'>
+                        <label for="city">City: </label>
+                        <input type="text" id='city'>
+                        <label for="zip-code">Zip Code: </label>
+                        <input type="text" id='zip-code'>
+                    </div>  
+                    <br>
+                    <div class='form-group'>
+                        <label for="propvince">Province: </label>
+                        <input type="text" id='province'>
+                    </div>
+                    <div class='submit-form'>
+                        <button type='submit'>Edit Address</button>
+                    </div>
+                </form>
+            </div>
+            <div class='edit-confirmation-container'>
+                <div class='billing-address-list-container'>
+                    <h1>Here is a list of available billing addresses</h1>
                 </div>
             </div>
-        </div>
-    </div>
+        </template>
+    </basic-modal-layout>
 </template>
 
 <script>
+import BasicModalLayout from './layouts/BasicModalLayout.vue'
 export default {
+  components: { BasicModalLayout },
     
 }
 </script>
