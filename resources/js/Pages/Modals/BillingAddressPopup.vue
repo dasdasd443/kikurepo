@@ -2,7 +2,7 @@
     <basic-modal-layout>
         <template #header>
             <h1>Billing Address</h1>
-            <button @click='$emit("closePopup")'>Close</button>
+            <button @click='$emit("closePopup")'>&times;</button>
         </template>
         <template #content>
             <div class="address-form">
@@ -60,7 +60,6 @@ export default {
     background:white;
     width:50%;
     height:650px;
-    overflow: scroll;
     margin: 100px auto;
     .popup-header{
         display:flex;
