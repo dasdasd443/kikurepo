@@ -14,7 +14,11 @@
 import BasicModalLayout from './layouts/BasicModalLayout.vue'
 
 export default {
-    components: { BasicModalLayout }    
+    components: { BasicModalLayout } ,
+    methods: {
+    },
+    mounted() {
+    }
 }
 </script>
 

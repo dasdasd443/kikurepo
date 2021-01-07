@@ -52,6 +52,22 @@
                             </div>
                         </div>
                         <hr>
+                        <div class='available-shippers'>
+                            <div class='shippers-title-container'>
+                                <h1>Available Shippers</h1>
+                                <h1>Shipping Cost</h1>
+                            </div>
+                            <br>
+                            <div class='shipper-options-container'>
+                                <select name="shipper" v-model='selected_shipper' @change='changeShipper'>
+                                    <option :value='shippers' v-for='shippers in available_shippers' :key='shippers.shipping_id'>
+                                        {{shippers.shipper_name}}
+                                    </option>
+                                </select>
+                                <h1 :key='shipping_costs_key'>{{shipping_costs}}</h1>
+                            </div>
+                        </div>
+                        <hr>
                         <div class='order-summary'>
                             <h1>Order Summary</h1>
                             <div class='summary-details'>
@@ -61,7 +77,7 @@
                                 </div>
                                 <div id='shipping-fee'>
                                     <h1>Shipping Fee</h1>
-                                    <h1>P100</h1>
+                                    <h1>{{shipping_costs}}</h1>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +85,7 @@
                         <div class='checkout-section' :key="checkoutKey">
                             <div class='total-price-section'>
                                 <button class='checkout-button' @click='checkoutPayment'>Checkout</button>
-                                <h1 class='total-price'>{{getTotalPrice()}}</h1>
+                                <h1 class='total-price'>{{sub_total + shipping_costs}}</h1>
                             </div>
                         </div>
                         
@@ -95,18 +111,58 @@ export default {
         return {
             cart_products: '',
             product_quantity: 0,
-            checkoutKey: 0
+            checkoutKey: 0,
+            available_shippers: 0,
+            selected_shipper: 0,
+            shipping_costs: 0,
+            package_type: '',
+            shipping_costs_key: 0,
+            sub_total: this.getTotalPrice()
         }
     },
     components: { AppLayout , ShippingAddressPopup, BillingAddressPopup, CheckoutModal},
     props:['cart_details','cart_cookie'],
     mounted() {
-        this.cart_products = this.cart_details
+        this.cart_products = this.cart_details,
+        this.getShippers(),
+        this.calculatePackageDimensions()
     },
     methods: {
+        changeShipper() {
+            switch(this.package_type){
+                case "Large": this.shipping_costs = this.selected_shipper.large_cargo_rate;break;
+                case "Medium": this.shipping_costs = this.selected_shipper.medium_cargo_rate;break;
+                case "Small": this.shipping_costs = this.selected_shipper.small_cargo_rate;break;
+            }
+
+            console.log(this.sub_total)
+        },
+        calculatePackageDimensions(){
+            const totalPackageLength = this.cart_products.reduce( (total, item) => {
+                return total + (item[0].product_length * item[1]);
+            },0);
+
+            const totalPackageWidth = this.cart_products.reduce( (total, item) => {
+                return total + (item[0].product_width * item[1]);
+            },0);
+
+            const totalPackageHeight = this.cart_products.reduce( (total, item) => {
+                return total + (item[0].product_height * item[1]);
+            },0);
+
+            const volume = totalPackageLength * totalPackageWidth * totalPackageHeight
+
+            if(volume >= 1500){
+                this.package_type = "Large"
+            }else if(volume >= 500){
+                this.package_type = "Medium"
+            }else{
+                this.package_type = "Small"
+            }
+        },
         getTotalPrice:function() {
             if(this.cart_details) {
-                return this.cart_details.reduce((total_val,current) => {
+                return this.sub_total = this.cart_details.reduce((total_val,current) => {
                     return total_val + (current[0].product_price * current[1])
                 },0)
             }
@@ -148,6 +204,9 @@ export default {
             }
 
             this.checkoutKey+=1;
+            this.calculatePackageDimensions()
+            this.getTotalPrice()
+            this.changeShipper()
         },
         editAddress(address) {
             document.querySelector(address).style.display='block';
@@ -159,10 +218,16 @@ export default {
         },
         checkoutPayment() {
             document.querySelector(".Checkout").style.display='block';
+        },
+        async getShippers() {
+            const response = await axios.get('/api/shippers');
+
+            this.available_shippers =  response.data;
+            this.available_shippers.forEach( val=>{
+                console.log(val.shipper_name)
+            });
         }
 
-        
-        
     },
         
 }
@@ -186,6 +251,28 @@ export default {
     height:100vh;
     z-index: 1;
     background-color:rgba(0,0,0,0.5);
+}
+.available-shippers{
+    .shippers-title-container{
+        display:flex;
+        justify-content: space-between;
+        h1{
+            font-size:20px;
+        }
+    }
+    .shipper-options-container{
+        padding:10px 0 10px 0;
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        select{
+            padding: 10px 0 10px 0;
+        }
+        select:focus{
+            outline:none;
+        }
+
+    }
 }
 .dont-show-orders{
     display:grid;

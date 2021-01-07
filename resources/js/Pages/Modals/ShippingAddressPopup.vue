@@ -10,30 +10,30 @@
                 <div class="address-form">
                     <form @submit.prevent="$emit('closePopup')" method='POST'>
                         <div class='form-group'>
-                            <label for="name">Name: </label>
-                            <input type="text" id='name'>
+                            <label for="shipping-name">Name: </label>
+                            <input type="text" id='shipping-name'>
                         </div>
                         <br>
                         <div class='form-group'>
-                            <label for="house-no">House No: </label>
-                            <input type="text" id='house-no'>
+                            <label for="shipping-house-no">House No: </label>
+                            <input type="text" id='shipping-house-no'>
                         </div>
                         <br>
                         <div class='form-group'>
-                            <label for="street">Street: </label>
-                            <input type="text" id='street'>
+                            <label for="shipping-street">Street: </label>
+                            <input type="text" id='shipping-street'>
                         </div>
                         <br>
                         <div class='form-group city-form'>
-                            <label for="city">City: </label>
-                            <input type="text" id='city'>
-                            <label for="zip-code">Zip Code: </label>
-                            <input type="text" id='zip-code'>
+                            <label for="shipping-city">City: </label>
+                            <input type="text" id='shipping-city'>
+                            <label for="shipping-zip-code">Zip Code: </label>
+                            <input type="text" id='shipping-zip-code'>
                         </div>  
                         <br>
                         <div class='form-group'>
-                            <label for="propvince">Province: </label>
-                            <input type="text" id='province'>
+                            <label for="shipping-propvince">Province: </label>
+                            <input type="text" id='shipping-province'>
                         </div>
                         <div class='submit-form'>
                             <button type='submit'>Edit Address</button>

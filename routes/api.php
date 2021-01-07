@@ -2,10 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductsController;
+
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\ShippersController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,3 +26,4 @@ use App\Http\Controllers\CategoriesController;
 Route::get('/products',[ProductsController::class,'getProducts'])->name('getProducts');
 Route::get('/categories',[CategoriesController::class,'getCategories'])->name('getCategories');
 Route::get('/sample',[ProductsController::class,'samplequery'])->name('sample');
+Route::get('/shippers',[ShippersController::class,'availableShippers'])->name('shippers');
