@@ -38,6 +38,10 @@
                     </div>
                 </div>
                 <div class='checkout-container' v-if='sumCartOrders(cart_details)'>
+                    <div class='error-checkout'>
+                        <h1 id='error-checkout-message'>Test</h1>
+                        <button onclick='this.parentElement.style.display="none"'>&times;</button>
+                    </div>
                     <div class='checkout'>
                         <div class='addresses'>
                             <h1>Shipping Address</h1>
@@ -128,15 +132,26 @@ export default {
         this.calculatePackageDimensions()
     },
     methods: {
+
+        //calculates the price based on the shipper being selected
+
         changeShipper() {
-            switch(this.package_type){
-                case "Large": this.shipping_costs = this.selected_shipper.large_cargo_rate;break;
-                case "Medium": this.shipping_costs = this.selected_shipper.medium_cargo_rate;break;
-                case "Small": this.shipping_costs = this.selected_shipper.small_cargo_rate;break;
+            if(this.selected_shipper != 0){
+                switch(this.package_type){
+                    case "Large": this.shipping_costs = this.selected_shipper.large_cargo_rate;break;
+                    case "Medium": this.shipping_costs = this.selected_shipper.medium_cargo_rate;break;
+                    case "Small": this.shipping_costs = this.selected_shipper.small_cargo_rate;break;
+                }
+            }else{
+                this.shipping_costs = 0;
             }
 
-            console.log(this.sub_total)
+            console.log(this.shipping_costs)
         },
+
+        //calculates the total dimensions of all packages from the cart and determines if the cargo is
+        //large medium or small
+
         calculatePackageDimensions(){
             const totalPackageLength = this.cart_products.reduce( (total, item) => {
                 return total + (item[0].product_length * item[1]);
@@ -160,6 +175,9 @@ export default {
                 this.package_type = "Small"
             }
         },
+
+        //gets the total price of each item, price * quantity
+
         getTotalPrice:function() {
             if(this.cart_details) {
                 return this.sub_total = this.cart_details.reduce((total_val,current) => {
@@ -168,6 +186,9 @@ export default {
             }
 
         },
+
+        //gets the amount of items ordered (quantity)
+
         sumCartOrders(cart) {
             if(cart) {
                 return cart.reduce( (total,item) => {
@@ -175,6 +196,12 @@ export default {
                 }, 0)
             }
         },
+
+        //changes the amount of the quantity of an item order
+        //removes the item if the quantity changed to 0
+        //updates the quantity value on the cart cookie
+        //updates the sub total and the shipping cost
+
         changeQuantity(index,price) {
             const quantity_value = document.querySelector(`#cart_no`+index).value;
             const date = new Date();
@@ -208,24 +235,37 @@ export default {
             this.getTotalPrice()
             this.changeShipper()
         },
+
+        //edits the address depending on which type of address is being passed on the parameter (billing or shipping)
+        
         editAddress(address) {
             document.querySelector(address).style.display='block';
         },
+
+        //function that closes all popup modals
+
         closePopup() {
             document.querySelectorAll('.popup').forEach(elem => {
                 elem.style.display='none';
             });
         },
+
+        //function for checkout modal
+
         checkoutPayment() {
-            document.querySelector(".Checkout").style.display='block';
+            if(this.selected_shipper != 0){
+                document.querySelector(".Checkout").style.display='block';
+            }else{
+                document.querySelector("#error-checkout-message").innerHTML = "Select a shipper";
+                document.querySelector(".error-checkout").style.display = "flex";
+            }
         },
+
+        //gets all the available shippers
         async getShippers() {
             const response = await axios.get('/api/shippers');
 
             this.available_shippers =  response.data;
-            this.available_shippers.forEach( val=>{
-                console.log(val.shipper_name)
-            });
         }
 
     },
@@ -234,6 +274,21 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.error-checkout{
+    display:none;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 10px 0;
+    border-radius: 0 5px 0 0;
+    background-color:rgba(250, 0, 0, 0.363);
+    button{
+        padding:5px;
+        font-size:20px;
+    }
+    h1{
+        padding:5px;
+    }
+}
 .message{
     display:none;
     justify-content: center;

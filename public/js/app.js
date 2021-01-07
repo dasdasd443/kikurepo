@@ -4175,6 +4175,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -4204,23 +4208,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.cart_products = this.cart_details, this.getShippers(), this.calculatePackageDimensions();
   },
   methods: {
+    //calculates the price based on the shipper being selected
     changeShipper: function changeShipper() {
-      switch (this.package_type) {
-        case "Large":
-          this.shipping_costs = this.selected_shipper.large_cargo_rate;
-          break;
+      if (this.selected_shipper != 0) {
+        switch (this.package_type) {
+          case "Large":
+            this.shipping_costs = this.selected_shipper.large_cargo_rate;
+            break;
 
-        case "Medium":
-          this.shipping_costs = this.selected_shipper.medium_cargo_rate;
-          break;
+          case "Medium":
+            this.shipping_costs = this.selected_shipper.medium_cargo_rate;
+            break;
 
-        case "Small":
-          this.shipping_costs = this.selected_shipper.small_cargo_rate;
-          break;
+          case "Small":
+            this.shipping_costs = this.selected_shipper.small_cargo_rate;
+            break;
+        }
+      } else {
+        this.shipping_costs = 0;
       }
 
-      console.log(this.sub_total);
+      console.log(this.shipping_costs);
     },
+    //calculates the total dimensions of all packages from the cart and determines if the cargo is
+    //large medium or small
     calculatePackageDimensions: function calculatePackageDimensions() {
       var totalPackageLength = this.cart_products.reduce(function (total, item) {
         return total + item[0].product_length * item[1];
@@ -4241,6 +4252,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.package_type = "Small";
       }
     },
+    //gets the total price of each item, price * quantity
     getTotalPrice: function getTotalPrice() {
       if (this.cart_details) {
         return this.sub_total = this.cart_details.reduce(function (total_val, current) {
@@ -4248,6 +4260,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, 0);
       }
     },
+    //gets the amount of items ordered (quantity)
     sumCartOrders: function sumCartOrders(cart) {
       if (cart) {
         return cart.reduce(function (total, item) {
@@ -4255,6 +4268,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, 0);
       }
     },
+    //changes the amount of the quantity of an item order
+    //removes the item if the quantity changed to 0
+    //updates the quantity value on the cart cookie
+    //updates the sub total and the shipping cost
     changeQuantity: function changeQuantity(index, price) {
       var quantity_value = document.querySelector("#cart_no" + index).value;
       var date = new Date();
@@ -4282,17 +4299,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.getTotalPrice();
       this.changeShipper();
     },
+    //edits the address depending on which type of address is being passed on the parameter (billing or shipping)
     editAddress: function editAddress(address) {
       document.querySelector(address).style.display = 'block';
     },
+    //function that closes all popup modals
     closePopup: function closePopup() {
       document.querySelectorAll('.popup').forEach(function (elem) {
         elem.style.display = 'none';
       });
     },
+    //function for checkout modal
     checkoutPayment: function checkoutPayment() {
-      document.querySelector(".Checkout").style.display = 'block';
+      if (this.selected_shipper != 0) {
+        document.querySelector(".Checkout").style.display = 'block';
+      } else {
+        document.querySelector("#error-checkout-message").innerHTML = "Select a shipper";
+        document.querySelector(".error-checkout").style.display = "flex";
+      }
     },
+    //gets all the available shippers
     getShippers: function getShippers() {
       var _this = this;
 
@@ -4309,11 +4335,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context.sent;
                 _this.available_shippers = response.data;
 
-                _this.available_shippers.forEach(function (val) {
-                  console.log(val.shipper_name);
-                });
-
-              case 5:
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -5008,7 +5030,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".message[data-v-7325571b] {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  margin: auto;\n  padding: 20px;\n  width: 70%;\n}\n.popup[data-v-7325571b] {\n  display: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  z-index: 1;\n  background-color: rgba(0, 0, 0, 0.5);\n}\n.available-shippers .shippers-title-container[data-v-7325571b] {\n  display: flex;\n  justify-content: space-between;\n}\n.available-shippers .shippers-title-container h1[data-v-7325571b] {\n  font-size: 20px;\n}\n.available-shippers .shipper-options-container[data-v-7325571b] {\n  padding: 10px 0 10px 0;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.available-shippers .shipper-options-container select[data-v-7325571b] {\n  padding: 10px 0 10px 0;\n}\n.available-shippers .shipper-options-container select[data-v-7325571b]:focus {\n  outline: none;\n}\n.dont-show-orders[data-v-7325571b] {\n  display: grid;\n  width: 70vw;\n  background: white;\n  margin: auto;\n  align-items: center;\n  padding: 50px;\n  grid-template-columns: repeat(2, 1fr);\n  grid-template-columns: repeat(2, minmax(300px, 1fr));\n  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n}\n.dont-show-orders .text-container h1[data-v-7325571b] {\n  font-size: 50px;\n}\n.dont-show-orders .no-cart-logo-container[data-v-7325571b] {\n  display: flex;\n  justify-content: flex-end;\n}\n.my-cart[data-v-7325571b] {\n  display: flex;\n  gap: 1rem;\n  width: 80vw;\n  margin: 50px auto;\n}\n@media screen and (max-width: 1000px) {\n.my-cart[data-v-7325571b] {\n    display: grid;\n    grid-template-columns: repeat(2, 1fr);\n    grid-template-columns: repeat(2, minmax(400px, 1fr));\n    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));\n}\n}\n.my-cart .checkout-container[data-v-7325571b] {\n  flex: 1;\n}\n.my-cart .checkout-container .checkout[data-v-7325571b] {\n  width: 100%;\n  padding: 25px;\n  border: 1px solid black;\n  background: white;\n}\n.my-cart .checkout-container .checkout .addresses[data-v-7325571b] {\n  gap: 1rem;\n}\n.my-cart .checkout-container .checkout .checkout-section[data-v-7325571b] {\n  display: grid;\n  font-size: 20px;\n}\n.my-cart .checkout-container .checkout .checkout-section .total-price-section[data-v-7325571b] {\n  margin-top: 20px;\n  display: flex;\n  flex: 3;\n  justify-content: space-between;\n}\n.my-cart .checkout-container .checkout .checkout-section .total-price-section .total-price[data-v-7325571b] {\n  padding: 25px 0 25px 25px;\n}\n.my-cart .checkout-container .checkout .checkout-section .checkout-button[data-v-7325571b] {\n  padding: 25px 40px 25px 40px;\n  background: #ebebeb63;\n  transition: all 0.45s;\n  border-radius: 10px 0 0 0;\n}\n.my-cart .checkout-container .checkout .checkout-section .checkout-button[data-v-7325571b]:hover, .my-cart .checkout-container .checkout .checkout-section .checkout-button[data-v-7325571b]:focus {\n  box-shadow: 1px 1px 1px;\n  outline: none;\n}\n.my-cart .checkout-container .checkout .shipping-address[data-v-7325571b], .my-cart .checkout-container .checkout .billing-address[data-v-7325571b] {\n  display: flex;\n  justify-content: space-between;\n  padding: 0 0 25px 0;\n}\n.my-cart .checkout-container .checkout .shipping-address button[data-v-7325571b]:focus, .my-cart .checkout-container .checkout .billing-address button[data-v-7325571b]:focus {\n  outline: none;\n}\n.my-cart .checkout-container .checkout .order-summary .summary-details #subtotal[data-v-7325571b] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.my-cart .checkout-container .checkout .order-summary .summary-details #shipping-fee[data-v-7325571b] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.my-cart .my-cart-container[data-v-7325571b] {\n  flex: 2;\n  width: 100%;\n  display: grid;\n  gap: 1rem;\n}\n.my-cart .my-cart-container .card[data-v-7325571b] {\n  box-shadow: 1px 1px 3px;\n  display: flex;\n  background: white;\n}\n.my-cart .my-cart-container .card .image[data-v-7325571b] {\n  flex: 1;\n  width: 200px;\n  height: 200px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.my-cart .my-cart-container .card .image img[data-v-7325571b] {\n  padding: 25px;\n}\n.my-cart .my-cart-container .card .product-information[data-v-7325571b] {\n  flex: 3;\n  display: flex;\n  align-items: center;\n  font-size: 20px;\n  padding: 20px;\n}\n.my-cart .my-cart-container .card .product-information h1[data-v-7325571b] {\n  padding: 25px;\n  flex: 2;\n}\n.my-cart .my-cart-container .card .product-information .quantity-container[data-v-7325571b] {\n  flex: 1;\n  display: flex;\n  align-items: center;\n}\n.my-cart .my-cart-container .card .product-information .quantity-container input[data-v-7325571b] {\n  width: 40px;\n  padding: 5px;\n  border-radius: 5px 5px 5px 5px;\n  box-shadow: 1px 1px 1px;\n  text-align: center;\n}\n.my-cart .my-cart-container .card .product-information .quantity-container input[data-v-7325571b]:focus {\n  outline: none;\n}\n.my-cart .my-cart-container .card .product-information .quantity-container input[data-v-7325571b]::-webkit-outer-spin-button,\n.my-cart .my-cart-container .card .product-information .quantity-container input[data-v-7325571b]::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n  margin: 0;\n}\n.my-cart .my-cart-container .card .product-price[data-v-7325571b] {\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.my-cart .my-cart-container .card .product-price #price[data-v-7325571b] {\n  font-size: 30px;\n}\n@media screen and (max-width: 1000px) {\n.my-cart .my-cart-container .card[data-v-7325571b] {\n    display: grid;\n    grid-template-columns: repeat(2, 1fr);\n    grid-template-columns: repeat(2, minmax(240px, 1fr));\n    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n}\n}", ""]);
+exports.push([module.i, ".error-checkout[data-v-7325571b] {\n  display: none;\n  justify-content: space-between;\n  align-items: center;\n  margin: 0 0 10px 0;\n  border-radius: 0 5px 0 0;\n  background-color: rgba(250, 0, 0, 0.363);\n}\n.error-checkout button[data-v-7325571b] {\n  padding: 5px;\n  font-size: 20px;\n}\n.error-checkout h1[data-v-7325571b] {\n  padding: 5px;\n}\n.message[data-v-7325571b] {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  margin: auto;\n  padding: 20px;\n  width: 70%;\n}\n.popup[data-v-7325571b] {\n  display: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  z-index: 1;\n  background-color: rgba(0, 0, 0, 0.5);\n}\n.available-shippers .shippers-title-container[data-v-7325571b] {\n  display: flex;\n  justify-content: space-between;\n}\n.available-shippers .shippers-title-container h1[data-v-7325571b] {\n  font-size: 20px;\n}\n.available-shippers .shipper-options-container[data-v-7325571b] {\n  padding: 10px 0 10px 0;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.available-shippers .shipper-options-container select[data-v-7325571b] {\n  padding: 10px 0 10px 0;\n}\n.available-shippers .shipper-options-container select[data-v-7325571b]:focus {\n  outline: none;\n}\n.dont-show-orders[data-v-7325571b] {\n  display: grid;\n  width: 70vw;\n  background: white;\n  margin: auto;\n  align-items: center;\n  padding: 50px;\n  grid-template-columns: repeat(2, 1fr);\n  grid-template-columns: repeat(2, minmax(300px, 1fr));\n  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n}\n.dont-show-orders .text-container h1[data-v-7325571b] {\n  font-size: 50px;\n}\n.dont-show-orders .no-cart-logo-container[data-v-7325571b] {\n  display: flex;\n  justify-content: flex-end;\n}\n.my-cart[data-v-7325571b] {\n  display: flex;\n  gap: 1rem;\n  width: 80vw;\n  margin: 50px auto;\n}\n@media screen and (max-width: 1000px) {\n.my-cart[data-v-7325571b] {\n    display: grid;\n    grid-template-columns: repeat(2, 1fr);\n    grid-template-columns: repeat(2, minmax(400px, 1fr));\n    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));\n}\n}\n.my-cart .checkout-container[data-v-7325571b] {\n  flex: 1;\n}\n.my-cart .checkout-container .checkout[data-v-7325571b] {\n  width: 100%;\n  padding: 25px;\n  border: 1px solid black;\n  background: white;\n}\n.my-cart .checkout-container .checkout .addresses[data-v-7325571b] {\n  gap: 1rem;\n}\n.my-cart .checkout-container .checkout .checkout-section[data-v-7325571b] {\n  display: grid;\n  font-size: 20px;\n}\n.my-cart .checkout-container .checkout .checkout-section .total-price-section[data-v-7325571b] {\n  margin-top: 20px;\n  display: flex;\n  flex: 3;\n  justify-content: space-between;\n}\n.my-cart .checkout-container .checkout .checkout-section .total-price-section .total-price[data-v-7325571b] {\n  padding: 25px 0 25px 25px;\n}\n.my-cart .checkout-container .checkout .checkout-section .checkout-button[data-v-7325571b] {\n  padding: 25px 40px 25px 40px;\n  background: #ebebeb63;\n  transition: all 0.45s;\n  border-radius: 10px 0 0 0;\n}\n.my-cart .checkout-container .checkout .checkout-section .checkout-button[data-v-7325571b]:hover, .my-cart .checkout-container .checkout .checkout-section .checkout-button[data-v-7325571b]:focus {\n  box-shadow: 1px 1px 1px;\n  outline: none;\n}\n.my-cart .checkout-container .checkout .shipping-address[data-v-7325571b], .my-cart .checkout-container .checkout .billing-address[data-v-7325571b] {\n  display: flex;\n  justify-content: space-between;\n  padding: 0 0 25px 0;\n}\n.my-cart .checkout-container .checkout .shipping-address button[data-v-7325571b]:focus, .my-cart .checkout-container .checkout .billing-address button[data-v-7325571b]:focus {\n  outline: none;\n}\n.my-cart .checkout-container .checkout .order-summary .summary-details #subtotal[data-v-7325571b] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.my-cart .checkout-container .checkout .order-summary .summary-details #shipping-fee[data-v-7325571b] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.my-cart .my-cart-container[data-v-7325571b] {\n  flex: 2;\n  width: 100%;\n  display: grid;\n  gap: 1rem;\n}\n.my-cart .my-cart-container .card[data-v-7325571b] {\n  box-shadow: 1px 1px 3px;\n  display: flex;\n  background: white;\n}\n.my-cart .my-cart-container .card .image[data-v-7325571b] {\n  flex: 1;\n  width: 200px;\n  height: 200px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.my-cart .my-cart-container .card .image img[data-v-7325571b] {\n  padding: 25px;\n}\n.my-cart .my-cart-container .card .product-information[data-v-7325571b] {\n  flex: 3;\n  display: flex;\n  align-items: center;\n  font-size: 20px;\n  padding: 20px;\n}\n.my-cart .my-cart-container .card .product-information h1[data-v-7325571b] {\n  padding: 25px;\n  flex: 2;\n}\n.my-cart .my-cart-container .card .product-information .quantity-container[data-v-7325571b] {\n  flex: 1;\n  display: flex;\n  align-items: center;\n}\n.my-cart .my-cart-container .card .product-information .quantity-container input[data-v-7325571b] {\n  width: 40px;\n  padding: 5px;\n  border-radius: 5px 5px 5px 5px;\n  box-shadow: 1px 1px 1px;\n  text-align: center;\n}\n.my-cart .my-cart-container .card .product-information .quantity-container input[data-v-7325571b]:focus {\n  outline: none;\n}\n.my-cart .my-cart-container .card .product-information .quantity-container input[data-v-7325571b]::-webkit-outer-spin-button,\n.my-cart .my-cart-container .card .product-information .quantity-container input[data-v-7325571b]::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n  margin: 0;\n}\n.my-cart .my-cart-container .card .product-price[data-v-7325571b] {\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.my-cart .my-cart-container .card .product-price #price[data-v-7325571b] {\n  font-size: 30px;\n}\n@media screen and (max-width: 1000px) {\n.my-cart .my-cart-container .card[data-v-7325571b] {\n    display: grid;\n    grid-template-columns: repeat(2, 1fr);\n    grid-template-columns: repeat(2, minmax(240px, 1fr));\n    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n}\n}", ""]);
 
 // exports
 
@@ -50776,6 +50798,22 @@ var render = function() {
                 _vm._v(" "),
                 _vm.sumCartOrders(_vm.cart_details)
                   ? _c("div", { staticClass: "checkout-container" }, [
+                      _c("div", { staticClass: "error-checkout" }, [
+                        _c("h1", { attrs: { id: "error-checkout-message" } }, [
+                          _vm._v("Test")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            attrs: {
+                              onclick: 'this.parentElement.style.display="none"'
+                            }
+                          },
+                          [_vm._v("×")]
+                        )
+                      ]),
+                      _vm._v(" "),
                       _c("div", { staticClass: "checkout" }, [
                         _c("div", { staticClass: "addresses" }, [
                           _c("h1", [_vm._v("Shipping Address")]),
