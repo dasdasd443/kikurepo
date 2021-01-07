@@ -8,30 +8,30 @@
             <div class="address-form">
                 <form @submit.prevent="$emit('closePopup')" method='POST'>
                     <div class='form-group'>
-                        <label for="name">Name: </label>
-                        <input type="text" id='name'>
+                        <label for="billing-name">Name: </label>
+                        <input type="text" id='billing-name'>
                     </div>
                     <br>
                     <div class='form-group'>
-                        <label for="house-no">House No: </label>
-                        <input type="text" id='house-no'>
+                        <label for="billing-house-no">House No: </label>
+                        <input type="text" id='billing-house-no'>
                     </div>
                     <br>
                     <div class='form-group'>
-                        <label for="street">Street: </label>
-                        <input type="text" id='street'>
+                        <label for="billing-street">Street: </label>
+                        <input type="text" id='billing-street'>
                     </div>
                     <br>
                     <div class='form-group city-form'>
-                        <label for="city">City: </label>
-                        <input type="text" id='city'>
-                        <label for="zip-code">Zip Code: </label>
-                        <input type="text" id='zip-code'>
+                        <label for="billing-city">City: </label>
+                        <input type="text" id='billing-city'>
+                        <label for="billing-zip-code">Zip Code: </label>
+                        <input type="text" id='billing-zip-code'>
                     </div>  
                     <br>
                     <div class='form-group'>
-                        <label for="propvince">Province: </label>
-                        <input type="text" id='province'>
+                        <label for="billing-propvince">Province: </label>
+                        <input type="text" id='billing-province'>
                     </div>
                     <div class='submit-form'>
                         <button type='submit'>Edit Address</button>
