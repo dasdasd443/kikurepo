@@ -4944,7 +4944,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "*{\n  scroll-behavior: smooth;\n}\n::-webkit-scrollbar{\n  width:10px;\n}\n::-webkit-scrollbar-thumb{\n  background-image: linear-gradient(0deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.9) 100%);\n}\n\n", ""]);
+exports.push([module.i, "*{\n  scroll-behavior: smooth;\n}\n::-webkit-scrollbar{\n  width:10px;\n}\n::-webkit-scrollbar-thumb{\n  background-image: linear-gradient(0deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.9) 100%);\n}\r\n\r\n", ""]);
 
 // exports
 
