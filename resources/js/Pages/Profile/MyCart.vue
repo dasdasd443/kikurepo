@@ -93,7 +93,7 @@
                 </div>
                 <ShippingAddressPopup @closePopup='closePopup' :class='"ShippingAddress popup"'/>
                 <BillingAddressPopup @closePopup='closePopup' :class='"BillingAddress popup"'/>
-                <CheckoutModal @closePopup='closePopup' :class='"Checkout popup"'/>
+                <CheckoutModal @closePopup='closePopup' :class='"Checkout popup"' :totalPayment='sub_total+shipping_costs'/>
             </div>
             
         </template>

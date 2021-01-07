@@ -3533,11 +3533,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     BasicModalLayout: _layouts_BasicModalLayout_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  props: ['totalPayment'],
   methods: {},
   mounted: function mounted() {}
 });
@@ -49686,7 +49688,11 @@ var render = function() {
       {
         key: "content",
         fn: function() {
-          return [_c("h1", [_vm._v("And I am the content")])]
+          return [
+            _c("h1", [_vm._v("And I am the content")]),
+            _vm._v(" "),
+            _c("h1", [_vm._v("The payment is " + _vm._s(_vm.totalPayment))])
+          ]
         },
         proxy: true
       }
@@ -50954,6 +50960,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("CheckoutModal", {
                   class: "Checkout popup",
+                  attrs: { totalPayment: _vm.sub_total + _vm.shipping_costs },
                   on: { closePopup: _vm.closePopup }
                 })
               ],

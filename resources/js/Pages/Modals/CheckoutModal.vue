@@ -6,6 +6,7 @@
         </template>
         <template #content>
             <h1>And I am the content</h1>
+            <h1>The payment is {{totalPayment}}</h1>
         </template>
     </basic-modal-layout>
 </template>
@@ -15,6 +16,7 @@ import BasicModalLayout from './layouts/BasicModalLayout.vue'
 
 export default {
     components: { BasicModalLayout } ,
+    props: ['totalPayment'],
     methods: {
     },
     mounted() {
