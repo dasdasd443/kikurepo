@@ -2,9 +2,12 @@
     <app-layout>
         <template #content>
             <div class='my-cart'>
-                <div id='show-orders' class='my-cart-container' v-if='sumCartOrders(cart_details) != 0'>
-                    <div :id='"item-no"+index' v-for='(product,index) in cart_details' :key='product[0].product_id'>
-                        <div class='card' v-if='product[1] > 0'>
+                <div id='show-orders' class='my-cart-container' v-if='sumCartOrders(cart_details)'>
+                    <div v-for='(product,index) in cart_details' :key='product[0].product_id'>
+                        <div class='message' :id='`message-item-${index}-container`'>
+                            <h1 :id ='`message-item-${index}`'></h1>
+                        </div>
+                        <div class='card' v-if='product[1] > 0' :id='"item-no"+index'>
                             <div class='image'>
                                 <img :src='"/storage/product_photos/"+product[0].photos_folder+"/" + product[2][0].photo_name' alt="" v-if='product[2].length!=0'>
                                 <img v-else src="/storage/product_photos/no-image.png" alt="">
@@ -24,21 +27,28 @@
                         </div>
                     </div>
                 </div>
-                <div class='my-cart-container' id='dont-show-orders' v-if='cart_details === 0'>
-                    <h1>You have no orders</h1>
+                <div class='my-cart-container dont-show-orders' v-else>
+                    <div class='text-container'>
+                        <h1>Empty Cart!</h1>
+                        <br>
+                        <span>Looking to buy an item? Click <a href="/">here</a> to start shopping!</span>
+                    </div>
+                    <div class='no-cart-logo-container'>
+                        <h1>Logo Here</h1>
+                    </div>
                 </div>
-                <div class='checkout-container'>
+                <div class='checkout-container' v-if='sumCartOrders(cart_details)'>
                     <div class='checkout'>
                         <div class='addresses'>
                             <h1>Shipping Address</h1>
                             <div class='shipping-address'>
                                 <h1>Talamban Cebu City</h1>
-                                <button @click='editShippingAddress'>Edit</button>
+                                <button @click='editAddress(".ShippingAddress")'>Edit</button>
                             </div>
                             <h1>Billing Address</h1>
                             <div class='billing-address'>
                                 <h1>Talamban Cebu City</h1>
-                                <button @click='editBillingAddress'>Edit</button>
+                                <button @click='editAddress(".BillingAddress")'>Edit</button>
                             </div>
                         </div>
                         <hr>
@@ -56,16 +66,18 @@
                             </div>
                         </div>
                         <hr>
-                        <div class='checkout-section'>
+                        <div class='checkout-section' :key="checkoutKey">
                             <div class='total-price-section'>
-                                <button class='checkout-button'>Checkout</button>
+                                <button class='checkout-button' @click='checkoutPayment'>Checkout</button>
                                 <h1 class='total-price'>{{getTotalPrice()}}</h1>
                             </div>
                         </div>
                         
                     </div>
                 </div>
-                <ShippingAddressPopup :class='"popup"'/>
+                <ShippingAddressPopup @closePopup='closePopup' :class='"ShippingAddress popup"'/>
+                <BillingAddressPopup @closePopup='closePopup' :class='"BillingAddress popup"'/>
+                <CheckoutModal @closePopup='closePopup' :class='"Checkout popup"'/>
             </div>
             
         </template>
@@ -75,15 +87,18 @@
 <script>
 import AppLayout from '@/Layouts/AppLayout.vue'
 import ShippingAddressPopup from '@/Pages/Modals/ShippingAddressPopup.vue'
+import BillingAddressPopup from '@/Pages/Modals/BillingAddressPopup.vue'
+import CheckoutModal from '@/Pages/Modals/CheckoutModal.vue'
 
 export default {
     data() {
         return {
             cart_products: '',
-            product_quantity: 0
+            product_quantity: 0,
+            checkoutKey: 0
         }
     },
-    components: { AppLayout , ShippingAddressPopup},
+    components: { AppLayout , ShippingAddressPopup, BillingAddressPopup, CheckoutModal},
     props:['cart_details','cart_cookie'],
     mounted() {
         this.cart_products = this.cart_details
@@ -114,22 +129,38 @@ export default {
 
             document.cookie = `cart_orders=${JSON.stringify(this.cart_cookie)};expires=`+ date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000) + `;path=/`
             
+            document.querySelectorAll('.message').forEach(elem => {
+                elem.style.display = 'none';
+            });
+
             if(quantity_value == 0) {
                 document.querySelector(`#item-no${index}`).style.display = 'none';
-            }
 
-            document.querySelector(`#product-price-`+index).innerHTML = price * quantity_value;
+                const elem = document.querySelector(`#message-item-${index}-container`).style
+                elem.display = 'flex'
+                elem.background='lightgreen'
+                
+                document.querySelector(`#message-item-${index}`).innerHTML = "Item removed"
+            }
 
             if(this.sumCartOrders(this.cart_details) == 0){
                 document.cookie = `cart_orders=0;expires=`+ new Date(0,0,0) + `;path=/`
             }
+
+            this.checkoutKey+=1;
         },
-        editShippingAddress() {
-            document.querySelector('.popup').style.display='block';
+        editAddress(address) {
+            document.querySelector(address).style.display='block';
         },
-        editBillingAddress() {
-            console.log('working')
+        closePopup() {
+            document.querySelectorAll('.popup').forEach(elem => {
+                elem.style.display='none';
+            });
+        },
+        checkoutPayment() {
+            document.querySelector(".Checkout").style.display='block';
         }
+
         
         
     },
@@ -138,18 +169,50 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.message{
+    display:none;
+    justify-content: center;
+    align-items: center;
+    margin:auto;
+    padding:20px;
+    width:70%;
+}
 .popup{
     display:none;
-    position: absolute;
-    left:50vw;
-    top:50vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100vw;
+    height:100vh;
     z-index: 1;
-    background-color:white;
+    background-color:rgba(0,0,0,0.5);
+}
+.dont-show-orders{
+    display:grid;
+    width:70vw;
+    background:white;
+    margin:auto;
+    align-items: center;
+    padding:50px;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2,minmax(300px,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    .text-container{
+        h1 {
+            font-size: 50px;
+        }
+    }
+    .no-cart-logo-container{
+        display: flex;
+        justify-content: flex-end;
+    }
+
 }
 .my-cart{
-    display:flex;
-    padding:100px; 
+    display:flex;   
     gap:1rem;
+    width:80vw;
+    margin:50px auto;
     @media screen and (max-width:1000px){
         display:grid;
         grid-template-columns: repeat(2, 1fr);
@@ -159,7 +222,7 @@ export default {
     .checkout-container{
         flex:1;
         .checkout{
-            width:90%;
+            width:100%;
             padding:25px;
             border:1px solid black;
             background:white;
@@ -216,7 +279,7 @@ export default {
     }
     .my-cart-container{
         flex:2;
-        width:70vw;
+        width:100%;
         display:grid;
         gap:1rem;
         .card{

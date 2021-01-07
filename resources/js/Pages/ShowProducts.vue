@@ -41,7 +41,6 @@ export default {
         AppLayout
     },
     methods:{
-        ...mapActions(['displayProductsData']),
         addToCart(product_id) {
             console.log(product_id);
         },
@@ -51,11 +50,9 @@ export default {
         }
     },
     computed:{
-        ...mapGetters(['productsData'])
     },
     props:['products'],
     created(){
-        this.displayProductsData();
     },
     mounted() {
         
