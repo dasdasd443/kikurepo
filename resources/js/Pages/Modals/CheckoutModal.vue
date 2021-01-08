@@ -18,8 +18,22 @@
                     </div>
                 </div>
                 <div class='payment-container'>
-                    <h1>Payment</h1>
-                    <button @click='checkoutPayment'>Proceed to checkout</button>
+                    <h1 class='payment-title'>Payment</h1>
+                    <form @submit.prevent='checkoutPayment' class='card-form'>
+                        <div class='form-group'>
+                            <input type="text" id='card-fname' v-model='firstname'>
+                            <label for="card-name">Cardholder's First name</label>
+                        </div>
+                        <div class='form-group'>
+                            <input type="text" id='card-lname' v-model='lastname'>
+                            <label for="card-name">Cardholder's Last name</label>
+                        </div>
+                        <div class='card-container'>
+
+                        </div>
+                        <button type='submit'>Proceed to checkout</button>
+                    </form>
+                    
                 </div>
             </div>
         </template>
@@ -28,22 +42,75 @@
 
 <script>
 import BasicModalLayout from './layouts/BasicModalLayout.vue'
+import {loadStripe} from '@stripe/stripe-js';
 
 export default {
     components: { BasicModalLayout } ,
+    data() {
+        return {
+            firstname: '',
+            lastname: ''      
+        }
+    },
     props: ['totalPayment'],
     methods: {
-        checkoutPayment() {
-            var response = fetch('/secret').then(function(response) {
+        async checkoutPayment() {
+            var response = fetch('/secret').then(response => {
                 return response.json();
-            }).then(function(responseJson) {
+            }).then(responseJson => {
                 var clientSecret = responseJson.client_secret;
                 // Call stripe.confirmCardPayment() with the client secret.
-                console.log(clientSecret)
+                return clientSecret;
+            }).then(async clientSecret => {
+                const stripe = await loadStripe('pk_test_51HuvwMJuH4Qnm7aCsa9mHV7aZ35qE1VWrjy8kNJRWNQN5pO9Htexujc1tsx9LHnogJh9Etycko92DYTwABwHk2M100AF0sFJgI');
+                const elem = stripe.confirmCardPayment(clientSecret,{
+                    payment_method: {
+                        card: card,
+                        billing_details: {
+                            name: `${firstname} ${lastname}`,
+                        }
+                    }
+                }).then(result => {
+                    if(result.error){
+                        console.log(result.error.message)
+                    }else if (result.paymentIntent.status === 'succeeded') {
+                        // Show a success message to your customer
+                        // There's a risk of the customer closing the window before callback
+                        // execution. Set up a webhook or plugin to listen for the
+                        // payment_intent.succeeded event that handles any business critical
+                        // post-payment actions.
+                    }
+                });
+            });
+        },
+        async initializeStripe() {
+            const stripe = await loadStripe('pk_test_51HuvwMJuH4Qnm7aCsa9mHV7aZ35qE1VWrjy8kNJRWNQN5pO9Htexujc1tsx9LHnogJh9Etycko92DYTwABwHk2M100AF0sFJgI');
+            const elements = stripe.elements()
+
+            const card = elements.create('card');
+
+            const cardDiv = document.createElement('div');
+            cardDiv.id = "card-element"
+            document.querySelector('.card-container').appendChild(cardDiv);
+
+            const errorDiv = document.createElement('div');
+            errorDiv.id = "card-errors"
+            document.querySelector('.card-container').appendChild(errorDiv);
+
+            card.mount('#card-element');
+
+            card.on('change', ({error}) => {
+            let displayError = document.getElementById('card-errors');
+            if (error) {
+                displayError.textContent = error.message;
+            } else {
+                displayError.textContent = '';
+            }
             });
         }
     },
     mounted() {
+        this.initializeStripe();
     }
 }
 </script>
@@ -51,7 +118,7 @@ export default {
 <style lang='scss' scoped>
 .content-container{
     display:flex;
-    align-items: center;
+    gap:1rem;
     .address-container{
         flex:1;
         h1{
@@ -63,6 +130,37 @@ export default {
     }
     .payment-container{
         flex:1;
+        display:grid;
+        gap:1rem;
+        .payment-title{
+            font-size:30px;
+        }
+        .card-form{
+            display:grid;
+            gap:1rem;
+            .form-group{
+                display:grid;
+                input{
+                    outline:1px solid rgba(0, 0, 0, 0.089);
+                    padding:5px;
+                }
+            }
+            .card-container{
+                display:grid;
+                gap:1rem;
+                color:red;
+            }
+            button{
+                background: #ebebeb63;
+                transition:.45s all;
+            }
+            button:focus{
+                outline:none;
+            }
+            button:hover{
+                box-shadow: 1px 1px 1px;
+            }
+        }
     }
 }
 </style>
