@@ -124,6 +124,149 @@ function e(e){return e&&"object"==typeof e&&"default"in e?e.default:e}var t=e(__
 
 /***/ }),
 
+/***/ "./node_modules/@stripe/stripe-js/dist/stripe.esm.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/@stripe/stripe-js/dist/stripe.esm.js ***!
+  \***********************************************************/
+/*! exports provided: loadStripe */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadStripe", function() { return loadStripe; });
+var V3_URL = 'https://js.stripe.com/v3';
+var V3_URL_REGEX = /^https:\/\/js\.stripe\.com\/v3\/?(\?.*)?$/;
+var EXISTING_SCRIPT_MESSAGE = 'loadStripe.setLoadParameters was called but an existing Stripe.js script already exists in the document; existing script parameters will be used';
+var findScript = function findScript() {
+  var scripts = document.querySelectorAll("script[src^=\"".concat(V3_URL, "\"]"));
+
+  for (var i = 0; i < scripts.length; i++) {
+    var script = scripts[i];
+
+    if (!V3_URL_REGEX.test(script.src)) {
+      continue;
+    }
+
+    return script;
+  }
+
+  return null;
+};
+
+var injectScript = function injectScript(params) {
+  var queryString = params && !params.advancedFraudSignals ? '?advancedFraudSignals=false' : '';
+  var script = document.createElement('script');
+  script.src = "".concat(V3_URL).concat(queryString);
+  var headOrBody = document.head || document.body;
+
+  if (!headOrBody) {
+    throw new Error('Expected document.body not to be null. Stripe.js requires a <body> element.');
+  }
+
+  headOrBody.appendChild(script);
+  return script;
+};
+
+var registerWrapper = function registerWrapper(stripe, startTime) {
+  if (!stripe || !stripe._registerWrapper) {
+    return;
+  }
+
+  stripe._registerWrapper({
+    name: 'stripe-js',
+    version: "1.11.0",
+    startTime: startTime
+  });
+};
+
+var stripePromise = null;
+var loadScript = function loadScript(params) {
+  // Ensure that we only attempt to load Stripe.js at most once
+  if (stripePromise !== null) {
+    return stripePromise;
+  }
+
+  stripePromise = new Promise(function (resolve, reject) {
+    if (typeof window === 'undefined') {
+      // Resolve to null when imported server side. This makes the module
+      // safe to import in an isomorphic code base.
+      resolve(null);
+      return;
+    }
+
+    if (window.Stripe && params) {
+      console.warn(EXISTING_SCRIPT_MESSAGE);
+    }
+
+    if (window.Stripe) {
+      resolve(window.Stripe);
+      return;
+    }
+
+    try {
+      var script = findScript();
+
+      if (script && params) {
+        console.warn(EXISTING_SCRIPT_MESSAGE);
+      } else if (!script) {
+        script = injectScript(params);
+      }
+
+      script.addEventListener('load', function () {
+        if (window.Stripe) {
+          resolve(window.Stripe);
+        } else {
+          reject(new Error('Stripe.js not available'));
+        }
+      });
+      script.addEventListener('error', function () {
+        reject(new Error('Failed to load Stripe.js'));
+      });
+    } catch (error) {
+      reject(error);
+      return;
+    }
+  });
+  return stripePromise;
+};
+var initStripe = function initStripe(maybeStripe, args, startTime) {
+  if (maybeStripe === null) {
+    return null;
+  }
+
+  var stripe = maybeStripe.apply(undefined, args);
+  registerWrapper(stripe, startTime);
+  return stripe;
+};
+
+// own script injection.
+
+var stripePromise$1 = Promise.resolve().then(function () {
+  return loadScript(null);
+});
+var loadCalled = false;
+stripePromise$1["catch"](function (err) {
+  if (!loadCalled) {
+    console.warn(err);
+  }
+});
+var loadStripe = function loadStripe() {
+  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+
+  loadCalled = true;
+  var startTime = Date.now();
+  return stripePromise$1.then(function (maybeStripe) {
+    return initStripe(maybeStripe, args, startTime);
+  });
+};
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/axios/index.js":
 /*!*************************************!*\
   !*** ./node_modules/axios/index.js ***!
@@ -3520,7 +3663,30 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _layouts_BasicModalLayout_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./layouts/BasicModalLayout.vue */ "./resources/js/Pages/Modals/layouts/BasicModalLayout.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _layouts_BasicModalLayout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./layouts/BasicModalLayout.vue */ "./resources/js/Pages/Modals/layouts/BasicModalLayout.vue");
+/* harmony import */ var _stripe_stripe_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @stripe/stripe-js */ "./node_modules/@stripe/stripe-js/dist/stripe.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3550,13 +3716,127 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    BasicModalLayout: _layouts_BasicModalLayout_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    BasicModalLayout: _layouts_BasicModalLayout_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      firstname: '',
+      lastname: ''
+    };
   },
   props: ['totalPayment'],
-  methods: {},
-  mounted: function mounted() {}
+  methods: {
+    checkoutPayment: function checkoutPayment() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                response = fetch('/secret').then(function (response) {
+                  return response.json();
+                }).then(function (responseJson) {
+                  var clientSecret = responseJson.client_secret; // Call stripe.confirmCardPayment() with the client secret.
+
+                  return clientSecret;
+                }).then( /*#__PURE__*/function () {
+                  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(clientSecret) {
+                    var elem;
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+                      while (1) {
+                        switch (_context.prev = _context.next) {
+                          case 0:
+                            elem = stripe.confirmCardPayment(clientSecret, {
+                              payment_method: {
+                                card: card,
+                                billing_details: {
+                                  name: "".concat(_this.firstname, " ").concat(_this.lastname)
+                                }
+                              }
+                            }).then(function (result) {
+                              if (result.error) {
+                                console.log(result.error.message);
+                              } else if (result.paymentIntent.status === 'succeeded') {
+                                // Show a success message to your customer
+                                // There's a risk of the customer closing the window before callback
+                                // execution. Set up a webhook or plugin to listen for the
+                                // payment_intent.succeeded event that handles any business critical
+                                // post-payment actions.
+                                console.log('success!');
+                              }
+                            });
+
+                          case 1:
+                          case "end":
+                            return _context.stop();
+                        }
+                      }
+                    }, _callee);
+                  }));
+
+                  return function (_x) {
+                    return _ref.apply(this, arguments);
+                  };
+                }());
+
+              case 1:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    initializeStripe: function initializeStripe() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var elements, cardDiv, errorDiv;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return Object(_stripe_stripe_js__WEBPACK_IMPORTED_MODULE_2__["loadStripe"])('pk_test_51HuvwMJuH4Qnm7aCsa9mHV7aZ35qE1VWrjy8kNJRWNQN5pO9Htexujc1tsx9LHnogJh9Etycko92DYTwABwHk2M100AF0sFJgI');
+
+              case 2:
+                window.stripe = _context3.sent;
+                elements = stripe.elements();
+                window.card = elements.create('card');
+                cardDiv = document.createElement('div');
+                cardDiv.id = "card-element";
+                document.querySelector('.card-container').appendChild(cardDiv);
+                errorDiv = document.createElement('div');
+                errorDiv.id = "card-errors";
+                document.querySelector('.card-container').appendChild(errorDiv);
+                card.mount('#card-element');
+                console.log(card);
+                card.on('change', function (_ref2) {
+                  var error = _ref2.error;
+                  var displayError = document.getElementById('card-errors');
+
+                  if (error) {
+                    displayError.textContent = error.message;
+                  } else {
+                    displayError.textContent = '';
+                  }
+                });
+
+              case 14:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    }
+  },
+  mounted: function mounted() {
+    this.initializeStripe();
+  }
 });
 
 /***/ }),
@@ -4988,7 +5268,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".content-container[data-v-642277b2] {\n  display: flex;\n  align-items: center;\n}\n.content-container .address-container[data-v-642277b2] {\n  flex: 1;\n}\n.content-container .address-container h1[data-v-642277b2] {\n  padding: 10px;\n}\n.content-container .address-container .address-title[data-v-642277b2] {\n  font-size: 30px;\n}\n.content-container .payment-container[data-v-642277b2] {\n  flex: 1;\n}", ""]);
+exports.push([module.i, ".content-container[data-v-642277b2] {\n  display: flex;\n  gap: 1rem;\n}\n.content-container .address-container[data-v-642277b2] {\n  flex: 1;\n}\n.content-container .address-container h1[data-v-642277b2] {\n  padding: 10px;\n}\n.content-container .address-container .address-title[data-v-642277b2] {\n  font-size: 30px;\n}\n.content-container .payment-container[data-v-642277b2] {\n  flex: 1;\n  display: grid;\n  gap: 1rem;\n}\n.content-container .payment-container .payment-title[data-v-642277b2] {\n  font-size: 30px;\n}\n.content-container .payment-container .card-form[data-v-642277b2] {\n  display: grid;\n  gap: 1rem;\n}\n.content-container .payment-container .card-form .form-group[data-v-642277b2] {\n  display: grid;\n}\n.content-container .payment-container .card-form .form-group input[data-v-642277b2] {\n  outline: 1px solid rgba(0, 0, 0, 0.089);\n  padding: 5px;\n}\n.content-container .payment-container .card-form .card-container[data-v-642277b2] {\n  display: grid;\n  gap: 1rem;\n  color: red;\n}\n.content-container .payment-container .card-form button[data-v-642277b2] {\n  background: #ebebeb63;\n  transition: 0.45s all;\n  padding: 15px 0 15px 0;\n}\n.content-container .payment-container .card-form button[data-v-642277b2]:focus {\n  outline: none;\n}\n.content-container .payment-container .card-form button[data-v-642277b2]:hover {\n  box-shadow: 1px 1px 1px;\n}\n.content-container .payment-container #card-element[data-v-642277b2] {\n  outline: 1px solid black;\n}", ""]);
 
 // exports
 
@@ -50292,9 +50572,81 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "payment-container" }, [
-                _c("h1", [_vm._v("Payment")]),
+                _c("h1", { staticClass: "payment-title" }, [_vm._v("Payment")]),
                 _vm._v(" "),
-                _c("button", [_vm._v("Proceed to checkout")])
+                _c(
+                  "form",
+                  {
+                    staticClass: "card-form",
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.checkoutPayment($event)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.firstname,
+                            expression: "firstname"
+                          }
+                        ],
+                        attrs: { type: "text", id: "card-fname" },
+                        domProps: { value: _vm.firstname },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.firstname = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "card-name" } }, [
+                        _vm._v("Cardholder's First name")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.lastname,
+                            expression: "lastname"
+                          }
+                        ],
+                        attrs: { type: "text", id: "card-lname" },
+                        domProps: { value: _vm.lastname },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.lastname = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "card-name" } }, [
+                        _vm._v("Cardholder's Last name")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "card-container" }),
+                    _vm._v(" "),
+                    _c("button", { attrs: { type: "submit" } }, [
+                      _vm._v("Proceed to checkout")
+                    ])
+                  ]
+                )
               ])
             ])
           ]
