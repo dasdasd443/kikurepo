@@ -118,7 +118,7 @@ var e=__webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/i
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var e,t=(e=__webpack_require__(/*! axios */ "./node_modules/axios/index.js"))&&"object"==typeof e&&"default"in e?e.default:e;function i(){return(i=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var i=arguments[t];for(var n in i)Object.prototype.hasOwnProperty.call(i,n)&&(e[n]=i[n])}return e}).apply(this,arguments)}var n={modal:null,listener:null,show:function(e){var t=this;"object"==typeof e&&(e="All Inertia.js requests must receive a valid Inertia.js response, however a return plain JSON response was received.<hr>"+JSON.stringify(e));var i=document.createElement("html");i.innerHTML=e,i.querySelectorAll("a").forEach(function(e){return e.setAttribute("target","_top")}),this.modal=document.createElement("div"),this.modal.style.position="fixed",this.modal.style.width="100vw",this.modal.style.height="100vh",this.modal.style.padding="50px",this.modal.style.boxSizing="border-box",this.modal.style.backgroundColor="rgba(0, 0, 0, .6)",this.modal.style.zIndex=2e5,this.modal.addEventListener("click",function(){return t.hide()});var n=document.createElement("iframe");n.style.backgroundColor="white",n.style.borderRadius="5px",n.style.width="100%",n.style.height="100%",this.modal.appendChild(n),document.body.prepend(this.modal),document.body.style.overflow="hidden",n.contentWindow.document.open(),n.contentWindow.document.write(i.outerHTML),n.contentWindow.document.close(),this.listener=this.hideOnEscape.bind(this),document.addEventListener("keydown",this.listener)},hide:function(){this.modal.outerHTML="",this.modal=null,document.body.style.overflow="visible",document.removeEventListener("keydown",this.listener)},hideOnEscape:function(e){27===e.keyCode&&this.hide()}};exports.Inertia={resolveComponent:null,updatePage:null,visitId:null,cancelToken:null,page:null,init:function(e){var t,i,n=e.initialPage,o=e.updatePage;this.resolveComponent=e.resolveComponent,this.updatePage=o,window.history.state&&"back_forward"===this.navigationType()?this.setPage(window.history.state):window.sessionStorage.getItem("inertia.hardVisit")?(window.sessionStorage.removeItem("inertia.hardVisit"),this.setPage(n,{preserveState:!0})):(n.url+=window.location.hash,this.setPage(n)),this.fireEvent("navigate",{detail:{page:n}}),window.addEventListener("popstate",this.restoreState.bind(this)),document.addEventListener("scroll",(t=this.handleScrollEvent.bind(this),i=null,function(){var e=arguments,n=this;clearTimeout(i),i=setTimeout(function(){return t.apply(n,e)},100)}),!0)},scrollRegions:function(){return document.querySelectorAll("[scroll-region]")},handleScrollEvent:function(e){"function"==typeof e.target.hasAttribute&&e.target.hasAttribute("scroll-region")&&this.saveScrollPositions()},saveScrollPositions:function(){this.replaceState(i({},window.history.state,{scrollRegions:Array.prototype.slice.call(this.scrollRegions()).map(function(e){return{top:e.scrollTop,left:e.scrollLeft}})}))},resetScrollPositions:function(){document.documentElement.scrollTop=0,document.documentElement.scrollLeft=0,this.scrollRegions().forEach(function(e){e.scrollTop=0,e.scrollLeft=0})},restoreScrollPositions:function(e){e.scrollRegions&&this.scrollRegions().forEach(function(t,i){t.scrollTop=e.scrollRegions[i].top,t.scrollLeft=e.scrollRegions[i].left})},navigationType:function(){if(window.performance&&window.performance.getEntriesByType("navigation").length)return window.performance.getEntriesByType("navigation")[0].type},isInertiaResponse:function(e){return e&&e.headers["x-inertia"]},isHardVisit:function(e){return e&&409===e.status&&e.headers["x-inertia-location"]},fireEvent:function(e,t){return document.dispatchEvent(new CustomEvent("inertia:"+e,t))},cancelActiveVisits:function(){this.cancelToken&&this.cancelToken.cancel(),this.cancelToken=t.CancelToken.source()},createVisitId:function(){return this.visitId={},this.visitId},visit:function(e,o){var r=this,s=void 0===o?{}:o,a=s.method,c=void 0===a?"get":a,l=s.data,d=void 0===l?{}:l,u=s.replace,h=void 0!==u&&u,p=s.preserveScroll,v=void 0!==p&&p,f=s.preserveState,m=void 0!==f&&f,g=s.only,w=void 0===g?[]:g,y=s.headers,S=void 0===y?{}:y,E=s.onCancelToken,P=void 0===E?function(){return{}}:E,b=s.onStart,I=void 0===b?function(){return{}}:b,T=s.onProgress,k=void 0===T?function(){return{}}:T,C=s.onFinish,L=void 0===C?function(){return{}}:C,x=s.onCancel,R=void 0===x?function(){return{}}:x,V=s.onSuccess,j=void 0===V?function(){return{}}:V,A=i({url:e},arguments[1]);if(!1!==I(A)&&this.fireEvent("start",{cancelable:!0,detail:{visit:A}})){this.cancelActiveVisits(),this.saveScrollPositions();var O=this.createVisitId();return P(this.cancelToken),new Proxy(t({method:c,url:e.toString(),data:"get"===c.toLowerCase()?{}:d,params:"get"===c.toLowerCase()?d:{},cancelToken:this.cancelToken.token,headers:i({},S,{Accept:"text/html, application/xhtml+xml","X-Requested-With":"XMLHttpRequest","X-Inertia":!0},w.length?{"X-Inertia-Partial-Component":this.page.component,"X-Inertia-Partial-Data":w.join(",")}:{},this.page.version?{"X-Inertia-Version":this.page.version}:{}),onUploadProgress:function(e){e.percentage=Math.round(e.loaded/e.total*100),r.fireEvent("progress",{detail:{progress:e}}),k(e)}}).then(function(e){return r.isInertiaResponse(e)?(w.length&&(e.data.props=i({},r.page.props,e.data.props)),r.setPage(e.data,{visitId:O,replace:h,preserveScroll:v,preserveState:m})):Promise.reject({response:e})}).then(function(){return r.fireEvent("success",{detail:{page:r.page}}),j(r.page)}).catch(function(e){if(r.isInertiaResponse(e.response))return r.setPage(e.response.data,{visitId:O});if(t.isCancel(e))R();else if(r.isHardVisit(e.response))r.hardVisit(e.response.headers["x-inertia-location"]);else{if(!e.response)return Promise.reject(e);r.fireEvent("invalid",{cancelable:!0,detail:{response:e.response}})&&n.show(e.response.data)}}).catch(function(e){if(r.fireEvent("error",{cancelable:!0,detail:{error:e}}))return Promise.reject(e)}).finally(function(){r.fireEvent("finish"),L()}),{get:function(e,t){return console.warn("Inertia.js visit promises have been deprecated and will be removed in a future release. Please use the new visit event callbacks instead.\n\nLearn more at https://inertiajs.com/manual-visits#promise-deprecation"),e[t].bind(e)}})}},hardVisit:function(e){window.sessionStorage.setItem("inertia.hardVisit",!0),window.location.href=e},setPage:function(e,t){var i=this,n=void 0===t?{}:t,o=n.visitId,r=void 0===o?this.createVisitId():o,s=n.replace,a=void 0!==s&&s,c=n.preserveScroll,l=void 0!==c&&c,d=n.preserveState,u=void 0!==d&&d;return this.page=e,Promise.resolve(this.resolveComponent(e.component)).then(function(t){r===i.visitId&&(u="function"==typeof u?u(e):u,l="function"==typeof l?l(e):l,(a=a||e.url===""+window.location.pathname+window.location.search)?i.replaceState(e,u):i.pushState(e),i.updatePage(t,e.props,{preserveState:u}).then(function(){l||i.resetScrollPositions(),a||i.fireEvent("navigate",{detail:{page:e}})}))})},pushState:function(e){window.history.pushState(i({cache:{}},e),"",e.url)},replaceState:function(e,t){void 0===t&&(t=!1),window.history.replaceState(i({},{cache:t&&window.history.state?window.history.state.cache:{}},e),"",e.url)},restoreState:function(e){var t=this;if(e.state){this.page=e.state;var i=this.createVisitId();return Promise.resolve(this.resolveComponent(this.page.component)).then(function(e){i===t.visitId&&t.updatePage(e,t.page.props,{preserveState:!1}).then(function(){t.restoreScrollPositions(t.page),t.fireEvent("navigate",{detail:{page:t.page}})})})}},get:function(e,t,n){return void 0===t&&(t={}),void 0===n&&(n={}),this.visit(e,i({},n,{method:"get",data:t}))},replace:function(e,t){return void 0===t&&(t={}),this.visit(e,i({preserveState:!0},t,{replace:!0}))},reload:function(e){return void 0===e&&(e={}),this.replace(window.location.href,e)},post:function(e,t,n){return void 0===t&&(t={}),void 0===n&&(n={}),this.visit(e,i({preserveState:!0},n,{method:"post",data:t}))},put:function(e,t,n){return void 0===t&&(t={}),void 0===n&&(n={}),this.visit(e,i({preserveState:!0},n,{method:"put",data:t}))},patch:function(e,t,n){return void 0===t&&(t={}),void 0===n&&(n={}),this.visit(e,i({preserveState:!0},n,{method:"patch",data:t}))},delete:function(e,t){return void 0===t&&(t={}),this.visit(e,i({},t,{method:"delete"}))},remember:function(e,t){void 0===t&&(t="default");var n=i({},window.history.state);n.cache=n.cache||{},n.cache[t]=e,this.replaceState(n)},restore:function(e){if(void 0===e&&(e="default"),window.history.state.cache&&window.history.state.cache[e])return window.history.state.cache[e]},on:function(e,t){var i=function(e){var i=t(e);e.cancelable&&!e.defaultPrevented&&!1===i&&e.preventDefault()};return document.addEventListener("inertia:"+e,i),function(){document.removeEventListener("inertia:"+e,i)}}},exports.shouldIntercept=function(e){return!(e.target&&e.target.isContentEditable||e.defaultPrevented||e.which>1||e.altKey||e.ctrlKey||e.metaKey||e.shiftKey)};
+function e(e){return e&&"object"==typeof e&&"default"in e?e.default:e}var t=e(__webpack_require__(/*! axios */ "./node_modules/axios/index.js")),i=e(__webpack_require__(/*! nprogress */ "./node_modules/nprogress/nprogress.js"));function o(){return(o=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var i=arguments[t];for(var o in i)Object.prototype.hasOwnProperty.call(i,o)&&(e[o]=i[o])}return e}).apply(this,arguments)}var n={modal:null,listener:null,show:function(e){var t=this,i=document.createElement("html");i.innerHTML=e,i.querySelectorAll("a").forEach(function(e){return e.setAttribute("target","_top")}),this.modal=document.createElement("div"),this.modal.style.position="fixed",this.modal.style.width="100vw",this.modal.style.height="100vh",this.modal.style.padding="50px",this.modal.style.boxSizing="border-box",this.modal.style.backgroundColor="rgba(0, 0, 0, .6)",this.modal.style.zIndex=2e5,this.modal.addEventListener("click",function(){return t.hide()});var o=document.createElement("iframe");o.style.backgroundColor="white",o.style.borderRadius="5px",o.style.width="100%",o.style.height="100%",this.modal.appendChild(o),document.body.prepend(this.modal),document.body.style.overflow="hidden",o.contentWindow.document.open(),o.contentWindow.document.write(i.outerHTML),o.contentWindow.document.close(),this.listener=this.hideOnEscape.bind(this),document.addEventListener("keydown",this.listener)},hide:function(){this.modal.outerHTML="",this.modal=null,document.body.style.overflow="visible",document.removeEventListener("keydown",this.listener)},hideOnEscape:function(e){27===e.keyCode&&this.hide()}};i.configure({showSpinner:!1});var s={delay:null,loading:!1,start:function(){var e=this;clearTimeout(this.delay),this.delay=setTimeout(function(){e.loading=!0,i.set(0),i.start()},250)},increment:function(){this.loading&&i.inc(.4)},stop:function(){clearTimeout(this.delay),this.loading&&(i.done(),this.loading=!1)}};exports.Inertia={saveScrollPositions:null,resolveComponent:null,updatePage:null,version:null,visitId:null,cancelToken:null,page:null,init:function(e){var t,i,n=this,s=e.initialPage,r=e.updatePage;this.resolveComponent=e.resolveComponent,this.updatePage=r,window.history.state&&"back_forward"===this.navigationType()?this.setPage(window.history.state):window.sessionStorage.getItem("inertia.hardVisit")?(window.sessionStorage.removeItem("inertia.hardVisit"),this.setPage(s,{preserveState:!0})):(s.url+=window.location.hash,this.setPage(s)),this.saveScrollPositions=(t=function(){n.setState(o({},window.history.state,{scrollRegions:Array.prototype.slice.call(n.scrollRegions()).map(function(e){return{top:e.scrollTop,left:e.scrollLeft}})}))},i=null,function(){var e=arguments,o=this;clearTimeout(i),i=setTimeout(function(){return t.apply(o,e)},100)}),window.addEventListener("popstate",this.restoreState.bind(this))},navigationType:function(){if(window.performance&&window.performance.getEntriesByType("navigation").length)return window.performance.getEntriesByType("navigation")[0].type},scrollRegions:function(){return document.querySelectorAll("[scroll-region]")},isInertiaResponse:function(e){return e&&e.headers["x-inertia"]},cancelActiveVisits:function(){this.cancelToken&&this.cancelToken.cancel(this.cancelToken),this.cancelToken=t.CancelToken.source()},createVisitId:function(){return this.visitId={},this.visitId},visit:function(e,i){var r=this,a=void 0===i?{}:i,l=a.method,c=void 0===l?"get":l,d=a.data,h=void 0===d?{}:d,u=a.replace,p=void 0!==u&&u,v=a.preserveScroll,f=void 0!==v&&v,m=a.preserveState,w=void 0!==m&&m,g=a.only,y=void 0===g?[]:g,S=a.headers,I=void 0===S?{}:S;s.start(),this.cancelActiveVisits(),this.saveScrollPositions();var T=this.createVisitId();return t({method:c,url:e.toString(),data:"get"===c.toLowerCase()?{}:h,params:"get"===c.toLowerCase()?h:{},cancelToken:this.cancelToken.token,headers:o({},I,{Accept:"text/html, application/xhtml+xml","X-Requested-With":"XMLHttpRequest","X-Inertia":!0},y.length?{"X-Inertia-Partial-Component":this.page.component,"X-Inertia-Partial-Data":y.join(",")}:{},this.version?{"X-Inertia-Version":this.version}:{})}).then(function(e){if(r.isInertiaResponse(e))return e.data;n.show(e.data)}).catch(function(e){if(!t.isCancel(e))return 409===e.response.status&&e.response.headers["x-inertia-location"]?(s.stop(),r.hardVisit(!0,e.response.headers["x-inertia-location"])):r.isInertiaResponse(e.response)?e.response.data:e.response?(s.stop(),void n.show(e.response.data)):Promise.reject(e)}).then(function(e){if(e)return y.length&&(e.props=o({},r.page.props,e.props)),r.setPage(e,{visitId:T,replace:p,preserveScroll:f,preserveState:w})})},hardVisit:function(e,t){window.sessionStorage.setItem("inertia.hardVisit",!0),e?window.location.replace(t):window.location.href=t},setPage:function(e,t){var i=this,o=void 0===t?{}:t,n=o.visitId,r=void 0===n?this.createVisitId():n,a=o.replace,l=void 0!==a&&a,c=o.preserveScroll,d=void 0!==c&&c,h=o.preserveState,u=void 0!==h&&h;return this.page=e,s.increment(),Promise.resolve(this.resolveComponent(e.component)).then(function(t){r===i.visitId&&(i.version=e.version,i.setState(e,l,u),i.updatePage(t,e.props,{preserveState:u}).then(function(){var e=i.scrollRegions();e.forEach(function(e){e.addEventListener("scroll",i.saveScrollPositions)}),d||(document.documentElement.scrollTop=0,document.documentElement.scrollLeft=0,e.forEach(function(e){e.scrollTop=0,e.scrollLeft=0})),i.saveScrollPositions()}),s.stop())})},setState:function(e,t,i){void 0===t&&(t=!1),void 0===i&&(i=!1),t||e.url===""+window.location.pathname+window.location.search?window.history.replaceState(o({},{cache:i&&window.history.state?window.history.state.cache:{}},e),"",e.url):window.history.pushState(o({cache:{}},e),"",e.url)},restoreState:function(e){var t=this;if(e.state){s.start(),this.page=e.state;var i=this.createVisitId();return Promise.resolve(this.resolveComponent(this.page.component)).then(function(e){i===t.visitId&&(t.version=t.page.version,t.setState(t.page),t.updatePage(e,t.page.props,{preserveState:!1}).then(function(){t.page.scrollRegions&&t.scrollRegions().forEach(function(e,i){e.scrollTop=t.page.scrollRegions[i].top,e.scrollLeft=t.page.scrollRegions[i].left})}),s.stop())})}},replace:function(e,t){return void 0===t&&(t={}),this.visit(e,o({preserveState:!0},t,{replace:!0}))},reload:function(e){return void 0===e&&(e={}),this.replace(window.location.href,e)},post:function(e,t,i){return void 0===t&&(t={}),void 0===i&&(i={}),this.visit(e,o({preserveState:!0},i,{method:"post",data:t}))},put:function(e,t,i){return void 0===t&&(t={}),void 0===i&&(i={}),this.visit(e,o({preserveState:!0},i,{method:"put",data:t}))},patch:function(e,t,i){return void 0===t&&(t={}),void 0===i&&(i={}),this.visit(e,o({preserveState:!0},i,{method:"patch",data:t}))},delete:function(e,t){return void 0===t&&(t={}),this.visit(e,o({},t,{method:"delete"}))},remember:function(e,t){void 0===t&&(t="default");var i=o({},window.history.state);i.cache=i.cache||{},i.cache[t]=e,this.setState(i)},restore:function(e){if(void 0===e&&(e="default"),window.history.state.cache&&window.history.state.cache[e])return window.history.state.cache[e]}},exports.shouldIntercept=function(e){return!(e.target&&e.target.isContentEditable||e.defaultPrevented||e.which>1||e.altKey||e.ctrlKey||e.metaKey||e.shiftKey)};
 //# sourceMappingURL=index.js.map
 
 
@@ -44454,6 +44454,493 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/module.js */ "./node_modules/webpack/buildin/module.js")(module)))
+
+/***/ }),
+
+/***/ "./node_modules/nprogress/nprogress.js":
+/*!*********************************************!*\
+  !*** ./node_modules/nprogress/nprogress.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, (c) 2013, 2014 Rico Sta. Cruz - http://ricostacruz.com/nprogress
+ * @license MIT */
+
+;(function(root, factory) {
+
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+
+})(this, function() {
+  var NProgress = {};
+
+  NProgress.version = '0.2.0';
+
+  var Settings = NProgress.settings = {
+    minimum: 0.08,
+    easing: 'ease',
+    positionUsing: '',
+    speed: 200,
+    trickle: true,
+    trickleRate: 0.02,
+    trickleSpeed: 800,
+    showSpinner: true,
+    barSelector: '[role="bar"]',
+    spinnerSelector: '[role="spinner"]',
+    parent: 'body',
+    template: '<div class="bar" role="bar"><div class="peg"></div></div><div class="spinner" role="spinner"><div class="spinner-icon"></div></div>'
+  };
+
+  /**
+   * Updates configuration.
+   *
+   *     NProgress.configure({
+   *       minimum: 0.1
+   *     });
+   */
+  NProgress.configure = function(options) {
+    var key, value;
+    for (key in options) {
+      value = options[key];
+      if (value !== undefined && options.hasOwnProperty(key)) Settings[key] = value;
+    }
+
+    return this;
+  };
+
+  /**
+   * Last number.
+   */
+
+  NProgress.status = null;
+
+  /**
+   * Sets the progress bar status, where `n` is a number from `0.0` to `1.0`.
+   *
+   *     NProgress.set(0.4);
+   *     NProgress.set(1.0);
+   */
+
+  NProgress.set = function(n) {
+    var started = NProgress.isStarted();
+
+    n = clamp(n, Settings.minimum, 1);
+    NProgress.status = (n === 1 ? null : n);
+
+    var progress = NProgress.render(!started),
+        bar      = progress.querySelector(Settings.barSelector),
+        speed    = Settings.speed,
+        ease     = Settings.easing;
+
+    progress.offsetWidth; /* Repaint */
+
+    queue(function(next) {
+      // Set positionUsing if it hasn't already been set
+      if (Settings.positionUsing === '') Settings.positionUsing = NProgress.getPositioningCSS();
+
+      // Add transition
+      css(bar, barPositionCSS(n, speed, ease));
+
+      if (n === 1) {
+        // Fade out
+        css(progress, { 
+          transition: 'none', 
+          opacity: 1 
+        });
+        progress.offsetWidth; /* Repaint */
+
+        setTimeout(function() {
+          css(progress, { 
+            transition: 'all ' + speed + 'ms linear', 
+            opacity: 0 
+          });
+          setTimeout(function() {
+            NProgress.remove();
+            next();
+          }, speed);
+        }, speed);
+      } else {
+        setTimeout(next, speed);
+      }
+    });
+
+    return this;
+  };
+
+  NProgress.isStarted = function() {
+    return typeof NProgress.status === 'number';
+  };
+
+  /**
+   * Shows the progress bar.
+   * This is the same as setting the status to 0%, except that it doesn't go backwards.
+   *
+   *     NProgress.start();
+   *
+   */
+  NProgress.start = function() {
+    if (!NProgress.status) NProgress.set(0);
+
+    var work = function() {
+      setTimeout(function() {
+        if (!NProgress.status) return;
+        NProgress.trickle();
+        work();
+      }, Settings.trickleSpeed);
+    };
+
+    if (Settings.trickle) work();
+
+    return this;
+  };
+
+  /**
+   * Hides the progress bar.
+   * This is the *sort of* the same as setting the status to 100%, with the
+   * difference being `done()` makes some placebo effect of some realistic motion.
+   *
+   *     NProgress.done();
+   *
+   * If `true` is passed, it will show the progress bar even if its hidden.
+   *
+   *     NProgress.done(true);
+   */
+
+  NProgress.done = function(force) {
+    if (!force && !NProgress.status) return this;
+
+    return NProgress.inc(0.3 + 0.5 * Math.random()).set(1);
+  };
+
+  /**
+   * Increments by a random amount.
+   */
+
+  NProgress.inc = function(amount) {
+    var n = NProgress.status;
+
+    if (!n) {
+      return NProgress.start();
+    } else {
+      if (typeof amount !== 'number') {
+        amount = (1 - n) * clamp(Math.random() * n, 0.1, 0.95);
+      }
+
+      n = clamp(n + amount, 0, 0.994);
+      return NProgress.set(n);
+    }
+  };
+
+  NProgress.trickle = function() {
+    return NProgress.inc(Math.random() * Settings.trickleRate);
+  };
+
+  /**
+   * Waits for all supplied jQuery promises and
+   * increases the progress as the promises resolve.
+   *
+   * @param $promise jQUery Promise
+   */
+  (function() {
+    var initial = 0, current = 0;
+
+    NProgress.promise = function($promise) {
+      if (!$promise || $promise.state() === "resolved") {
+        return this;
+      }
+
+      if (current === 0) {
+        NProgress.start();
+      }
+
+      initial++;
+      current++;
+
+      $promise.always(function() {
+        current--;
+        if (current === 0) {
+            initial = 0;
+            NProgress.done();
+        } else {
+            NProgress.set((initial - current) / initial);
+        }
+      });
+
+      return this;
+    };
+
+  })();
+
+  /**
+   * (Internal) renders the progress bar markup based on the `template`
+   * setting.
+   */
+
+  NProgress.render = function(fromStart) {
+    if (NProgress.isRendered()) return document.getElementById('nprogress');
+
+    addClass(document.documentElement, 'nprogress-busy');
+    
+    var progress = document.createElement('div');
+    progress.id = 'nprogress';
+    progress.innerHTML = Settings.template;
+
+    var bar      = progress.querySelector(Settings.barSelector),
+        perc     = fromStart ? '-100' : toBarPerc(NProgress.status || 0),
+        parent   = document.querySelector(Settings.parent),
+        spinner;
+    
+    css(bar, {
+      transition: 'all 0 linear',
+      transform: 'translate3d(' + perc + '%,0,0)'
+    });
+
+    if (!Settings.showSpinner) {
+      spinner = progress.querySelector(Settings.spinnerSelector);
+      spinner && removeElement(spinner);
+    }
+
+    if (parent != document.body) {
+      addClass(parent, 'nprogress-custom-parent');
+    }
+
+    parent.appendChild(progress);
+    return progress;
+  };
+
+  /**
+   * Removes the element. Opposite of render().
+   */
+
+  NProgress.remove = function() {
+    removeClass(document.documentElement, 'nprogress-busy');
+    removeClass(document.querySelector(Settings.parent), 'nprogress-custom-parent');
+    var progress = document.getElementById('nprogress');
+    progress && removeElement(progress);
+  };
+
+  /**
+   * Checks if the progress bar is rendered.
+   */
+
+  NProgress.isRendered = function() {
+    return !!document.getElementById('nprogress');
+  };
+
+  /**
+   * Determine which positioning CSS rule to use.
+   */
+
+  NProgress.getPositioningCSS = function() {
+    // Sniff on document.body.style
+    var bodyStyle = document.body.style;
+
+    // Sniff prefixes
+    var vendorPrefix = ('WebkitTransform' in bodyStyle) ? 'Webkit' :
+                       ('MozTransform' in bodyStyle) ? 'Moz' :
+                       ('msTransform' in bodyStyle) ? 'ms' :
+                       ('OTransform' in bodyStyle) ? 'O' : '';
+
+    if (vendorPrefix + 'Perspective' in bodyStyle) {
+      // Modern browsers with 3D support, e.g. Webkit, IE10
+      return 'translate3d';
+    } else if (vendorPrefix + 'Transform' in bodyStyle) {
+      // Browsers without 3D support, e.g. IE9
+      return 'translate';
+    } else {
+      // Browsers without translate() support, e.g. IE7-8
+      return 'margin';
+    }
+  };
+
+  /**
+   * Helpers
+   */
+
+  function clamp(n, min, max) {
+    if (n < min) return min;
+    if (n > max) return max;
+    return n;
+  }
+
+  /**
+   * (Internal) converts a percentage (`0..1`) to a bar translateX
+   * percentage (`-100%..0%`).
+   */
+
+  function toBarPerc(n) {
+    return (-1 + n) * 100;
+  }
+
+
+  /**
+   * (Internal) returns the correct CSS for changing the bar's
+   * position given an n percentage, and speed and ease from Settings
+   */
+
+  function barPositionCSS(n, speed, ease) {
+    var barCSS;
+
+    if (Settings.positionUsing === 'translate3d') {
+      barCSS = { transform: 'translate3d('+toBarPerc(n)+'%,0,0)' };
+    } else if (Settings.positionUsing === 'translate') {
+      barCSS = { transform: 'translate('+toBarPerc(n)+'%,0)' };
+    } else {
+      barCSS = { 'margin-left': toBarPerc(n)+'%' };
+    }
+
+    barCSS.transition = 'all '+speed+'ms '+ease;
+
+    return barCSS;
+  }
+
+  /**
+   * (Internal) Queues a function to be executed.
+   */
+
+  var queue = (function() {
+    var pending = [];
+    
+    function next() {
+      var fn = pending.shift();
+      if (fn) {
+        fn(next);
+      }
+    }
+
+    return function(fn) {
+      pending.push(fn);
+      if (pending.length == 1) next();
+    };
+  })();
+
+  /**
+   * (Internal) Applies css properties to an element, similar to the jQuery 
+   * css method.
+   *
+   * While this helper does assist with vendor prefixed property names, it 
+   * does not perform any manipulation of values prior to setting styles.
+   */
+
+  var css = (function() {
+    var cssPrefixes = [ 'Webkit', 'O', 'Moz', 'ms' ],
+        cssProps    = {};
+
+    function camelCase(string) {
+      return string.replace(/^-ms-/, 'ms-').replace(/-([\da-z])/gi, function(match, letter) {
+        return letter.toUpperCase();
+      });
+    }
+
+    function getVendorProp(name) {
+      var style = document.body.style;
+      if (name in style) return name;
+
+      var i = cssPrefixes.length,
+          capName = name.charAt(0).toUpperCase() + name.slice(1),
+          vendorName;
+      while (i--) {
+        vendorName = cssPrefixes[i] + capName;
+        if (vendorName in style) return vendorName;
+      }
+
+      return name;
+    }
+
+    function getStyleProp(name) {
+      name = camelCase(name);
+      return cssProps[name] || (cssProps[name] = getVendorProp(name));
+    }
+
+    function applyCss(element, prop, value) {
+      prop = getStyleProp(prop);
+      element.style[prop] = value;
+    }
+
+    return function(element, properties) {
+      var args = arguments,
+          prop, 
+          value;
+
+      if (args.length == 2) {
+        for (prop in properties) {
+          value = properties[prop];
+          if (value !== undefined && properties.hasOwnProperty(prop)) applyCss(element, prop, value);
+        }
+      } else {
+        applyCss(element, args[1], args[2]);
+      }
+    }
+  })();
+
+  /**
+   * (Internal) Determines if an element or space separated list of class names contains a class name.
+   */
+
+  function hasClass(element, name) {
+    var list = typeof element == 'string' ? element : classList(element);
+    return list.indexOf(' ' + name + ' ') >= 0;
+  }
+
+  /**
+   * (Internal) Adds a class to an element.
+   */
+
+  function addClass(element, name) {
+    var oldList = classList(element),
+        newList = oldList + name;
+
+    if (hasClass(oldList, name)) return; 
+
+    // Trim the opening space.
+    element.className = newList.substring(1);
+  }
+
+  /**
+   * (Internal) Removes a class from an element.
+   */
+
+  function removeClass(element, name) {
+    var oldList = classList(element),
+        newList;
+
+    if (!hasClass(element, name)) return;
+
+    // Replace the class name.
+    newList = oldList.replace(' ' + name + ' ', ' ');
+
+    // Trim the opening and closing spaces.
+    element.className = newList.substring(1, newList.length - 1);
+  }
+
+  /**
+   * (Internal) Gets a space separated list of the class names on the element. 
+   * The list is wrapped with a single space on each end to facilitate finding 
+   * matches within the list.
+   */
+
+  function classList(element) {
+    return (' ' + (element.className || '') + ' ').replace(/\s+/gi, ' ');
+  }
+
+  /**
+   * (Internal) Removes an element from the DOM.
+   */
+
+  function removeElement(element) {
+    element && element.parentNode && element.parentNode.removeChild(element);
+  }
+
+  return NProgress;
+});
+
+
 
 /***/ }),
 
