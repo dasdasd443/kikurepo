@@ -3730,6 +3730,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   props: ['totalPayment'],
   methods: {
     checkoutPayment: function checkoutPayment() {
+      var _this = this;
+
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
@@ -3744,35 +3746,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   return clientSecret;
                 }).then( /*#__PURE__*/function () {
                   var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(clientSecret) {
-                    var stripe, elem;
+                    var elem;
                     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
                       while (1) {
                         switch (_context.prev = _context.next) {
                           case 0:
-                            _context.next = 2;
-                            return Object(_stripe_stripe_js__WEBPACK_IMPORTED_MODULE_2__["loadStripe"])('pk_test_51HuvwMJuH4Qnm7aCsa9mHV7aZ35qE1VWrjy8kNJRWNQN5pO9Htexujc1tsx9LHnogJh9Etycko92DYTwABwHk2M100AF0sFJgI');
-
-                          case 2:
-                            stripe = _context.sent;
                             elem = stripe.confirmCardPayment(clientSecret, {
                               payment_method: {
                                 card: card,
                                 billing_details: {
-                                  name: "".concat(firstname, " ").concat(lastname)
+                                  name: "".concat(_this.firstname, " ").concat(_this.lastname)
                                 }
                               }
                             }).then(function (result) {
                               if (result.error) {
                                 console.log(result.error.message);
-                              } else if (result.paymentIntent.status === 'succeeded') {// Show a success message to your customer
+                              } else if (result.paymentIntent.status === 'succeeded') {
+                                // Show a success message to your customer
                                 // There's a risk of the customer closing the window before callback
                                 // execution. Set up a webhook or plugin to listen for the
                                 // payment_intent.succeeded event that handles any business critical
                                 // post-payment actions.
+                                console.log('success!');
                               }
                             });
 
-                          case 4:
+                          case 1:
                           case "end":
                             return _context.stop();
                         }
@@ -3795,7 +3794,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     initializeStripe: function initializeStripe() {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var stripe, elements, card, cardDiv, errorDiv;
+        var elements, cardDiv, errorDiv;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -3804,9 +3803,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return Object(_stripe_stripe_js__WEBPACK_IMPORTED_MODULE_2__["loadStripe"])('pk_test_51HuvwMJuH4Qnm7aCsa9mHV7aZ35qE1VWrjy8kNJRWNQN5pO9Htexujc1tsx9LHnogJh9Etycko92DYTwABwHk2M100AF0sFJgI');
 
               case 2:
-                stripe = _context3.sent;
+                window.stripe = _context3.sent;
                 elements = stripe.elements();
-                card = elements.create('card');
+                window.card = elements.create('card');
                 cardDiv = document.createElement('div');
                 cardDiv.id = "card-element";
                 document.querySelector('.card-container').appendChild(cardDiv);
@@ -3814,6 +3813,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 errorDiv.id = "card-errors";
                 document.querySelector('.card-container').appendChild(errorDiv);
                 card.mount('#card-element');
+                console.log(card);
                 card.on('change', function (_ref2) {
                   var error = _ref2.error;
                   var displayError = document.getElementById('card-errors');
@@ -3825,7 +3825,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 });
 
-              case 13:
+              case 14:
               case "end":
                 return _context3.stop();
             }
@@ -5268,7 +5268,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".content-container[data-v-642277b2] {\n  display: flex;\n  gap: 1rem;\n}\n.content-container .address-container[data-v-642277b2] {\n  flex: 1;\n}\n.content-container .address-container h1[data-v-642277b2] {\n  padding: 10px;\n}\n.content-container .address-container .address-title[data-v-642277b2] {\n  font-size: 30px;\n}\n.content-container .payment-container[data-v-642277b2] {\n  flex: 1;\n  display: grid;\n  gap: 1rem;\n}\n.content-container .payment-container .payment-title[data-v-642277b2] {\n  font-size: 30px;\n}\n.content-container .payment-container .card-form[data-v-642277b2] {\n  display: grid;\n  gap: 1rem;\n}\n.content-container .payment-container .card-form .form-group[data-v-642277b2] {\n  display: grid;\n}\n.content-container .payment-container .card-form .form-group input[data-v-642277b2] {\n  outline: 1px solid rgba(0, 0, 0, 0.089);\n  padding: 5px;\n}\n.content-container .payment-container .card-form .card-container[data-v-642277b2] {\n  display: grid;\n  gap: 1rem;\n  color: red;\n}\n.content-container .payment-container .card-form button[data-v-642277b2] {\n  background: #ebebeb63;\n  transition: 0.45s all;\n}\n.content-container .payment-container .card-form button[data-v-642277b2]:focus {\n  outline: none;\n}\n.content-container .payment-container .card-form button[data-v-642277b2]:hover {\n  box-shadow: 1px 1px 1px;\n}", ""]);
+exports.push([module.i, ".content-container[data-v-642277b2] {\n  display: flex;\n  gap: 1rem;\n}\n.content-container .address-container[data-v-642277b2] {\n  flex: 1;\n}\n.content-container .address-container h1[data-v-642277b2] {\n  padding: 10px;\n}\n.content-container .address-container .address-title[data-v-642277b2] {\n  font-size: 30px;\n}\n.content-container .payment-container[data-v-642277b2] {\n  flex: 1;\n  display: grid;\n  gap: 1rem;\n}\n.content-container .payment-container .payment-title[data-v-642277b2] {\n  font-size: 30px;\n}\n.content-container .payment-container .card-form[data-v-642277b2] {\n  display: grid;\n  gap: 1rem;\n}\n.content-container .payment-container .card-form .form-group[data-v-642277b2] {\n  display: grid;\n}\n.content-container .payment-container .card-form .form-group input[data-v-642277b2] {\n  outline: 1px solid rgba(0, 0, 0, 0.089);\n  padding: 5px;\n}\n.content-container .payment-container .card-form .card-container[data-v-642277b2] {\n  display: grid;\n  gap: 1rem;\n  color: red;\n}\n.content-container .payment-container .card-form button[data-v-642277b2] {\n  background: #ebebeb63;\n  transition: 0.45s all;\n  padding: 15px 0 15px 0;\n}\n.content-container .payment-container .card-form button[data-v-642277b2]:focus {\n  outline: none;\n}\n.content-container .payment-container .card-form button[data-v-642277b2]:hover {\n  box-shadow: 1px 1px 1px;\n}\n.content-container .payment-container #card-element[data-v-642277b2] {\n  outline: 1px solid black;\n}", ""]);
 
 // exports
 

@@ -62,12 +62,12 @@ export default {
                 // Call stripe.confirmCardPayment() with the client secret.
                 return clientSecret;
             }).then(async clientSecret => {
-                const stripe = await loadStripe('pk_test_51HuvwMJuH4Qnm7aCsa9mHV7aZ35qE1VWrjy8kNJRWNQN5pO9Htexujc1tsx9LHnogJh9Etycko92DYTwABwHk2M100AF0sFJgI');
+
                 const elem = stripe.confirmCardPayment(clientSecret,{
                     payment_method: {
                         card: card,
                         billing_details: {
-                            name: `${firstname} ${lastname}`,
+                            name: `${this.firstname} ${this.lastname}`,
                         }
                     }
                 }).then(result => {
@@ -79,15 +79,16 @@ export default {
                         // execution. Set up a webhook or plugin to listen for the
                         // payment_intent.succeeded event that handles any business critical
                         // post-payment actions.
+                        console.log('success!')
                     }
                 });
             });
         },
         async initializeStripe() {
-            const stripe = await loadStripe('pk_test_51HuvwMJuH4Qnm7aCsa9mHV7aZ35qE1VWrjy8kNJRWNQN5pO9Htexujc1tsx9LHnogJh9Etycko92DYTwABwHk2M100AF0sFJgI');
+            window.stripe = await loadStripe('pk_test_51HuvwMJuH4Qnm7aCsa9mHV7aZ35qE1VWrjy8kNJRWNQN5pO9Htexujc1tsx9LHnogJh9Etycko92DYTwABwHk2M100AF0sFJgI');
             const elements = stripe.elements()
 
-            const card = elements.create('card');
+            window.card = elements.create('card');
 
             const cardDiv = document.createElement('div');
             cardDiv.id = "card-element"
@@ -98,6 +99,8 @@ export default {
             document.querySelector('.card-container').appendChild(errorDiv);
 
             card.mount('#card-element');
+
+            console.log(card)
 
             card.on('change', ({error}) => {
             let displayError = document.getElementById('card-errors');
@@ -153,6 +156,7 @@ export default {
             button{
                 background: #ebebeb63;
                 transition:.45s all;
+                padding:15px 0 15px 0;
             }
             button:focus{
                 outline:none;
@@ -160,6 +164,9 @@ export default {
             button:hover{
                 box-shadow: 1px 1px 1px;
             }
+        }
+        #card-element{
+            outline:1px solid black;
         }
     }
 }
