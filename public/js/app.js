@@ -3738,7 +3738,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                response = fetch('/secret').then(function (response) {
+                response = fetch('/secret', {
+                  headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    "X-CSRF-TOKEN": document.head.querySelector("[name=csrf-token]").content
+                  },
+                  method: "POST",
+                  body: JSON.stringify({
+                    payment: _this.totalPayment
+                  })
+                }).then(function (response) {
                   return response.json();
                 }).then(function (responseJson) {
                   var clientSecret = responseJson.client_secret; // Call stripe.confirmCardPayment() with the client secret.
@@ -3813,7 +3823,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 errorDiv.id = "card-errors";
                 document.querySelector('.card-container').appendChild(errorDiv);
                 card.mount('#card-element');
-                console.log(card);
                 card.on('change', function (_ref2) {
                   var error = _ref2.error;
                   var displayError = document.getElementById('card-errors');
@@ -3825,7 +3834,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 });
 
-              case 14:
+              case 13:
               case "end":
                 return _context3.stop();
             }

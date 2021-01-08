@@ -27,3 +27,4 @@ Route::get('/products',[ProductsController::class,'getProducts'])->name('getProd
 Route::get('/categories',[CategoriesController::class,'getCategories'])->name('getCategories');
 Route::get('/sample',[ProductsController::class,'samplequery'])->name('sample');
 Route::get('/shippers',[ShippersController::class,'availableShippers'])->name('shippers');
+

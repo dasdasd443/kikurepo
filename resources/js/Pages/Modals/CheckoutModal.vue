@@ -55,7 +55,18 @@ export default {
     props: ['totalPayment'],
     methods: {
         async checkoutPayment() {
-            var response = fetch('/secret').then(response => {
+            var response = fetch('/secret', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    "X-CSRF-TOKEN": document.head.querySelector("[name=csrf-token]").content
+                },
+                
+                method: "POST",
+                body: JSON.stringify({
+                    payment: this.totalPayment
+                })
+            }).then(response => {
                 return response.json();
             }).then(responseJson => {
                 var clientSecret = responseJson.client_secret;
@@ -99,8 +110,6 @@ export default {
             document.querySelector('.card-container').appendChild(errorDiv);
 
             card.mount('#card-element');
-
-            console.log(card)
 
             card.on('change', ({error}) => {
             let displayError = document.getElementById('card-errors');
