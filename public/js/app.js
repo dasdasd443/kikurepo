@@ -3645,11 +3645,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     BasicModalLayout: _layouts_BasicModalLayout_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-  }
+  },
+  props: ['address']
 });
 
 /***/ }),
@@ -3715,6 +3721,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3727,7 +3741,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       lastname: ''
     };
   },
-  props: ['totalPayment'],
+  props: ['totalPayment', 'billing_address', 'shipping_address'],
   methods: {
     checkoutPayment: function checkoutPayment() {
       var _this = this;
@@ -3859,6 +3873,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _layouts_BasicModalLayout_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./layouts/BasicModalLayout.vue */ "./resources/js/Pages/Modals/layouts/BasicModalLayout.vue");
 //
 //
 //
@@ -3912,7 +3927,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    BasicModalLayout: _layouts_BasicModalLayout_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: ['address']
+});
 
 /***/ }),
 
@@ -4039,7 +4064,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(product_id);
     }
   },
-  props: ['product_details', 'product_photos']
+  props: ['product_details', 'product_photos', 'product_reviews']
 });
 
 /***/ }),
@@ -4451,6 +4476,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4475,7 +4508,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     BillingAddressPopup: _Pages_Modals_BillingAddressPopup_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     CheckoutModal: _Pages_Modals_CheckoutModal_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
-  props: ['cart_details', 'cart_cookie'],
+  props: ['cart_details', 'cart_cookie', 'addresses'],
   mounted: function mounted() {
     this.cart_products = this.cart_details, this.getShippers(), this.calculatePackageDimensions();
   },
@@ -5206,7 +5239,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     product_id: product_id
                   })
                 }).then(function (response) {
-                  console.log(response.text());
+                  location.href = route('my_cart').url();
                 });
 
               case 1:
@@ -5260,7 +5293,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".popup-container[data-v-e7493b5a] {\n  background: white;\n  width: 50%;\n  height: 650px;\n  margin: 100px auto;\n}\n.popup-container .popup-header[data-v-e7493b5a] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 20px;\n}\n.popup-container .popup-header h1[data-v-e7493b5a] {\n  font-size: 36px;\n}\n.popup-container .popup-header button[data-v-e7493b5a]:focus {\n  outline: none;\n}\n.popup-container .popup-header button[data-v-e7493b5a] {\n  justify-content: flex-end;\n  align-items: center;\n  padding: 5px;\n  transition: all 0.45s;\n  border-radius: 5px 5px 5px 5px;\n}\n.popup-container .popup-header button[data-v-e7493b5a]:hover {\n  background: grey;\n  color: white;\n}\n.popup-container .popup-content[data-v-e7493b5a] {\n  padding: 50px;\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-template-columns: repeat(2, minmax(300px, 1fr));\n  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));\n}\n.popup-container .popup-content .address-form[data-v-e7493b5a] {\n  flex: 1;\n}\n.popup-container .popup-content .address-form .city-form[data-v-e7493b5a] {\n  display: flex;\n  width: 50%;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n  gap: 1rem;\n}\n@media screen and (max-width: 1400px) {\n.popup-container .popup-content .address-form .city-form[data-v-e7493b5a] {\n    display: grid;\n    grid-template-columns: repeat(4, minmax(100px, 1fr));\n    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));\n}\n}\n.popup-container .popup-content .address-form input[data-v-e7493b5a] {\n  padding: 5px;\n  outline: 1px solid black;\n  font-size: 15px;\n  width: 100%;\n}\n.popup-container .popup-content .address-form .submit-form[data-v-e7493b5a] {\n  display: flex;\n  justify-content: flex-end;\n}\n.popup-container .popup-content .address-form .submit-form button[data-v-e7493b5a]:focus {\n  outline: none;\n}\n.popup-container .popup-content .address-form .submit-form button[data-v-e7493b5a] {\n  margin: 20px 0 0 0;\n  justify-content: flex-end;\n  padding: 5px;\n  transition: all 0.45s;\n  border-radius: 5px 5px 5px 5px;\n}\n.popup-container .popup-content .address-form .submit-form button[data-v-e7493b5a]:hover {\n  background: grey;\n  color: white;\n}\n.popup-container .popup-content .edit-confirmation-container[data-v-e7493b5a] {\n  flex: 1;\n}\n.popup-container .popup-content .edit-confirmation-container .billing-address-list-container[data-v-e7493b5a] {\n  padding: 20px;\n}\n@media screen and (max-width: 1000px) {\n.city-form[data-v-e7493b5a] {\n    display: none;\n    grid-template-columns: repeat(2, 1fr);\n    grid-template-columns: repeat(2, minmax(200px, 1fr));\n    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));\n}\n}", ""]);
+exports.push([module.i, ".popup-container[data-v-e7493b5a] {\n  background: white;\n  width: 50%;\n  height: 650px;\n  margin: 100px auto;\n}\n.popup-container .popup-header[data-v-e7493b5a] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 20px;\n}\n.popup-container .popup-header h1[data-v-e7493b5a] {\n  font-size: 36px;\n}\n.popup-container .popup-content[data-v-e7493b5a] {\n  padding: 50px;\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-template-columns: repeat(2, minmax(300px, 1fr));\n  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));\n}\n.popup-container .popup-content .address-form[data-v-e7493b5a] {\n  flex: 1;\n}\n.popup-container .popup-content .address-form .city-form[data-v-e7493b5a] {\n  display: flex;\n  width: 50%;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n  gap: 1rem;\n}\n@media screen and (max-width: 1400px) {\n.popup-container .popup-content .address-form .city-form[data-v-e7493b5a] {\n    display: grid;\n    grid-template-columns: repeat(4, minmax(100px, 1fr));\n    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));\n}\n}\n.popup-container .popup-content .address-form input[data-v-e7493b5a] {\n  padding: 5px;\n  outline: 1px solid black;\n  font-size: 15px;\n  width: 100%;\n}\n.popup-container .popup-content .address-form .submit-form[data-v-e7493b5a] {\n  display: flex;\n  justify-content: flex-end;\n}\n.popup-container .popup-content .address-form .submit-form button[data-v-e7493b5a]:focus {\n  outline: none;\n}\n.popup-container .popup-content .address-form .submit-form button[data-v-e7493b5a] {\n  margin: 20px 0 0 0;\n  justify-content: flex-end;\n  padding: 5px;\n  transition: all 0.45s;\n  border-radius: 5px 5px 5px 5px;\n}\n.popup-container .popup-content .address-form .submit-form button[data-v-e7493b5a]:hover {\n  background: grey;\n  color: white;\n}\n.popup-container .popup-content .edit-confirmation-container[data-v-e7493b5a] {\n  flex: 1;\n}\n.popup-container .popup-content .edit-confirmation-container .billing-address-list-container[data-v-e7493b5a] {\n  padding: 20px;\n}\n@media screen and (max-width: 1000px) {\n.city-form[data-v-e7493b5a] {\n    display: none;\n    grid-template-columns: repeat(2, 1fr);\n    grid-template-columns: repeat(2, minmax(200px, 1fr));\n    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));\n}\n}", ""]);
 
 // exports
 
@@ -5298,7 +5331,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".popup-container[data-v-4761bc76] {\n  background: white;\n  width: 50%;\n  height: 650px;\n  overflow: scroll;\n  margin: 100px auto;\n}\n.popup-container .popup-header[data-v-4761bc76] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 20px;\n}\n.popup-container .popup-header h1[data-v-4761bc76] {\n  font-size: 36px;\n}\n.popup-container .popup-header button[data-v-4761bc76]:focus {\n  outline: none;\n}\n.popup-container .popup-header button[data-v-4761bc76] {\n  justify-content: flex-end;\n  align-items: center;\n  padding: 5px;\n  transition: all 0.45s;\n  border-radius: 5px 5px 5px 5px;\n}\n.popup-container .popup-header button[data-v-4761bc76]:hover {\n  background: grey;\n  color: white;\n}\n.popup-container .popup-content[data-v-4761bc76] {\n  padding: 50px;\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-template-columns: repeat(2, minmax(300px, 1fr));\n  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));\n}\n.popup-container .popup-content .address-form[data-v-4761bc76] {\n  flex: 1;\n}\n.popup-container .popup-content .address-form .city-form[data-v-4761bc76] {\n  display: flex;\n  width: 50%;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n  gap: 1rem;\n}\n@media screen and (max-width: 1400px) {\n.popup-container .popup-content .address-form .city-form[data-v-4761bc76] {\n    display: grid;\n    grid-template-columns: repeat(4, minmax(100px, 1fr));\n    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));\n}\n}\n.popup-container .popup-content .address-form input[data-v-4761bc76] {\n  padding: 5px;\n  outline: 1px solid black;\n  font-size: 15px;\n  width: 100%;\n}\n.popup-container .popup-content .address-form .submit-form[data-v-4761bc76] {\n  display: flex;\n  justify-content: flex-end;\n}\n.popup-container .popup-content .address-form .submit-form button[data-v-4761bc76]:focus {\n  outline: none;\n}\n.popup-container .popup-content .address-form .submit-form button[data-v-4761bc76] {\n  margin: 20px 0 0 0;\n  justify-content: flex-end;\n  padding: 5px;\n  transition: all 0.45s;\n  border-radius: 5px 5px 5px 5px;\n}\n.popup-container .popup-content .address-form .submit-form button[data-v-4761bc76]:hover {\n  background: grey;\n  color: white;\n}\n.popup-container .popup-content .edit-confirmation-container[data-v-4761bc76] {\n  flex: 1;\n}\n.popup-container .popup-content .edit-confirmation-container .shipping-address-list-container[data-v-4761bc76] {\n  padding: 20px;\n}\n@media screen and (max-width: 1000px) {\n.city-form[data-v-4761bc76] {\n    display: none;\n    grid-template-columns: repeat(2, 1fr);\n    grid-template-columns: repeat(2, minmax(200px, 1fr));\n    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));\n}\n}", ""]);
+exports.push([module.i, ".popup-container[data-v-4761bc76] {\n  background: white;\n  width: 50%;\n  height: 650px;\n  overflow: scroll;\n  margin: 100px auto;\n}\n.popup-container .popup-header[data-v-4761bc76] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 20px;\n}\n.popup-container .popup-header h1[data-v-4761bc76] {\n  font-size: 36px;\n}\n.popup-container .popup-content[data-v-4761bc76] {\n  padding: 50px;\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-template-columns: repeat(2, minmax(300px, 1fr));\n  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));\n}\n.popup-container .popup-content .address-form[data-v-4761bc76] {\n  flex: 1;\n}\n.popup-container .popup-content .address-form .city-form[data-v-4761bc76] {\n  display: flex;\n  width: 50%;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n  gap: 1rem;\n}\n@media screen and (max-width: 1400px) {\n.popup-container .popup-content .address-form .city-form[data-v-4761bc76] {\n    display: grid;\n    grid-template-columns: repeat(4, minmax(100px, 1fr));\n    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));\n}\n}\n.popup-container .popup-content .address-form input[data-v-4761bc76] {\n  padding: 5px;\n  outline: 1px solid black;\n  font-size: 15px;\n  width: 100%;\n}\n.popup-container .popup-content .address-form .submit-form[data-v-4761bc76] {\n  display: flex;\n  justify-content: flex-end;\n}\n.popup-container .popup-content .address-form .submit-form button[data-v-4761bc76]:focus {\n  outline: none;\n}\n.popup-container .popup-content .address-form .submit-form button[data-v-4761bc76] {\n  margin: 20px 0 0 0;\n  justify-content: flex-end;\n  padding: 5px;\n  transition: all 0.45s;\n  border-radius: 5px 5px 5px 5px;\n}\n.popup-container .popup-content .address-form .submit-form button[data-v-4761bc76]:hover {\n  background: grey;\n  color: white;\n}\n.popup-container .popup-content .edit-confirmation-container[data-v-4761bc76] {\n  flex: 1;\n}\n.popup-container .popup-content .edit-confirmation-container .shipping-address-list-container[data-v-4761bc76] {\n  padding: 20px;\n}\n@media screen and (max-width: 1000px) {\n.city-form[data-v-4761bc76] {\n    display: none;\n    grid-template-columns: repeat(2, 1fr);\n    grid-template-columns: repeat(2, minmax(200px, 1fr));\n    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));\n}\n}", ""]);
 
 // exports
 
@@ -5355,7 +5388,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".error-checkout[data-v-7325571b] {\n  display: none;\n  justify-content: space-between;\n  align-items: center;\n  margin: 0 0 10px 0;\n  border-radius: 0 5px 0 0;\n  background-color: rgba(250, 0, 0, 0.363);\n}\n.error-checkout button[data-v-7325571b] {\n  padding: 5px;\n  font-size: 20px;\n}\n.error-checkout h1[data-v-7325571b] {\n  padding: 5px;\n}\n.message[data-v-7325571b] {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  margin: auto;\n  padding: 10px;\n  width: 100%;\n}\n.popup[data-v-7325571b] {\n  display: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  z-index: 1;\n  background-color: rgba(0, 0, 0, 0.5);\n}\n.available-shippers .shippers-title-container[data-v-7325571b] {\n  display: flex;\n  justify-content: space-between;\n}\n.available-shippers .shippers-title-container h1[data-v-7325571b] {\n  font-size: 20px;\n}\n.available-shippers .shipper-options-container[data-v-7325571b] {\n  padding: 10px 0 10px 0;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.available-shippers .shipper-options-container select[data-v-7325571b] {\n  padding: 10px 0 10px 0;\n}\n.available-shippers .shipper-options-container select[data-v-7325571b]:focus {\n  outline: none;\n}\n.dont-show-orders[data-v-7325571b] {\n  display: grid;\n  width: 70vw;\n  background: white;\n  margin: auto;\n  align-items: center;\n  padding: 50px;\n  grid-template-columns: repeat(2, 1fr);\n  grid-template-columns: repeat(2, minmax(300px, 1fr));\n  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n}\n.dont-show-orders .text-container h1[data-v-7325571b] {\n  font-size: 50px;\n}\n.dont-show-orders .no-cart-logo-container[data-v-7325571b] {\n  display: flex;\n  justify-content: flex-end;\n}\n.my-cart[data-v-7325571b] {\n  display: flex;\n  gap: 1rem;\n  width: 80vw;\n  margin: 50px auto;\n}\n@media screen and (max-width: 1000px) {\n.my-cart[data-v-7325571b] {\n    display: grid;\n    grid-template-columns: repeat(2, 1fr);\n    grid-template-columns: repeat(2, minmax(400px, 1fr));\n    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));\n}\n}\n.my-cart .checkout-container[data-v-7325571b] {\n  flex: 1;\n}\n.my-cart .checkout-container .checkout[data-v-7325571b] {\n  width: 100%;\n  padding: 25px;\n  border: 1px solid black;\n  background: white;\n}\n.my-cart .checkout-container .checkout .addresses[data-v-7325571b] {\n  gap: 1rem;\n}\n.my-cart .checkout-container .checkout .checkout-section[data-v-7325571b] {\n  display: grid;\n  font-size: 20px;\n}\n.my-cart .checkout-container .checkout .checkout-section .total-price-section[data-v-7325571b] {\n  margin-top: 20px;\n  display: flex;\n  flex: 3;\n  justify-content: space-between;\n}\n.my-cart .checkout-container .checkout .checkout-section .total-price-section .total-price[data-v-7325571b] {\n  padding: 25px 0 25px 25px;\n}\n.my-cart .checkout-container .checkout .checkout-section .checkout-button[data-v-7325571b] {\n  padding: 25px 40px 25px 40px;\n  background: #ebebeb63;\n  transition: all 0.45s;\n  border-radius: 10px 0 0 0;\n}\n.my-cart .checkout-container .checkout .checkout-section .checkout-button[data-v-7325571b]:hover, .my-cart .checkout-container .checkout .checkout-section .checkout-button[data-v-7325571b]:focus {\n  box-shadow: 1px 1px 1px;\n  outline: none;\n}\n.my-cart .checkout-container .checkout .shipping-address[data-v-7325571b], .my-cart .checkout-container .checkout .billing-address[data-v-7325571b] {\n  display: flex;\n  justify-content: space-between;\n  padding: 0 0 25px 0;\n}\n.my-cart .checkout-container .checkout .shipping-address button[data-v-7325571b]:focus, .my-cart .checkout-container .checkout .billing-address button[data-v-7325571b]:focus {\n  outline: none;\n}\n.my-cart .checkout-container .checkout .order-summary .summary-details #subtotal[data-v-7325571b] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.my-cart .checkout-container .checkout .order-summary .summary-details #shipping-fee[data-v-7325571b] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.my-cart .my-cart-container[data-v-7325571b] {\n  flex: 2;\n  width: 100%;\n  display: grid;\n  gap: 1rem;\n}\n.my-cart .my-cart-container .card[data-v-7325571b] {\n  box-shadow: 1px 1px 3px;\n  display: flex;\n  background: white;\n}\n.my-cart .my-cart-container .card .image[data-v-7325571b] {\n  flex: 1;\n  width: 200px;\n  height: 200px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.my-cart .my-cart-container .card .image img[data-v-7325571b] {\n  padding: 25px;\n}\n.my-cart .my-cart-container .card .product-information[data-v-7325571b] {\n  flex: 3;\n  display: flex;\n  align-items: center;\n  font-size: 20px;\n  padding: 20px;\n}\n.my-cart .my-cart-container .card .product-information h1[data-v-7325571b] {\n  padding: 25px;\n  flex: 2;\n}\n.my-cart .my-cart-container .card .product-information .quantity-container[data-v-7325571b] {\n  flex: 1;\n  display: flex;\n  align-items: center;\n}\n.my-cart .my-cart-container .card .product-information .quantity-container input[data-v-7325571b] {\n  width: 40px;\n  padding: 5px;\n  border-radius: 5px 5px 5px 5px;\n  box-shadow: 1px 1px 1px;\n  text-align: center;\n}\n.my-cart .my-cart-container .card .product-information .quantity-container input[data-v-7325571b]:focus {\n  outline: none;\n}\n.my-cart .my-cart-container .card .product-information .quantity-container input[data-v-7325571b]::-webkit-outer-spin-button,\n.my-cart .my-cart-container .card .product-information .quantity-container input[data-v-7325571b]::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n  margin: 0;\n}\n.my-cart .my-cart-container .card .product-price[data-v-7325571b] {\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.my-cart .my-cart-container .card .product-price #price[data-v-7325571b] {\n  font-size: 30px;\n}\n@media screen and (max-width: 1000px) {\n.my-cart .my-cart-container .card[data-v-7325571b] {\n    display: grid;\n    grid-template-columns: repeat(2, 1fr);\n    grid-template-columns: repeat(2, minmax(240px, 1fr));\n    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n}\n}", ""]);
+exports.push([module.i, ".error-checkout[data-v-7325571b] {\n  display: none;\n  justify-content: space-between;\n  align-items: center;\n  margin: 0 0 10px 0;\n  border-radius: 0 5px 0 0;\n  background-color: rgba(250, 0, 0, 0.363);\n}\n.error-checkout button[data-v-7325571b] {\n  padding: 5px;\n  font-size: 20px;\n}\n.error-checkout h1[data-v-7325571b] {\n  padding: 5px;\n}\n.message[data-v-7325571b] {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  margin: auto;\n  padding: 10px;\n  width: 100%;\n}\n.popup[data-v-7325571b] {\n  display: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  z-index: 1;\n  background-color: rgba(0, 0, 0, 0.5);\n}\n.available-shippers .shippers-title-container[data-v-7325571b] {\n  display: flex;\n  justify-content: space-between;\n}\n.available-shippers .shippers-title-container h1[data-v-7325571b] {\n  font-size: 20px;\n}\n.available-shippers .shipper-options-container[data-v-7325571b] {\n  padding: 10px 0 10px 0;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.available-shippers .shipper-options-container select[data-v-7325571b] {\n  padding: 10px 0 10px 0;\n}\n.available-shippers .shipper-options-container select[data-v-7325571b]:focus {\n  outline: none;\n}\n.dont-show-orders[data-v-7325571b] {\n  display: grid;\n  width: 70vw;\n  background: white;\n  margin: auto;\n  align-items: center;\n  padding: 50px;\n  grid-template-columns: repeat(2, 1fr);\n  grid-template-columns: repeat(2, minmax(300px, 1fr));\n  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n}\n.dont-show-orders .text-container h1[data-v-7325571b] {\n  font-size: 50px;\n}\n.dont-show-orders .no-cart-logo-container[data-v-7325571b] {\n  display: flex;\n  justify-content: flex-end;\n}\n.my-cart[data-v-7325571b] {\n  display: flex;\n  gap: 1rem;\n  width: 80vw;\n  margin: 50px auto;\n}\n@media screen and (max-width: 1000px) {\n.my-cart[data-v-7325571b] {\n    display: grid;\n    grid-template-columns: repeat(2, 1fr);\n    grid-template-columns: repeat(2, minmax(400px, 1fr));\n    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));\n}\n}\n.my-cart .checkout-container[data-v-7325571b] {\n  flex: 1;\n}\n.my-cart .checkout-container .checkout[data-v-7325571b] {\n  width: 100%;\n  padding: 25px;\n  border: 1px solid black;\n  background: white;\n}\n.my-cart .checkout-container .checkout .addresses[data-v-7325571b] {\n  gap: 1rem;\n}\n.my-cart .checkout-container .checkout .addresses h1[data-v-7325571b] {\n  padding: 0 0 10px 0;\n}\n.my-cart .checkout-container .checkout .checkout-section[data-v-7325571b] {\n  display: grid;\n  font-size: 20px;\n}\n.my-cart .checkout-container .checkout .checkout-section .total-price-section[data-v-7325571b] {\n  margin-top: 20px;\n  display: flex;\n  flex: 3;\n  justify-content: space-between;\n}\n.my-cart .checkout-container .checkout .checkout-section .total-price-section .total-price[data-v-7325571b] {\n  padding: 25px 0 25px 25px;\n}\n.my-cart .checkout-container .checkout .checkout-section .checkout-button[data-v-7325571b] {\n  padding: 25px 40px 25px 40px;\n  background: #ebebeb63;\n  transition: all 0.45s;\n  border-radius: 10px 0 0 0;\n}\n.my-cart .checkout-container .checkout .checkout-section .checkout-button[data-v-7325571b]:hover, .my-cart .checkout-container .checkout .checkout-section .checkout-button[data-v-7325571b]:focus {\n  box-shadow: 1px 1px 1px;\n  outline: none;\n}\n.my-cart .checkout-container .checkout .shipping-address[data-v-7325571b], .my-cart .checkout-container .checkout .billing-address[data-v-7325571b] {\n  display: flex;\n  justify-content: space-between;\n  gap: 1rem;\n  align-items: center;\n  padding: 0 0 25px 0;\n}\n.my-cart .checkout-container .checkout .shipping-address button[data-v-7325571b]:focus, .my-cart .checkout-container .checkout .billing-address button[data-v-7325571b]:focus {\n  outline: none;\n}\n.my-cart .checkout-container .checkout .order-summary .summary-details #subtotal[data-v-7325571b] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.my-cart .checkout-container .checkout .order-summary .summary-details #shipping-fee[data-v-7325571b] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.my-cart .my-cart-container[data-v-7325571b] {\n  flex: 2;\n  width: 100%;\n  display: grid;\n  gap: 1rem;\n}\n.my-cart .my-cart-container .card[data-v-7325571b] {\n  box-shadow: 1px 1px 3px;\n  display: flex;\n  background: white;\n}\n.my-cart .my-cart-container .card .image[data-v-7325571b] {\n  flex: 1;\n  width: 200px;\n  height: 200px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.my-cart .my-cart-container .card .image img[data-v-7325571b] {\n  padding: 25px;\n}\n.my-cart .my-cart-container .card .product-information[data-v-7325571b] {\n  flex: 3;\n  display: flex;\n  align-items: center;\n  font-size: 20px;\n  padding: 20px;\n}\n.my-cart .my-cart-container .card .product-information h1[data-v-7325571b] {\n  padding: 25px;\n  flex: 2;\n}\n.my-cart .my-cart-container .card .product-information .quantity-container[data-v-7325571b] {\n  flex: 1;\n  display: flex;\n  align-items: center;\n}\n.my-cart .my-cart-container .card .product-information .quantity-container input[data-v-7325571b] {\n  width: 40px;\n  padding: 5px;\n  border-radius: 5px 5px 5px 5px;\n  box-shadow: 1px 1px 1px;\n  text-align: center;\n}\n.my-cart .my-cart-container .card .product-information .quantity-container input[data-v-7325571b]:focus {\n  outline: none;\n}\n.my-cart .my-cart-container .card .product-information .quantity-container input[data-v-7325571b]::-webkit-outer-spin-button,\n.my-cart .my-cart-container .card .product-information .quantity-container input[data-v-7325571b]::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n  margin: 0;\n}\n.my-cart .my-cart-container .card .product-price[data-v-7325571b] {\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.my-cart .my-cart-container .card .product-price #price[data-v-7325571b] {\n  font-size: 30px;\n}\n@media screen and (max-width: 1000px) {\n.my-cart .my-cart-container .card[data-v-7325571b] {\n    display: grid;\n    grid-template-columns: repeat(2, 1fr);\n    grid-template-columns: repeat(2, minmax(240px, 1fr));\n    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n}\n}", ""]);
 
 // exports
 
@@ -50419,21 +50452,38 @@ var render = function() {
                 [
                   _c("div", { staticClass: "form-group" }, [
                     _c("label", { attrs: { for: "billing-name" } }, [
-                      _vm._v("Name: ")
+                      _vm._v("First Name: ")
                     ]),
                     _vm._v(" "),
-                    _c("input", { attrs: { type: "text", id: "billing-name" } })
+                    _c("input", {
+                      attrs: { type: "text", id: "billing-first-name" },
+                      domProps: { value: _vm.address.first_name }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "billing-name" } }, [
+                      _vm._v("Last Name: ")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "text", id: "billing-last-name" },
+                      domProps: { value: _vm.address.last_name }
+                    })
                   ]),
                   _vm._v(" "),
                   _c("br"),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
                     _c("label", { attrs: { for: "billing-house-no" } }, [
-                      _vm._v("House No: ")
+                      _vm._v("Address 1: ")
                     ]),
                     _vm._v(" "),
                     _c("input", {
-                      attrs: { type: "text", id: "billing-house-no" }
+                      attrs: { type: "text", id: "billing-address-1" },
+                      domProps: { value: _vm.address.address_line1 }
                     })
                   ]),
                   _vm._v(" "),
@@ -50441,11 +50491,12 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
                     _c("label", { attrs: { for: "billing-street" } }, [
-                      _vm._v("Street: ")
+                      _vm._v("Address 2: ")
                     ]),
                     _vm._v(" "),
                     _c("input", {
-                      attrs: { type: "text", id: "billing-street" }
+                      attrs: { type: "text", id: "billing-address-2" },
+                      domProps: { value: _vm.address.address_line2 }
                     })
                   ]),
                   _vm._v(" "),
@@ -50457,7 +50508,8 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("input", {
-                      attrs: { type: "text", id: "billing-city" }
+                      attrs: { type: "text", id: "billing-city" },
+                      domProps: { value: _vm.address.city }
                     }),
                     _vm._v(" "),
                     _c("label", { attrs: { for: "billing-zip-code" } }, [
@@ -50465,7 +50517,8 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("input", {
-                      attrs: { type: "text", id: "billing-zip-code" }
+                      attrs: { type: "text", id: "billing-zip-code" },
+                      domProps: { value: _vm.address.zip_code }
                     })
                   ]),
                   _vm._v(" "),
@@ -50473,11 +50526,12 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
                     _c("label", { attrs: { for: "billing-propvince" } }, [
-                      _vm._v("Province: ")
+                      _vm._v("Country: ")
                     ]),
                     _vm._v(" "),
                     _c("input", {
-                      attrs: { type: "text", id: "billing-province" }
+                      attrs: { type: "text", id: "billing-country" },
+                      domProps: { value: _vm.address.country }
                     })
                   ]),
                   _vm._v(" "),
@@ -50562,7 +50616,14 @@ var render = function() {
                   _vm._v(" "),
                   _c("h1", [
                     _vm._v(
-                      "MAKAI's Dorm Gov M. Cuenco Ave Talamban Cebu City Cebu 6000"
+                      _vm._s(_vm.shipping_address.address_line1) +
+                        ", \n                        " +
+                        _vm._s(_vm.shipping_address.address_line2) +
+                        ",\n                        " +
+                        _vm._s(_vm.shipping_address.city) +
+                        ",\n                        " +
+                        _vm._s(_vm.shipping_address.zip_code) +
+                        "\n                    "
                     )
                   ])
                 ]),
@@ -50576,7 +50637,14 @@ var render = function() {
                   _vm._v(" "),
                   _c("h1", [
                     _vm._v(
-                      "MAKAI's Dorm Gov M. Cuenco Ave Talamban Cebu City Cebu 6000"
+                      _vm._s(_vm.billing_address.address_line1) +
+                        ", \n                        " +
+                        _vm._s(_vm.billing_address.address_line2) +
+                        ",\n                        " +
+                        _vm._s(_vm.billing_address.city) +
+                        ",\n                        " +
+                        _vm._s(_vm.billing_address.zip_code) +
+                        "\n                    "
                     )
                   ])
                 ])
@@ -50689,148 +50757,155 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "popup" }, [
-    _c("div", { staticClass: "popup-container" }, [
-      _c("div", { staticClass: "popup-header" }, [
-        _c("h1", [_vm._v("Shipping Address")]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            on: {
-              click: function($event) {
-                return _vm.$emit("closePopup")
-              }
-            }
-          },
-          [_vm._v("Close")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c("div", { staticClass: "popup-content" }, [
-        _c("div", { staticClass: "address-form" }, [
-          _c(
-            "form",
-            {
-              attrs: { method: "POST" },
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.$emit("closePopup")
+  return _c("basic-modal-layout", {
+    scopedSlots: _vm._u([
+      {
+        key: "header",
+        fn: function() {
+          return [
+            _c("h1", [_vm._v("Shipping Address")]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                on: {
+                  click: function($event) {
+                    return _vm.$emit("closePopup")
+                  }
                 }
-              }
-            },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _vm._m(1),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _vm._m(2),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _vm._m(3),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _vm._m(4),
-              _vm._v(" "),
-              _vm._m(5)
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _vm._m(6)
-      ])
+              },
+              [_vm._v("×")]
+            )
+          ]
+        },
+        proxy: true
+      },
+      {
+        key: "content",
+        fn: function() {
+          return [
+            _c("div", { staticClass: "address-form" }, [
+              _c(
+                "form",
+                {
+                  attrs: { method: "POST" },
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.$emit("closePopup")
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "shipping-name" } }, [
+                      _vm._v("First Name: ")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "text", id: "shipping-first-name" },
+                      domProps: { value: _vm.address.first_name }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "shipping-name" } }, [
+                      _vm._v("Last Name: ")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "text", id: "shipping-last-name" },
+                      domProps: { value: _vm.address.last_name }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "shipping-house-no" } }, [
+                      _vm._v("Address 1: ")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "text", id: "shipping-address-1" },
+                      domProps: { value: _vm.address.address_line1 }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "shipping-street" } }, [
+                      _vm._v("Address 2: ")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "text", id: "shipping-address-2" },
+                      domProps: { value: _vm.address.address_line2 }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group city-form" }, [
+                    _c("label", { attrs: { for: "shipping-city" } }, [
+                      _vm._v("City: ")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "text", id: "shipping-city" },
+                      domProps: { value: _vm.address.city }
+                    }),
+                    _vm._v(" "),
+                    _c("label", { attrs: { for: "shipping-zip-code" } }, [
+                      _vm._v("Zip Code: ")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "text", id: "shipping-zip-code" },
+                      domProps: { value: _vm.address.zip_code }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "shipping-propvince" } }, [
+                      _vm._v("Country: ")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "text", id: "shipping-country" },
+                      domProps: { value: _vm.address.country }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "submit-form" }, [
+                    _c("button", { attrs: { type: "submit" } }, [
+                      _vm._v("Edit Address")
+                    ])
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "edit-confirmation-container" }, [
+              _c("div", { staticClass: "shipping-address-list-container" }, [
+                _c("h1", [
+                  _vm._v("Here is a list of available shipping addresses")
+                ])
+              ])
+            ])
+          ]
+        },
+        proxy: true
+      }
     ])
-  ])
+  })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "shipping-name" } }, [_vm._v("Name: ")]),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "text", id: "shipping-name" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "shipping-house-no" } }, [
-        _vm._v("House No: ")
-      ]),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "text", id: "shipping-house-no" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "shipping-street" } }, [_vm._v("Street: ")]),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "text", id: "shipping-street" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group city-form" }, [
-      _c("label", { attrs: { for: "shipping-city" } }, [_vm._v("City: ")]),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "text", id: "shipping-city" } }),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "shipping-zip-code" } }, [
-        _vm._v("Zip Code: ")
-      ]),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "text", id: "shipping-zip-code" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "shipping-propvince" } }, [
-        _vm._v("Province: ")
-      ]),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "text", id: "shipping-province" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "submit-form" }, [
-      _c("button", { attrs: { type: "submit" } }, [_vm._v("Edit Address")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "edit-confirmation-container" }, [
-      _c("div", { staticClass: "shipping-address-list-container" }, [
-        _c("h1", [_vm._v("Here is a list of available shipping addresses")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -50949,9 +51024,25 @@ var render = function() {
                 _c("div", { staticClass: "product-sub-details" }, [
                   _c("h1", [_vm._v("Sold by: Kiku Trading Company")]),
                   _vm._v(" "),
-                  _c("h1", [_vm._v("4 out of 5 stars")]),
+                  _c("h1", [
+                    _vm._v(
+                      _vm._s(
+                        _vm.product_reviews.average > 0
+                          ? _vm.product_reviews.average
+                          : 0
+                      ) + " out of 5 stars"
+                    )
+                  ]),
                   _vm._v(" "),
-                  _c("h1", [_vm._v("136 Reviews")])
+                  _c("h1", [
+                    _vm._v(
+                      _vm._s(_vm.product_reviews.count) +
+                        " " +
+                        _vm._s(
+                          _vm.product_reviews.count > 1 ? "Reviews" : "Review"
+                        )
+                    )
+                  ])
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "product-price-details" }, [
@@ -50979,7 +51070,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "product-sub-description" }, [
                   _c("div", { staticClass: "description-text" }, [
-                    _c("h1", [_vm._v("hello there i am description")])
+                    _c("h1", [
+                      _vm._v(_vm._s(_vm.product_details.product_description))
+                    ])
                   ]),
                   _vm._v(" "),
                   _c("hr"),
@@ -51031,7 +51124,13 @@ var render = function() {
                 staticClass: "products-description-container",
                 attrs: { id: "products-description-container" }
               },
-              [_vm._v("\n            Hello i am description\n        ")]
+              [
+                _vm._v(
+                  "\n            " +
+                    _vm._s(_vm.product_details.product_details) +
+                    "\n        "
+                )
+              ]
             )
           ]
         },
@@ -51759,7 +51858,25 @@ var render = function() {
                           _c("h1", [_vm._v("Shipping Address")]),
                           _vm._v(" "),
                           _c("div", { staticClass: "shipping-address" }, [
-                            _c("h1", [_vm._v("Talamban Cebu City")]),
+                            _c("h1", [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.addresses.shipping_address.address_line1
+                                ) +
+                                  ", \n                                " +
+                                  _vm._s(
+                                    _vm.addresses.shipping_address.address_line2
+                                  ) +
+                                  ", \n                                " +
+                                  _vm._s(_vm.addresses.shipping_address.city) +
+                                  ", \n                                " +
+                                  _vm._s(
+                                    _vm.addresses.shipping_address.zip_code
+                                  ) +
+                                  ", \n                                " +
+                                  _vm._s(_vm.addresses.shipping_address.country)
+                              )
+                            ]),
                             _vm._v(" "),
                             _c(
                               "button",
@@ -51777,7 +51894,25 @@ var render = function() {
                           _c("h1", [_vm._v("Billing Address")]),
                           _vm._v(" "),
                           _c("div", { staticClass: "billing-address" }, [
-                            _c("h1", [_vm._v("Talamban Cebu City")]),
+                            _c("h1", [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.addresses.billing_address.address_line1
+                                ) +
+                                  ", \n                                " +
+                                  _vm._s(
+                                    _vm.addresses.billing_address.address_line2
+                                  ) +
+                                  ", \n                                " +
+                                  _vm._s(_vm.addresses.billing_address.city) +
+                                  ", \n                                " +
+                                  _vm._s(
+                                    _vm.addresses.billing_address.zip_code
+                                  ) +
+                                  ", \n                                " +
+                                  _vm._s(_vm.addresses.billing_address.country)
+                              )
+                            ]),
                             _vm._v(" "),
                             _c(
                               "button",
@@ -51928,17 +52063,23 @@ var render = function() {
                 _vm._v(" "),
                 _c("ShippingAddressPopup", {
                   class: "ShippingAddress popup",
+                  attrs: { address: _vm.addresses.shipping_address },
                   on: { closePopup: _vm.closePopup }
                 }),
                 _vm._v(" "),
                 _c("BillingAddressPopup", {
                   class: "BillingAddress popup",
+                  attrs: { address: _vm.addresses.billing_address },
                   on: { closePopup: _vm.closePopup }
                 }),
                 _vm._v(" "),
                 _c("CheckoutModal", {
                   class: "Checkout popup",
-                  attrs: { totalPayment: _vm.sub_total + _vm.shipping_costs },
+                  attrs: {
+                    totalPayment: _vm.sub_total + _vm.shipping_costs,
+                    billing_address: _vm.addresses.billing_address,
+                    shipping_address: _vm.addresses.shipping_address
+                  },
                   on: { closePopup: _vm.closePopup }
                 })
               ],

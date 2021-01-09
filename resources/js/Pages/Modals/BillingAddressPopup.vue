@@ -8,30 +8,35 @@
             <div class="address-form">
                 <form @submit.prevent="$emit('closePopup')" method='POST'>
                     <div class='form-group'>
-                        <label for="billing-name">Name: </label>
-                        <input type="text" id='billing-name'>
+                        <label for="billing-name">First Name: </label>
+                        <input type="text" id='billing-first-name' :value='address.first_name'>
                     </div>
                     <br>
                     <div class='form-group'>
-                        <label for="billing-house-no">House No: </label>
-                        <input type="text" id='billing-house-no'>
+                        <label for="billing-name">Last Name: </label>
+                        <input type="text" id='billing-last-name' :value='address.last_name'>
                     </div>
                     <br>
                     <div class='form-group'>
-                        <label for="billing-street">Street: </label>
-                        <input type="text" id='billing-street'>
+                        <label for="billing-house-no">Address 1: </label>
+                        <input type="text" id='billing-address-1' :value='address.address_line1'>
+                    </div>
+                    <br>
+                    <div class='form-group'>
+                        <label for="billing-street">Address 2: </label>
+                        <input type="text" id='billing-address-2' :value='address.address_line2'>
                     </div>
                     <br>
                     <div class='form-group city-form'>
                         <label for="billing-city">City: </label>
-                        <input type="text" id='billing-city'>
+                        <input type="text" id='billing-city' :value='address.city'>
                         <label for="billing-zip-code">Zip Code: </label>
-                        <input type="text" id='billing-zip-code'>
+                        <input type="text" id='billing-zip-code' :value='address.zip_code'>
                     </div>  
                     <br>
                     <div class='form-group'>
-                        <label for="billing-propvince">Province: </label>
-                        <input type="text" id='billing-province'>
+                        <label for="billing-propvince">Country: </label>
+                        <input type="text" id='billing-country' :value='address.country'>
                     </div>
                     <div class='submit-form'>
                         <button type='submit'>Edit Address</button>
@@ -50,8 +55,8 @@
 <script>
 import BasicModalLayout from './layouts/BasicModalLayout.vue'
 export default {
-  components: { BasicModalLayout },
-    
+    components: { BasicModalLayout },
+    props:['address']
 }
 </script>
 
@@ -68,20 +73,6 @@ export default {
         padding:20px;
         h1{
             font-size:36px;
-        }
-        button:focus{
-            outline:none;
-        }
-        button{
-            justify-content: flex-end;
-            align-items: center;
-            padding:5px;
-            transition:all .45s;
-            border-radius: 5px 5px 5px 5px;
-        }
-        button:hover{
-            background: grey;
-            color:white;
         }
     }
     .popup-content{

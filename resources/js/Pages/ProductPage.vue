@@ -26,8 +26,8 @@
                     <hr>
                     <div class='product-sub-details'>
                         <h1>Sold by: Kiku Trading Company</h1>
-                        <h1>4 out of 5 stars</h1>
-                        <h1>136 Reviews</h1>
+                        <h1>{{(product_reviews.average > 0)? product_reviews.average: 0}} out of 5 stars</h1>
+                        <h1>{{product_reviews.count}} {{(product_reviews.count > 1)?'Reviews':'Review'}}</h1>
                     </div>
                     <div class='product-price-details'>
                         <h1 v-if='product_details.product_stock > 0'>
@@ -39,7 +39,7 @@
                     <hr>
                     <div class='product-sub-description'>
                         <div class='description-text'>
-                            <h1>hello there i am description</h1>
+                            <h1>{{product_details.product_description}}</h1>
                         </div>
                         <hr>
                         <a href="#products-description-container">>See more about this product</a>
@@ -52,7 +52,7 @@
             </div>
             <hr>
             <div class='products-description-container' id='products-description-container'>
-                Hello i am description
+                {{product_details.product_details}}
             </div>
         </template>
     </app-layout>
@@ -88,7 +88,7 @@ export default {
             console.log(product_id)
         }
     },
-    props:['product_details','product_photos']
+    props:['product_details','product_photos','product_reviews']
 }
 </script>
 

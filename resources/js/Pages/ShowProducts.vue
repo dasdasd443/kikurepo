@@ -54,7 +54,7 @@ export default {
                 }),
 
             }).then(response=>{
-                console.log(response.text())
+                location.href= route('my_cart').url();
             })
         },
 

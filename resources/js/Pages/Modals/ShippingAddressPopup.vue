@@ -1,59 +1,65 @@
 <template>
-    <div class='popup'>
-        <div class='popup-container'>
-            <div class='popup-header'>
-                <h1>Shipping Address</h1>
-                <button @click='$emit("closePopup")'>Close</button>
-            </div>
-            <hr>
-            <div class='popup-content'>
-                <div class="address-form">
-                    <form @submit.prevent="$emit('closePopup')" method='POST'>
-                        <div class='form-group'>
-                            <label for="shipping-name">Name: </label>
-                            <input type="text" id='shipping-name'>
-                        </div>
-                        <br>
-                        <div class='form-group'>
-                            <label for="shipping-house-no">House No: </label>
-                            <input type="text" id='shipping-house-no'>
-                        </div>
-                        <br>
-                        <div class='form-group'>
-                            <label for="shipping-street">Street: </label>
-                            <input type="text" id='shipping-street'>
-                        </div>
-                        <br>
-                        <div class='form-group city-form'>
-                            <label for="shipping-city">City: </label>
-                            <input type="text" id='shipping-city'>
-                            <label for="shipping-zip-code">Zip Code: </label>
-                            <input type="text" id='shipping-zip-code'>
-                        </div>  
-                        <br>
-                        <div class='form-group'>
-                            <label for="shipping-propvince">Province: </label>
-                            <input type="text" id='shipping-province'>
-                        </div>
-                        <div class='submit-form'>
-                            <button type='submit'>Edit Address</button>
-                        </div>
-                    </form>
-                </div>
-                <div class='edit-confirmation-container'>
-                    <div class='shipping-address-list-container'>
-                        <h1>Here is a list of available shipping addresses</h1>
+    <basic-modal-layout>
+        <template #header>
+            <h1>Shipping Address</h1>
+            <button @click='$emit("closePopup")'>&times;</button>
+        </template>
+        <template #content>
+            <div class="address-form">
+                <form @submit.prevent="$emit('closePopup')" method='POST'>
+                    <div class='form-group'>
+                        <label for="shipping-name">First Name: </label>
+                        <input type="text" id='shipping-first-name' :value='address.first_name'>
                     </div>
-                    
-                </div>
+                    <br>
+                    <div class='form-group'>
+                        <label for="shipping-name">Last Name: </label>
+                        <input type="text" id='shipping-last-name' :value='address.last_name'>
+                    </div>
+                    <br>
+                    <div class='form-group'>
+                        <label for="shipping-house-no">Address 1: </label>
+                        <input type="text" id='shipping-address-1' :value='address.address_line1'>
+                    </div>
+                    <br>
+                    <div class='form-group'>
+                        <label for="shipping-street">Address 2: </label>
+                        <input type="text" id='shipping-address-2' :value='address.address_line2'>
+                    </div>
+                    <br>
+                    <div class='form-group city-form'>
+                        <label for="shipping-city">City: </label>
+                        <input type="text" id='shipping-city' :value='address.city'>
+                        <label for="shipping-zip-code">Zip Code: </label>
+                        <input type="text" id='shipping-zip-code' :value='address.zip_code'>
+                    </div>  
+                    <br>
+                    <div class='form-group'>
+                        <label for="shipping-propvince">Country: </label>
+                        <input type="text" id='shipping-country' :value='address.country'>
+                    </div>
+                    <div class='submit-form'>
+                        <button type='submit'>Edit Address</button>
+                    </div>
+                </form>
             </div>
-        </div>
-    </div>
+            <div class='edit-confirmation-container'>
+                <div class='shipping-address-list-container'>
+                    <h1>Here is a list of available shipping addresses</h1>
+                </div>
+                
+            </div>
+        </template>
+    </basic-modal-layout>
+        
+
 </template>
 
 <script>
+import BasicModalLayout from './layouts/BasicModalLayout.vue'
 export default {
-    
+    components: { BasicModalLayout },
+    props:['address']
 }
 </script>
 
@@ -72,20 +78,7 @@ export default {
         h1{
             font-size:36px;
         }
-        button:focus{
-            outline:none;
-        }
-        button{
-            justify-content: flex-end;
-            align-items: center;
-            padding:5px;
-            transition:all .45s;
-            border-radius: 5px 5px 5px 5px;
-        }
-        button:hover{
-            background: grey;
-            color:white;
-        }
+        
     }
     .popup-content{
         padding:50px;

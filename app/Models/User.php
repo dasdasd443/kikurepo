@@ -58,4 +58,14 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function reviews()
+    {
+        return $this->hasMany('App\Models\Reviews', 'user_id', 'id');
+    }
+
+    public function address()
+    {
+        return $this->hasMany('App\Models\Address', 'user_id', 'id');
+    }
 }
