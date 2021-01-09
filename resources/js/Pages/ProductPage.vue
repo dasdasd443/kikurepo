@@ -45,7 +45,7 @@
                         <a href="#products-description-container">>See more about this product</a>
                     </div>
                     <div class='product-buttons'>
-                        <button id='add-to-cart-button' @click='addToCart(product_details.product_id)'><a href="javascript:history.back()">Add to Cart</a></button>
+                        <button id='add-to-cart-button' @click='addToCart(product_details.product_id)'>Add to Cart</button>
                         <button id='add-to-wishlist-button' @click='addToWishlist(product_details.product_id)'>Add to Wishlist</button>
                     </div>
                 </div>
@@ -68,65 +68,20 @@ export default {
     methods: {
         addToCart(product_id) {
             
-            const cookies_split = document.cookie.split(';')
-            const cart_orders_cookie = cookies_split.filter(id => {
-                 return id.split('=')[0]==='cart_orders'
+            const response = fetch('/add_to_cart',{
+                headers:{
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    "X-CSRF-TOKEN": document.head.querySelector("[name=csrf-token]").content
+                },
+                method:'POST',
+                body: JSON.stringify({
+                    product_id: product_id
+                }),
+
+            }).then(response=>{
+                location.href = "javascript:history.back()"
             })
-
-
-            //if there is an existing cookie for cart orders
-            if(cart_orders_cookie.length > 0)
-            {
-                // new date instance
-                const date = new Date()
-
-                //get cookies for cart orders
-                const get_cart_orders = JSON.parse(cart_orders_cookie[0].split('=')[1])
-
-                //if the current product is found on the existing cookie
-                const isFound = get_cart_orders.find((cart_item) => {
-                    return cart_item.product_id == product_id
-                })
-
-                //if the order is found on the existing cart orders in cookies
-                if(isFound)
-                {
-                    get_cart_orders.map(cart_item => {
-                        if (cart_item.product_id === product_id)
-                            cart_item.quantity++
-                    })
-
-                    //set the cookie and give it to /my_cart route
-                    //document.cookie = `cart_orders=${JSON.stringify(get_cart_orders)};expires=`+ date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000) + `;path=/`
-                    document.cookie = `cart_orders=${JSON.stringify(get_cart_orders)};expires=`+ date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000) + `;path=/`
-                }
-
-                //if the order is not found on the existing cart orders in cookies
-                else
-                {
-                    const cart_order = {
-                        product_id,
-                        quantity: 1
-                    }
-
-                    //set the cookie and give it to /my_cart route
-                    get_cart_orders.push(cart_order)
-                    //document.cookie = `cart_orders=${JSON.stringify(get_cart_orders)};expires=`+ date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000) + `;path=/my_cart`
-                    document.cookie = `cart_orders=${JSON.stringify(get_cart_orders)};expires=`+ date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000) + `;path=/`
-                }
-            }
-            //if there are no existing cart orders
-            else
-            {
-                const date = new Date();
-                const new_cart_order = [
-                    {product_id,quantity: 1}
-                ]
-                
-                //set the cookie and give it to /my_cart route
-                //document.cookie = `cart_orders=${JSON.stringify(new_cart_order)};expires=`+ date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000) + `;path=/my_cart`
-                document.cookie = `cart_orders=${JSON.stringify(new_cart_order)};expires=`+ date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000) + `;path=/`
-            }
             
         },
         addToWishlist(product_id) {

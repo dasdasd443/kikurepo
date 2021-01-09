@@ -27,3 +27,4 @@ Route::get('/user/my_cart',[RenderController::class,'my_cart'])->name('my_cart')
 Route::middleware('auth:sanctum','verified')->get('/logout',[UserController::class,'logout'])->name('weblogout');
 Route::get('/user',[UserController::class,'requestUser'])->name('user');
 Route::post('/secret',[UserController::class,'checkoutPayment'])->name('checkoutPayment');
+Route::post('/add_to_cart',[UserController::class,'addToCart'])->name('addtocart');

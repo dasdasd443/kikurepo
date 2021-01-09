@@ -4021,51 +4021,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addToCart: function addToCart(product_id) {
-      var cookies_split = document.cookie.split(';');
-      var cart_orders_cookie = cookies_split.filter(function (id) {
-        return id.split('=')[0] === 'cart_orders';
-      }); //if there is an existing cookie for cart orders
-
-      if (cart_orders_cookie.length > 0) {
-        // new date instance
-        var date = new Date(); //get cookies for cart orders
-
-        var get_cart_orders = JSON.parse(cart_orders_cookie[0].split('=')[1]); //if the current product is found on the existing cookie
-
-        var isFound = get_cart_orders.find(function (cart_item) {
-          return cart_item.product_id == product_id;
-        }); //if the order is found on the existing cart orders in cookies
-
-        if (isFound) {
-          get_cart_orders.map(function (cart_item) {
-            if (cart_item.product_id === product_id) cart_item.quantity++;
-          }); //set the cookie and give it to /my_cart route
-          //document.cookie = `cart_orders=${JSON.stringify(get_cart_orders)};expires=`+ date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000) + `;path=/`
-
-          document.cookie = "cart_orders=".concat(JSON.stringify(get_cart_orders), ";expires=") + date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000) + ";path=/";
-        } //if the order is not found on the existing cart orders in cookies
-        else {
-            var cart_order = {
-              product_id: product_id,
-              quantity: 1
-            }; //set the cookie and give it to /my_cart route
-
-            get_cart_orders.push(cart_order); //document.cookie = `cart_orders=${JSON.stringify(get_cart_orders)};expires=`+ date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000) + `;path=/my_cart`
-
-            document.cookie = "cart_orders=".concat(JSON.stringify(get_cart_orders), ";expires=") + date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000) + ";path=/";
-          }
-      } //if there are no existing cart orders
-      else {
-          var _date = new Date();
-
-          var new_cart_order = [{
-            product_id: product_id,
-            quantity: 1
-          }]; //set the cookie and give it to /my_cart route
-          //document.cookie = `cart_orders=${JSON.stringify(new_cart_order)};expires=`+ date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000) + `;path=/my_cart`
-
-          document.cookie = "cart_orders=".concat(JSON.stringify(new_cart_order), ";expires=") + _date.setTime(_date.getTime() + 7 * 24 * 60 * 60 * 1000) + ";path=/";
-        }
+      var response = fetch('/add_to_cart', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          "X-CSRF-TOKEN": document.head.querySelector("[name=csrf-token]").content
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          product_id: product_id
+        })
+      }).then(function (response) {
+        location.href = "javascript:history.back()";
+      });
     },
     addToWishlist: function addToWishlist(product_id) {
       console.log(product_id);
@@ -5168,8 +5136,16 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -5209,11 +5185,37 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   methods: {
     addToCart: function addToCart(product_id) {
-      console.log(product_id);
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                response = fetch('/add_to_cart', {
+                  headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    "X-CSRF-TOKEN": document.head.querySelector("[name=csrf-token]").content
+                  },
+                  method: 'POST',
+                  body: JSON.stringify({
+                    product_id: product_id
+                  })
+                }).then(function (response) {
+                  console.log(response.text());
+                });
+
+              case 1:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
     },
     addToWishlist: function addToWishlist(product_id) {
       console.log(product_id);
@@ -51000,13 +51002,7 @@ var render = function() {
                         }
                       }
                     },
-                    [
-                      _c(
-                        "a",
-                        { attrs: { href: "javascript:history.back()" } },
-                        [_vm._v("Add to Cart")]
-                      )
-                    ]
+                    [_vm._v("Add to Cart")]
                   ),
                   _vm._v(" "),
                   _c(

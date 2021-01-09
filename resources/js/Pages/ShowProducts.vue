@@ -41,8 +41,21 @@ export default {
         AppLayout
     },
     methods:{
-        addToCart(product_id) {
-            console.log(product_id);
+        async addToCart(product_id) {
+            const response = fetch('/add_to_cart',{
+                headers:{
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    "X-CSRF-TOKEN": document.head.querySelector("[name=csrf-token]").content
+                },
+                method:'POST',
+                body: JSON.stringify({
+                    product_id: product_id
+                }),
+
+            }).then(response=>{
+                console.log(response.text())
+            })
         },
 
         addToWishlist(product_id) {
