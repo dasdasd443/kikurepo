@@ -6,7 +6,7 @@
         </template>
         <template #content>
             <div class="address-form">
-                <form @submit.prevent="$emit('closePopup')" method='POST'>
+                <form method='POST'>
                     <div class='form-group'>
                         <label for="billing-name">First Name: </label>
                         <input type="text" id='billing-first-name' :value='address.first_name'>
@@ -39,7 +39,7 @@
                         <input type="text" id='billing-country' :value='address.country'>
                     </div>
                     <div class='submit-form'>
-                        <button type='submit'>Edit Address</button>
+                        <button type='submit' @click.prevent='editAddress(address.address_id)'>Edit Address</button>
                     </div>
                 </form>
             </div>
@@ -56,7 +56,30 @@
 import BasicModalLayout from './layouts/BasicModalLayout.vue'
 export default {
     components: { BasicModalLayout },
-    props:['address']
+    props:['address'],
+    methods:{
+        editAddress(address_id) {
+            fetch(`/edit_address/${address_id}`,{
+                headers:{
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    "X-CSRF-TOKEN": document.head.querySelector("[name=csrf-token]").content
+                },
+                method: 'PUT',
+                body: JSON.stringify({
+                    first_name: document.querySelector('#billing-first-name').value,
+                    last_name: document.querySelector('#billing-last-name').value,
+                    address_1: document.querySelector('#billing-address-1').value,
+                    address_2: document.querySelector('#billing-address-2').value,
+                    city: document.querySelector('#billing-city').value,
+                    zip_code: document.querySelector('#billing-zip-code').value,
+                    country: document.querySelector('#billing-country').value,
+                })
+            }).then(response=> {
+                location.reload();
+            })
+        }
+    }
 }
 </script>
 
@@ -74,6 +97,7 @@ export default {
         h1{
             font-size:36px;
         }
+
     }
     .popup-content{
         padding:50px;

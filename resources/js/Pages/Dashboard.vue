@@ -2,7 +2,11 @@
     <app-layout>
 
         <template #content>
-            Hello and Welcome
+            <div class='logo'>
+                <h1 class='logo-title'>KIKU<small>
+                    Trading Company</small></h1>
+                
+            </div>
         </template>
     </app-layout>
 </template>
@@ -37,5 +41,26 @@
 </script>
 
 <style lang='scss' scoped>
-
+.logo{
+    display:grid;
+    justify-content: center;
+    align-items: center;
+    .logo-title{    
+        background-image:linear-gradient(#393e464f 0%, #393e46 100%);
+        background-clip: text;
+        color:transparent;
+        letter-spacing: 5vw;
+        font-size:30vw;
+        position:relative;  
+        small{
+            font-size:20px;
+            letter-spacing: 5px;
+            line-height:1px;
+            position: relative;
+            color:black;
+            top:10;
+            z-index: 1111;
+        }
+    }
+}
 </style>

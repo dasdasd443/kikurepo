@@ -39,7 +39,7 @@
                         <input type="text" id='shipping-country' :value='address.country'>
                     </div>
                     <div class='submit-form'>
-                        <button type='submit'>Edit Address</button>
+                        <button type='submit' @click.prevent='editAddress(address.address_id)'>Edit Address</button>
                     </div>
                 </form>
             </div>
@@ -59,7 +59,30 @@
 import BasicModalLayout from './layouts/BasicModalLayout.vue'
 export default {
     components: { BasicModalLayout },
-    props:['address']
+    props:['address'],
+    methods: {
+        editAddress(address_id) {
+            fetch(`/edit_address/${address_id}`,{
+                headers:{
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    "X-CSRF-TOKEN": document.head.querySelector("[name=csrf-token]").content
+                },
+                method: 'PUT',
+                body: JSON.stringify({
+                    first_name: document.querySelector('#shipping-first-name').value,
+                    last_name: document.querySelector('#shipping-last-name').value,
+                    address_1: document.querySelector('#shipping-address-1').value,
+                    address_2: document.querySelector('#shipping-address-2').value,
+                    city: document.querySelector('#shipping-city').value,
+                    zip_code: document.querySelector('#shipping-zip-code').value,
+                    country: document.querySelector('#shipping-country').value,
+                })
+            }).then(response=> {
+                location.reload();
+            })
+        }
+    }
 }
 </script>
 

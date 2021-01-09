@@ -28,3 +28,4 @@ Route::middleware('auth:sanctum','verified')->get('/logout',[UserController::cla
 Route::get('/user',[UserController::class,'requestUser'])->name('user');
 Route::post('/secret',[UserController::class,'checkoutPayment'])->name('checkoutPayment');
 Route::post('/add_to_cart',[UserController::class,'addToCart'])->name('addtocart');
+Route::put('/edit_address/{address_id}',[UserController::class,'editAddress'])->name('editAddress');

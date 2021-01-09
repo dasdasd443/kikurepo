@@ -15,7 +15,9 @@
 
 <script>
 export default {
-    
+    methods: {
+        
+    }
 }
 </script>
 
@@ -58,6 +60,7 @@ export default {
     }
     .popup-content{
         padding:50px;
+        display:flex;
         
     }
 }

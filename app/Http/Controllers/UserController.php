@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
+use App\Models\Address;
+
 class UserController extends Controller
 {
     //
@@ -79,5 +81,20 @@ class UserController extends Controller
         }
 
         
+    }
+
+    public function editAddress($address_id, Request $request)
+    {
+        $address = Address::find($address_id);
+
+        $address->first_name = $request->first_name;
+        $address->last_name = $request->last_name;
+        $address->address_line1 = $request->address_1;
+        $address->address_line2 = $request->address_2;
+        $address->city = $request->city;
+        $address->zip_code = $request->zip_code;
+        $address->country = $request->country;
+
+        $address->save();
     }
 }
