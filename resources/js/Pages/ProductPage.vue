@@ -111,6 +111,10 @@ export default {
     .photos-container{
         flex: 1;
         .display-photo{
+            width:70%;
+            height:70%;
+            margin:auto;
+            align-items: center;
             .photo-collection{
                 display:flex;
             }

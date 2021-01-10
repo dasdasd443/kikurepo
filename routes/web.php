@@ -22,7 +22,7 @@ Route::get('/',[RenderController::class,'dashboard'])->name('/');
 Route::get('/dashboard',[RenderController::class,'dashboard'])->name('dashboard');
 Route::get('/browse/{category?}',[RenderController::class,'browse'])->name('browse');
 Route::get('/product_details/{product_id}',[RenderController::class,'product_details'])->name('productDetails');
-Route::get('/user/my_cart',[RenderController::class,'my_cart'])->name('my_cart');
+Route::middleware('auth:sanctum','verified')->get('/user/my_cart',[RenderController::class,'my_cart'])->name('my_cart');
 
 Route::middleware('auth:sanctum','verified')->get('/logout',[UserController::class,'logout'])->name('weblogout');
 Route::get('/user',[UserController::class,'requestUser'])->name('user');

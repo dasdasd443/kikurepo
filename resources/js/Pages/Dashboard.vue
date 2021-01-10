@@ -45,6 +45,11 @@
     display:grid;
     justify-content: center;
     align-items: center;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */  
+    white-space:pre; 
     .logo-title{    
         background-image:linear-gradient(#393e464f 0%, #393e46 100%);
         background-clip: text;
@@ -52,14 +57,15 @@
         letter-spacing: 5vw;
         font-size:30vw;
         position:relative;  
+        line-height:1.6;
         small{
-            font-size:20px;
+            font-size:.05em;
             letter-spacing: 5px;
-            line-height:1px;
-            position: relative;
+            line-height:1;
+            position: absolute;
+            left:0;
+            top:0;
             color:black;
-            top:10;
-            z-index: 1111;
         }
     }
 }
