@@ -2,7 +2,7 @@
     <app-layout>
         <template #content>
             <div class="show-products-container">
-                <div class='product-filters'></div>
+                <div class="product-filter"></div>
                 <div class='products-container' v-if='products.length > 0'>
                     <div class='product-card' v-for='n in products' :key='n.product_id'>
                         <a :href='"/product_details/" + n[0].product_id' v-if='n[2] == null'>
@@ -81,41 +81,43 @@ export default {
     display:grid;
     align-items: center;
     grid-template-columns: repeat(1,1fr);
-    grid-template-columns: repeat(1,minmax(240px,1fr));
-    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    grid-template-columns: repeat(1,minmax(200px,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
     .product-details{
         flex:1;
         padding:10px;
     }
     .add-buttons{
         flex: 1;
-        display:flex;
-        justify-content: space-between;
+        display:grid;
         align-items: center;
+        gap:.5rem;
     }
     .add-cart-button,.add-wishlist-button{
-        padding:10px;
+        padding:5px;
         border:1px solid black;
         box-shadow: 5px black;
     }
 }
 .show-products-container{
     display:flex;
-    margin: 10vh 0 0 0;
-    .product-filters{
-        flex:1;
+    padding:100px;
+    @media screen and (max-width:1400px){
+        padding:100px 0 0 0;
+    }
+    .product-filter{
+        flex:2;
     }
     .products-container{
-        flex:4;
         display:grid;
-        grid-template-columns: repeat(4,minmax(300px,1fr));
-        
+        grid-template-columns: repeat(4,minmax(250px,1fr));
+        flex:1;
         @media screen and (max-width:1400px){
-            grid-template-columns: repeat(4,minmax(300px,1fr));
-            grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+            grid-template-columns: repeat(4,minmax(250px,1fr));
+            grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
         }
         margin:auto;
-        gap:4rem;
+        gap:1rem;
         .product-card{
             border:1px solid black;
             padding:20px;
@@ -126,7 +128,7 @@ export default {
     }
 
     .sidebar{
-        flex:1;
+        flex:2;
     }
 }
 </style>
