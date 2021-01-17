@@ -5266,6 +5266,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5326,7 +5329,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "body[data-v-5663af57] {\n  background: #f7f7f7;\n}\n*[data-v-5663af57] {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-family: \"Roboto\";\n}\n.category-list[data-v-5663af57] {\n  display: flex;\n  gap: 2rem;\n  align-items: center;\n}\n.category-list h1[data-v-5663af57] {\n  cursor: pointer;\n}\n.categories-container[data-v-5663af57] {\n  display: flex;\n  align-items: center;\n  overflow-x: hidden;\n}\n.header-container[data-v-5663af57] {\n  display: flex;\n  font-size: 20px;\n  height: 100px;\n  z-index: 2;\n  background: #393e46;\n  color: white;\n}\n.header-container .title-container[data-v-5663af57] {\n  display: flex;\n  flex: 1;\n  align-items: center;\n  justify-content: center;\n  font-size: 25px;\n}\n.header-container .search-container[data-v-5663af57] {\n  display: flex;\n  flex: 3;\n  align-items: center;\n  justify-content: center;\n  color: black;\n}\n.header-container .search-container form[data-v-5663af57] {\n  font-size: 15px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n}\n.header-container .search-container form #search-text[data-v-5663af57] {\n  width: 60%;\n  padding: 5px;\n}\n.header-container .search-container form button[data-v-5663af57] {\n  background: white;\n  border: 1px solid black;\n  padding: 5px 25px 5px 25px;\n}\n.header-container .search-container form input[data-v-5663af57]:focus, .header-container .search-container form button[data-v-5663af57]:focus {\n  outline: 0;\n}\n.header-container .search-container form .category-button[data-v-5663af57] {\n  border-radius: 10px 0 0 10px;\n}\n.header-container .search-container form .search-button[data-v-5663af57] {\n  border-radius: 0 10px 10px 0;\n}\n.header-container .user-container[data-v-5663af57] {\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: space-evenly;\n}\n.header-container .user-container .account-details[data-v-5663af57] {\n  position: relative;\n}\n.header-container .user-container .account-details h1[data-v-5663af57] {\n  cursor: pointer;\n}\n.header-container .user-container .account-details .account-target[data-v-5663af57] {\n  position: absolute;\n  display: none;\n  z-index: 2;\n  background-color: white;\n  color: black;\n  margin: 2px 0 0 -100px;\n  border-radius: 5px 0 5px 5px;\n  width: 200px;\n  padding: 10px;\n  justify-content: center;\n  align-items: center;\n}\n.header-container .user-container .account-details .account-target hr[data-v-5663af57] {\n  border-color: black;\n  width: 100%;\n  margin: 10px 0 10px 0;\n}\n.header-container .user-container .account-details .account-target span[data-v-5663af57] {\n  display: flex;\n  align-content: center;\n  font-size: 15px;\n  cursor: pointer;\n  padding: 10px;\n}\n.header-container .user-container .account-details[data-v-5663af57]:hover {\n  border: 1px solid white;\n}", ""]);
+exports.push([module.i, "body[data-v-5663af57] {\n  background: #f7f7f7;\n}\n*[data-v-5663af57] {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-family: \"Roboto\";\n}\n.category-list[data-v-5663af57] {\n  display: flex;\n  gap: 2rem;\n  align-items: center;\n}\n.category-list h1[data-v-5663af57] {\n  cursor: pointer;\n}\n.categories-container[data-v-5663af57] {\n  display: flex;\n  align-items: center;\n  overflow-x: hidden;\n}\n.header-container[data-v-5663af57] {\n  display: flex;\n  font-size: 20px;\n  height: 100px;\n  z-index: 2;\n  background: #393e46;\n  color: white;\n}\n.header-container .title-container[data-v-5663af57] {\n  display: flex;\n  flex: 1;\n  align-items: center;\n  justify-content: center;\n  font-size: 25px;\n}\n.header-container .search-container[data-v-5663af57] {\n  display: flex;\n  flex: 3;\n  align-items: center;\n  justify-content: center;\n  color: black;\n}\n.header-container .search-container form[data-v-5663af57] {\n  font-size: 15px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n}\n.header-container .search-container form #search-text[data-v-5663af57] {\n  width: 60%;\n  padding: 5px;\n}\n.header-container .search-container form button[data-v-5663af57] {\n  background: white;\n  border: 1px solid black;\n  padding: 5px 25px 5px 25px;\n}\n.header-container .search-container form input[data-v-5663af57]:focus, .header-container .search-container form button[data-v-5663af57]:focus {\n  outline: 0;\n}\n.header-container .user-container[data-v-5663af57] {\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: space-evenly;\n}\n.header-container .user-container .account-details[data-v-5663af57] {\n  position: relative;\n}\n.header-container .user-container .account-details h1[data-v-5663af57] {\n  cursor: pointer;\n}\n.header-container .user-container .account-details .account-target[data-v-5663af57] {\n  position: absolute;\n  display: none;\n  z-index: 2;\n  background-color: white;\n  color: black;\n  margin: 2px 0 0 -100px;\n  border-radius: 5px 0 5px 5px;\n  width: 200px;\n  padding: 10px;\n  justify-content: center;\n  align-items: center;\n}\n.header-container .user-container .account-details .account-target hr[data-v-5663af57] {\n  border-color: black;\n  width: 100%;\n  margin: 10px 0 10px 0;\n}\n.header-container .user-container .account-details .account-target span[data-v-5663af57] {\n  display: flex;\n  align-content: center;\n  font-size: 15px;\n  cursor: pointer;\n  padding: 10px;\n}\n.header-container .user-container .account-details[data-v-5663af57]:hover {\n  border: 1px solid white;\n}", ""]);
 
 // exports
 
@@ -5478,7 +5481,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".product-card-content[data-v-19ad1dac] {\n  display: grid;\n  align-items: center;\n  grid-template-columns: repeat(1, 1fr);\n  grid-template-columns: repeat(1, minmax(240px, 1fr));\n  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));\n}\n.product-card-content .product-details[data-v-19ad1dac] {\n  flex: 1;\n  padding: 10px;\n}\n.product-card-content .add-buttons[data-v-19ad1dac] {\n  flex: 1;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.product-card-content .add-cart-button[data-v-19ad1dac], .product-card-content .add-wishlist-button[data-v-19ad1dac] {\n  padding: 10px;\n  border: 1px solid black;\n  box-shadow: 5px black;\n}\n.show-products-container[data-v-19ad1dac] {\n  display: flex;\n  margin: 10vh 0 0 0;\n}\n.show-products-container .product-filters[data-v-19ad1dac] {\n  flex: 1;\n}\n.show-products-container .products-container[data-v-19ad1dac] {\n  flex: 4;\n  display: grid;\n  grid-template-columns: repeat(4, minmax(300px, 1fr));\n  margin: auto;\n  gap: 4rem;\n}\n@media screen and (max-width: 1400px) {\n.show-products-container .products-container[data-v-19ad1dac] {\n    grid-template-columns: repeat(4, minmax(300px, 1fr));\n    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n}\n}\n.show-products-container .products-container .product-card[data-v-19ad1dac] {\n  border: 1px solid black;\n  padding: 20px;\n}\n.show-products-container .sidebar[data-v-19ad1dac] {\n  flex: 1;\n}", ""]);
+exports.push([module.i, ".product-card-content[data-v-19ad1dac] {\n  display: grid;\n  align-items: center;\n  grid-template-columns: repeat(1, 1fr);\n  grid-template-columns: repeat(1, minmax(240px, 1fr));\n  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));\n}\n.product-card-content .product-details[data-v-19ad1dac] {\n  flex: 1;\n  padding: 10px;\n}\n.product-card-content .add-buttons[data-v-19ad1dac] {\n  flex: 1;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.product-card-content .add-cart-button[data-v-19ad1dac], .product-card-content .add-wishlist-button[data-v-19ad1dac] {\n  padding: 10px;\n  border: 1px solid black;\n  box-shadow: 5px black;\n}\n.show-products-container[data-v-19ad1dac] {\n  display: flex;\n  margin: 10vh 0 0 0;\n}\n.show-products-container .product-filters[data-v-19ad1dac] {\n  flex: 1;\n}\n.show-products-container .products-container[data-v-19ad1dac] {\n  flex: 4;\n  display: grid;\n  grid-template-columns: repeat(4, minmax(300px, 1fr));\n  margin: auto;\n  gap: 4rem;\n}\n@media screen and (max-width: 1400px) {\n.show-products-container .products-container[data-v-19ad1dac] {\n    grid-template-columns: repeat(4, minmax(300px, 1fr));\n    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n}\n}\n.show-products-container .products-container .product-card[data-v-19ad1dac] {\n  border: 1px solid black;\n  padding: 20px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.show-products-container .sidebar[data-v-19ad1dac] {\n  flex: 1;\n}", ""]);
 
 // exports
 
@@ -53008,42 +53011,66 @@ var render = function() {
                         "div",
                         { key: n.product_id, staticClass: "product-card" },
                         [
-                          _c(
-                            "a",
-                            {
-                              attrs: {
-                                href: "/product_details/" + n.product_id
-                              }
-                            },
-                            [
-                              _c("img", {
-                                attrs: {
-                                  src: "/storage/product_photos/no-image.png",
-                                  alt: "product_image"
-                                }
-                              })
-                            ]
-                          ),
+                          n[2] == null
+                            ? _c(
+                                "a",
+                                {
+                                  attrs: {
+                                    href: "/product_details/" + n[0].product_id
+                                  }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "/storage/product_photos/no-image.png",
+                                      alt: "product_image"
+                                    }
+                                  })
+                                ]
+                              )
+                            : _c(
+                                "a",
+                                {
+                                  attrs: {
+                                    href: "/product_details/" + n[0].product_id
+                                  }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "/storage/product_photos/" +
+                                        n[0].photos_folder +
+                                        "/" +
+                                        n[2].photo_name,
+                                      alt: "product_image"
+                                    }
+                                  })
+                                ]
+                              ),
                           _vm._v(" "),
                           _c("div", { staticClass: "product-card-content" }, [
                             _c(
                               "a",
                               {
                                 attrs: {
-                                  href: "/product_details/" + n.product_id
+                                  href: "/product_details/" + n[0].product_id
                                 }
                               },
                               [
                                 _c("div", { staticClass: "product-details" }, [
-                                  _c("h1", [_vm._v(_vm._s(n.product_name))]),
+                                  _c("h1", [_vm._v(_vm._s(n[0].product_name))]),
                                   _vm._v(" "),
                                   _c("hr"),
                                   _vm._v(" "),
                                   _c("h1", [
-                                    _vm._v("Sold by: " + _vm._s(n.seller_name))
+                                    _vm._v(
+                                      "Sold by: " + _vm._s(n[1].seller_name)
+                                    )
                                   ]),
                                   _vm._v(" "),
-                                  _c("h1", [_vm._v(_vm._s(n.product_price))])
+                                  _c("h1", [_vm._v(_vm._s(n[0].product_price))])
                                 ])
                               ]
                             ),
@@ -53055,7 +53082,7 @@ var render = function() {
                                   staticClass: "add-cart-button",
                                   on: {
                                     click: function($event) {
-                                      return _vm.addToCart(n.product_id)
+                                      return _vm.addToCart(n[0].product_id)
                                     }
                                   }
                                 },
@@ -53068,7 +53095,7 @@ var render = function() {
                                   staticClass: "add-wishlist-button",
                                   on: {
                                     click: function($event) {
-                                      return _vm.addToWishlist(n.product_id)
+                                      return _vm.addToWishlist(n[0].product_id)
                                     }
                                   }
                                 },

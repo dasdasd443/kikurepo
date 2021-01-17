@@ -5,21 +5,24 @@
                 <div class='product-filters'></div>
                 <div class='products-container' v-if='products.length > 0'>
                     <div class='product-card' v-for='n in products' :key='n.product_id'>
-                        <a :href='"/product_details/" + n.product_id'>
+                        <a :href='"/product_details/" + n[0].product_id' v-if='n[2] == null'>
                             <img src="/storage/product_photos/no-image.png" alt="product_image">
                         </a>
+                        <a :href='"/product_details/" + n[0].product_id' v-else>
+                            <img :src='`/storage/product_photos/${n[0].photos_folder}/${n[2].photo_name}`' alt="product_image">
+                        </a>
                         <div class='product-card-content'>
-                            <a :href='"/product_details/" + n.product_id'>
+                            <a :href='"/product_details/" + n[0].product_id'>
                                 <div class='product-details'>
-                                    <h1>{{n.product_name}}</h1>
+                                    <h1>{{n[0].product_name}}</h1>
                                     <hr>
-                                    <h1>Sold by: {{n.seller_name}}</h1>
-                                    <h1>{{n.product_price}}</h1>
+                                    <h1>Sold by: {{n[1].seller_name}}</h1>
+                                    <h1>{{n[0].product_price}}</h1>
                                 </div>
                             </a>
                             <div class='add-buttons'>
-                                <button class='add-cart-button' @click='addToCart(n.product_id)'>Add to Cart</button>
-                                <button class='add-wishlist-button' @click='addToWishlist(n.product_id)'>Add to Wishlist</button>
+                                <button class='add-cart-button' @click='addToCart(n[0].product_id)'>Add to Cart</button>
+                                <button class='add-wishlist-button' @click='addToWishlist(n[0].product_id)'>Add to Wishlist</button>
                             </div>
                         </div>
                     </div>
@@ -116,6 +119,9 @@ export default {
         .product-card{
             border:1px solid black;
             padding:20px;
+            display:flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
     }
 

@@ -34,14 +34,25 @@ class RenderController extends Controller
         {
             $category = str_replace("-"," ",$category);
 
-            $category_id = Categories::where('category_name','like','%'.$category.'%')->get();
+            $category_id = Categories::where('category_name','like','%'.$category.'%')->pluck('category_id');
 
-            $products = DB::select("SELECT * from products p INNER JOIN sellers s ON p.seller_id = s.seller_id
-            WHERE category_id LIKE '%".$category_id[0]["category_id"]."%'");
+            $products = Products::where('category_id','LIKE',$category_id[0])->get();
 
-            //$products = Products::where('category_id',$category_id[0]["category_id"])->get();
+            $products_array = array();
 
-            return Inertia::render('ShowProducts',['products' => $products]);
+            foreach($products as $product)
+            {
+                $product_details = array(
+                    Products::find($product->product_id),
+                    Products::find($product->product_id)->seller()->get(),
+                    Products::find($product->product_id)->photos()->first()
+                );
+
+                array_push($products_array,$product_details);
+            }
+
+
+            return Inertia::render('ShowProducts',['products' => $products_array]);
         }
     }
 
