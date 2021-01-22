@@ -4091,6 +4091,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -5443,7 +5454,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".products-description-container[data-v-f301a3f6] {\n  width: 70vw;\n  margin: 10vh auto;\n}\n.product-price-details[data-v-f301a3f6] {\n  margin: 50px auto;\n}\n.product-details-container[data-v-f301a3f6] {\n  width: 70vw;\n  display: grid;\n  margin: 10vh auto;\n  gap: 3rem;\n  grid-template-columns: repeat(2, 1fr);\n  grid-template-columns: repeat(2, minmax(300px, 1fr));\n  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n}\n.product-details-container .photos-container[data-v-f301a3f6] {\n  flex: 1;\n}\n.product-details-container .photos-container .display-photo[data-v-f301a3f6] {\n  width: 70%;\n  height: 70%;\n  margin: auto;\n  align-items: center;\n}\n.product-details-container .photos-container .display-photo .photo-collection[data-v-f301a3f6] {\n  display: flex;\n}\n.product-details-container .product-details[data-v-f301a3f6] {\n  flex: 2;\n}\n.product-details-container .product-details .product-sub-description[data-v-f301a3f6] {\n  padding: 50px;\n}\n.product-details-container .product-details .product-sub-description .description-text[data-v-f301a3f6] {\n  padding: 20px 0 20px 0;\n}\n.product-details-container .product-details .product-buttons[data-v-f301a3f6] {\n  font-size: 30px;\n  display: grid;\n  gap: 4rem;\n  grid-template-columns: repeat(2, 1fr);\n  grid-template-columns: repeat(2, minmax(240px, 1fr));\n  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));\n}\n.product-details-container .product-details .product-buttons button[data-v-f301a3f6] {\n  padding: 20px;\n  box-shadow: 3px 3px rgba(0, 0, 0, 0.1);\n  border-radius: 3px 3px 3px 3px;\n}\n.product-details-container .product-details .product-buttons button[data-v-f301a3f6]:focus {\n  outline: 0;\n}\n.product-details-container .product-details .product-buttons #add-to-cart-button[data-v-f301a3f6] {\n  background-image: linear-gradient(90deg, #fdcc0d 0%, rgba(255, 208, 0, 0.787) 100%);\n}\n.product-details-container .product-details .product-buttons #add-to-wishlist-button[data-v-f301a3f6] {\n  background-image: linear-gradient(90deg, #fd950d 0%, rgba(255, 157, 0, 0.787) 100%);\n}\n.product-details-container .product-details #product-name[data-v-f301a3f6] {\n  font-size: 36px;\n}\n.product-details-container .product-details #product-price[data-v-f301a3f6] {\n  font-size: 32px;\n}\n.product-details-container .product-details .product-sub-details[data-v-f301a3f6] {\n  display: flex;\n  gap: 1rem;\n}\n.product-details-container .product-details .product-sub-details h1[data-v-f301a3f6]:first-child {\n  margin-right: auto;\n}", ""]);
+exports.push([module.i, ".products-description-container[data-v-f301a3f6] {\n  width: 70vw;\n  margin: 10vh auto;\n}\n.product-price-details[data-v-f301a3f6] {\n  margin: 50px auto;\n}\n.product-details-container[data-v-f301a3f6] {\n  width: 70vw;\n  display: grid;\n  margin: 10vh auto;\n  gap: 3rem;\n  grid-template-columns: repeat(2, 1fr);\n  grid-template-columns: repeat(2, minmax(300px, 1fr));\n  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n}\n.product-details-container .photos-container[data-v-f301a3f6] {\n  flex: 1;\n}\n.product-details-container .photos-container .display-photo[data-v-f301a3f6] {\n  display: grid;\n  margin: auto;\n  align-items: center;\n  justify-content: center;\n}\n.product-details-container .photos-container .display-photo .photo-collection[data-v-f301a3f6] {\n  display: flex;\n  flex-direction: column;\n  .product-photo-display: none;\n}\n.product-details-container .photos-container .display-photo .photo-collection .product-photo[data-v-f301a3f6] {\n  flex: 1;\n  display: flex;\n  width: 100%;\n}\n.product-details-container .photos-container .display-photo .photo-collection .product-photo button[data-v-f301a3f6] {\n  width: 10%;\n}\n.product-details-container .photos-container .display-photo .photo-collection .product-photo .photo-display[data-v-f301a3f6] {\n  width: 80%;\n}\n.product-details-container .photos-container .display-photo .photo-collection .product-photo .photo-display div[data-v-f301a3f6]:first-child {\n  display: block;\n}\n.product-details-container .photos-container .display-photo .photo-collection .product-photo .photo-display div[data-v-f301a3f6] {\n  display: none;\n}\n.product-details-container .photos-container .display-photo .photo-collection .photo-selectors[data-v-f301a3f6] {\n  display: flex;\n  width: 80%;\n  margin: auto;\n  justify-content: space-evenly;\n  padding: 10px;\n  gap: 1rem;\n}\n.product-details-container .photos-container .display-photo .photo-collection .photo-selectors img[data-v-f301a3f6] {\n  flex: 1;\n  height: 40px;\n}\n.product-details-container .product-details[data-v-f301a3f6] {\n  flex: 2;\n}\n.product-details-container .product-details .product-sub-description[data-v-f301a3f6] {\n  padding: 50px;\n}\n.product-details-container .product-details .product-sub-description .description-text[data-v-f301a3f6] {\n  padding: 20px 0 20px 0;\n}\n.product-details-container .product-details .product-buttons[data-v-f301a3f6] {\n  font-size: 30px;\n  display: grid;\n  gap: 4rem;\n  grid-template-columns: repeat(2, 1fr);\n  grid-template-columns: repeat(2, minmax(240px, 1fr));\n  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));\n}\n.product-details-container .product-details .product-buttons button[data-v-f301a3f6] {\n  padding: 20px;\n  box-shadow: 3px 3px rgba(0, 0, 0, 0.1);\n  border-radius: 3px 3px 3px 3px;\n}\n.product-details-container .product-details .product-buttons button[data-v-f301a3f6]:focus {\n  outline: 0;\n}\n.product-details-container .product-details .product-buttons #add-to-cart-button[data-v-f301a3f6] {\n  background-image: linear-gradient(90deg, #fdcc0d 0%, rgba(255, 208, 0, 0.787) 100%);\n}\n.product-details-container .product-details .product-buttons #add-to-wishlist-button[data-v-f301a3f6] {\n  background-image: linear-gradient(90deg, #fd950d 0%, rgba(255, 157, 0, 0.787) 100%);\n}\n.product-details-container .product-details #product-name[data-v-f301a3f6] {\n  font-size: 36px;\n}\n.product-details-container .product-details #product-price[data-v-f301a3f6] {\n  font-size: 32px;\n}\n.product-details-container .product-details .product-sub-details[data-v-f301a3f6] {\n  display: flex;\n  gap: 1rem;\n}\n.product-details-container .product-details .product-sub-details h1[data-v-f301a3f6]:first-child {\n  margin-right: auto;\n}", ""]);
 
 // exports
 
@@ -51088,30 +51099,67 @@ var render = function() {
               _c("div", { staticClass: "photos-container" }, [
                 _c("div", { staticClass: "display-photo" }, [
                   _vm.product_photos.length != 0
-                    ? _c(
-                        "div",
-                        { staticClass: "photo-collection" },
-                        [
+                    ? _c("div", { staticClass: "photo-collection" }, [
+                        _c("div", { staticClass: "product-photo" }, [
                           _c("button", [_vm._v("X")]),
                           _vm._v(" "),
-                          _vm._l(_vm.product_photos, function(photo) {
-                            return _c("img", {
-                              key: photo.photo_id,
-                              attrs: {
-                                src:
-                                  "/storage/product_photos/" +
-                                  _vm.product_details.photos_folder +
-                                  "/" +
-                                  photo.photo_name,
-                                alt: ""
-                              }
-                            })
-                          }),
+                          _c(
+                            "div",
+                            { staticClass: "photo-display" },
+                            _vm._l(_vm.product_photos, function(photo, index) {
+                              return _c(
+                                "div",
+                                {
+                                  key: photo.photo_id,
+                                  class: "photo photo-" + index
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "/storage/product_photos/" +
+                                        _vm.product_details.photos_folder +
+                                        "/" +
+                                        photo.photo_name,
+                                      alt: ""
+                                    }
+                                  })
+                                ]
+                              )
+                            }),
+                            0
+                          ),
                           _vm._v(" "),
                           _c("button", [_vm._v("Y")])
-                        ],
-                        2
-                      )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "photo-selectors" },
+                          _vm._l(_vm.product_photos, function(photo) {
+                            return _c(
+                              "div",
+                              {
+                                key: photo.photo_id,
+                                staticClass: "photos-selection"
+                              },
+                              [
+                                _c("img", {
+                                  attrs: {
+                                    src:
+                                      "/storage/product_photos/" +
+                                      _vm.product_details.photos_folder +
+                                      "/" +
+                                      photo.photo_name,
+                                    alt: ""
+                                  }
+                                })
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      ])
                     : _c("div", [
                         _c("img", {
                           attrs: {

@@ -5,9 +5,20 @@
                 <div class='photos-container'>
                     <div class='display-photo'>
                         <div class='photo-collection' v-if='product_photos.length != 0'>
-                            <button>X</button>
-                            <img v-for='photo in product_photos' :key='photo.photo_id' :src='"/storage/product_photos/"+product_details.photos_folder+"/" + photo.photo_name' alt="">
-                            <button>Y</button>
+                            <div class='product-photo'>
+                                <button>X</button>
+                                    <div class="photo-display">
+                                        <div :class="'photo photo-'+index" v-for='(photo,index) in product_photos' :key='photo.photo_id'>
+                                            <img :src='"/storage/product_photos/"+product_details.photos_folder+"/" + photo.photo_name' alt="">
+                                        </div>
+                                    </div>
+                                <button>Y</button>
+                            </div>
+                            <div class='photo-selectors'>
+                                <div class="photos-selection" v-for='photo in product_photos' :key='photo.photo_id'>
+                                    <img :src='"/storage/product_photos/"+product_details.photos_folder+"/" + photo.photo_name' alt="">
+                                </div>
+                            </div>
                         </div>
                         <div v-else>
                             <img src="/storage/product_photos/no-image.png" alt="no-product-image">
@@ -111,13 +122,47 @@ export default {
     .photos-container{
         flex: 1;
         .display-photo{
-            width:70%;
-            height:70%;
+            display:grid;
             margin:auto;
             align-items: center;
+            justify-content: center;
             .photo-collection{
                 display:flex;
+                flex-direction: column;
+                .product-photo{
+                    flex:1;
+                    display:flex;   
+                    width:100%; 
+                    button{
+                        width:10%;
+                    }
+                    .photo-display{
+                        width:80%;
+                    }
+                    .photo-display div:first-child{
+                        display:block;
+                    }
+                    .photo-display div{
+                        display:none;
+                    }
+                }
+                .product-photo:{
+                    display:none;
+                }
+                .photo-selectors{
+                    display: flex;
+                    width: 80%;
+                    margin:auto;    
+                    justify-content: space-evenly;
+                    padding:10px;
+                    gap:1rem;
+                    img{
+                        flex:1;
+                        height:40px;
+                    }
+                }
             }
+            
         }
     }
     .product-details{
