@@ -192,9 +192,6 @@ export default {
                         }
                     }
                 }
-                .product-photo:{
-                    display:none;
-                }
                 .photo-selectors{
                     display: flex;
                     margin:auto;    
