@@ -44,7 +44,7 @@ class RenderController extends Controller
             {
                 $product_details = array(
                     Products::find($product->product_id),
-                    Products::find($product->product_id)->seller()->get(),
+                    Products::find($product->product_id)->seller()->first(),
                     Products::find($product->product_id)->photos()->first()
                 );
 

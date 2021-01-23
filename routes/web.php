@@ -31,4 +31,4 @@ Route::post('/secret',[UserController::class,'checkoutPayment'])->name('checkout
 Route::post('/add_to_cart',[UserController::class,'addToCart'])->name('addtocart');
 Route::put('/edit_address/{address_id}',[UserController::class,'editAddress'])->name('editAddress');
 
-Route::post('/login',[LoginController::class,'authenticate'])->name('login');
+//Route::post('/login',[LoginController::class,'authenticate'])->name('login');

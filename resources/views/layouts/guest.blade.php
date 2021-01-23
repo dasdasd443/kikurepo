@@ -17,7 +17,7 @@
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
     </head>
     <body>
-        <div class="text-gray-900 antialiased">
+        <div class="">
             <div class='header-container'>
                 <h1 id='authentication-title'>Kiku Trading</h1>
             </div>
