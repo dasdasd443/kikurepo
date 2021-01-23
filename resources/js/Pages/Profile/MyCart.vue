@@ -46,12 +46,20 @@
                         <div class='addresses'>
                             <h1>Shipping Address</h1>
                             <div class='shipping-address'>
-                                <h1>Talamban Cebu City</h1>
+                                <h1>{{addresses.shipping_address.address_line1}}, 
+                                    {{addresses.shipping_address.address_line2}}, 
+                                    {{addresses.shipping_address.city}}, 
+                                    {{addresses.shipping_address.zip_code}}, 
+                                    {{addresses.shipping_address.country}}</h1>
                                 <button @click='editAddress(".ShippingAddress")'>Edit</button>
                             </div>
                             <h1>Billing Address</h1>
                             <div class='billing-address'>
-                                <h1>Talamban Cebu City</h1>
+                                <h1>{{addresses.billing_address.address_line1}}, 
+                                    {{addresses.billing_address.address_line2}}, 
+                                    {{addresses.billing_address.city}}, 
+                                    {{addresses.billing_address.zip_code}}, 
+                                    {{addresses.billing_address.country}}</h1>
                                 <button @click='editAddress(".BillingAddress")'>Edit</button>
                             </div>
                         </div>
@@ -95,9 +103,9 @@
                         
                     </div>
                 </div>
-                <ShippingAddressPopup @closePopup='closePopup' :class='"ShippingAddress popup"'/>
-                <BillingAddressPopup @closePopup='closePopup' :class='"BillingAddress popup"'/>
-                <CheckoutModal @closePopup='closePopup' :class='"Checkout popup"' :totalPayment='sub_total+shipping_costs'/>
+                <ShippingAddressPopup @closePopup='closePopup' :class='"ShippingAddress popup"' :address='addresses.shipping_address'/>
+                <BillingAddressPopup @closePopup='closePopup' :class='"BillingAddress popup"' :address='addresses.billing_address'/>
+                <CheckoutModal @closePopup='closePopup' :class='"Checkout popup"' :totalPayment='sub_total+shipping_costs' :billing_address='addresses.billing_address' :shipping_address='addresses.shipping_address'/>
             </div>
             
         </template>
@@ -125,7 +133,7 @@ export default {
         }
     },
     components: { AppLayout , ShippingAddressPopup, BillingAddressPopup, CheckoutModal},
-    props:['cart_details','cart_cookie'],
+    props:['cart_details','cart_cookie','addresses'],
     mounted() {
         this.cart_products = this.cart_details,
         this.getShippers(),
@@ -370,6 +378,9 @@ export default {
             background:white;
             .addresses{
                 gap:1rem;
+                h1{
+                    padding: 0 0 10px 0;
+                }
             }
             .checkout-section{
                 display:grid;
@@ -398,6 +409,8 @@ export default {
             .shipping-address, .billing-address{
                 display:flex;
                 justify-content: space-between;
+                gap:1rem;
+                align-items: center;
                 button:focus{
                     outline:none;
                 }

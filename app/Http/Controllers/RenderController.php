@@ -8,6 +8,9 @@ use App\Exceptions\Handler;
 
 use App\Models\Products;
 use App\Models\Categories;
+use App\Models\User;
+use App\Models\Address;
+use Illuminate\Support\Facades\Auth;
 
 use DB;
 
@@ -31,14 +34,25 @@ class RenderController extends Controller
         {
             $category = str_replace("-"," ",$category);
 
-            $category_id = Categories::where('category_name','like','%'.$category.'%')->get();
+            $category_id = Categories::where('category_name','like','%'.$category.'%')->pluck('category_id');
 
-            $products = DB::select("SELECT * from products p INNER JOIN sellers s ON p.seller_id = s.seller_id
-            WHERE category_id LIKE '%".$category_id[0]["category_id"]."%'");
+            $products = Products::where('category_id','LIKE',$category_id[0])->get();
 
-            //$products = Products::where('category_id',$category_id[0]["category_id"])->get();
+            $products_array = array();
 
-            return Inertia::render('ShowProducts',['products' => $products]);
+            foreach($products as $product)
+            {
+                $product_details = array(
+                    Products::find($product->product_id),
+                    Products::find($product->product_id)->seller()->get(),
+                    Products::find($product->product_id)->photos()->first()
+                );
+
+                array_push($products_array,$product_details);
+            }
+
+
+            return Inertia::render('ShowProducts',['products' => $products_array]);
         }
     }
 
@@ -46,8 +60,9 @@ class RenderController extends Controller
     {
         $product = Products::find($product_id);
         $product_photos = $product->photos()->get();
+        $product_reviews = array("product_reviews" => $product->reviews()->get(),"average"=>$product->reviews()->avg('product_stars'),"count"=>$product->reviews()->count());
 
-        return Inertia::render('ProductPage',['product_details' => $product,'product_photos' => $product_photos]);
+        return Inertia::render('ProductPage',['product_details' => $product,'product_photos' => $product_photos,'product_reviews'=>$product_reviews]);
     }
 
     public function my_cart(Request $request)
@@ -73,8 +88,20 @@ class RenderController extends Controller
             $cart_array = 0;
             $decoded_cart_cookie = 0;
         }
+
+        if(Auth::check())
+        {
+            $addresses = array(
+                'billing_address' => Address::find(User::find(Auth::id())->pluck('billing_address'))->first(),
+                'shipping_address' => Address::find(User::find(Auth::id())->pluck('shipping_address'))->first()
+            );
+        }
+        else
+        {
+            $addresses = 0;
+        }
         
         //return $cart_array;
-        return Inertia::render('Profile/MyCart',['cart_details' => $cart_array,"cart_cookie" => $decoded_cart_cookie]);
+        return Inertia::render('Profile/MyCart',['cart_details' => $cart_array,"cart_cookie" => $decoded_cart_cookie,"addresses"=>$addresses]);
     }
 }

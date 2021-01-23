@@ -9,12 +9,20 @@
                 <div class='address-container'>
                     <div class="shipping-address">
                         <h1 class='address-title'>Shipping Address</h1>
-                        <h1>MAKAI's Dorm Gov M. Cuenco Ave Talamban Cebu City Cebu 6000</h1>
+                        <h1>{{shipping_address.address_line1}}, 
+                            {{shipping_address.address_line2}},
+                            {{shipping_address.city}},
+                            {{shipping_address.zip_code}}
+                        </h1>
                     </div>
                     <hr>
                     <div class="billing-address">
                         <h1 class='address-title'>Billing Address</h1>
-                        <h1>MAKAI's Dorm Gov M. Cuenco Ave Talamban Cebu City Cebu 6000</h1>
+                        <h1>{{billing_address.address_line1}}, 
+                            {{billing_address.address_line2}},
+                            {{billing_address.city}},
+                            {{billing_address.zip_code}}
+                        </h1>
                     </div>
                 </div>
                 <div class='payment-container'>
@@ -52,7 +60,7 @@ export default {
             lastname: ''      
         }
     },
-    props: ['totalPayment'],
+    props: ['totalPayment','billing_address','shipping_address'],
     methods: {
         async checkoutPayment() {
             var response = fetch('/secret', {

@@ -26,4 +26,9 @@ class Products extends Model
     {
         return $this->belongsTo('App\Models\Categories','category_id','category_id');
     }
+
+    public function reviews()
+    {
+        return $this->hasMany('App\Models\Reviews', 'product_id', 'product_id');
+    }
 }

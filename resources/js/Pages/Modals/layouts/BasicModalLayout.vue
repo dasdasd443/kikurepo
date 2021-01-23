@@ -15,7 +15,9 @@
 
 <script>
 export default {
-    
+    methods: {
+        
+    }
 }
 </script>
 
@@ -23,6 +25,7 @@ export default {
 ::-webkit-scrollbar{
     width: 0;
 }
+
 .popup-container{
     background:white;
     width:50%;
@@ -57,6 +60,7 @@ export default {
     }
     .popup-content{
         padding:50px;
+        display:flex;
         
     }
 }

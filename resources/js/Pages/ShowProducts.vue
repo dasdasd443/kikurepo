@@ -2,24 +2,27 @@
     <app-layout>
         <template #content>
             <div class="show-products-container">
-                <div class='product-filters'></div>
+                <div class="product-filter"></div>
                 <div class='products-container' v-if='products.length > 0'>
                     <div class='product-card' v-for='n in products' :key='n.product_id'>
-                        <a :href='"/product_details/" + n.product_id'>
+                        <a :href='"/product_details/" + n[0].product_id' v-if='n[2] == null'>
                             <img src="/storage/product_photos/no-image.png" alt="product_image">
                         </a>
+                        <a :href='"/product_details/" + n[0].product_id' v-else>
+                            <img :class='`thumbnail-preview`' :src='`/storage/product_photos/${n[0].photos_folder}/${n[2].photo_name}`' alt="product_image">
+                        </a>
                         <div class='product-card-content'>
-                            <a :href='"/product_details/" + n.product_id'>
+                            <a :href='"/product_details/" + n[0].product_id'>
                                 <div class='product-details'>
-                                    <h1>{{n.product_name}}</h1>
+                                    <h1>{{n[0].product_name}}</h1>
                                     <hr>
-                                    <h1>Sold by: {{n.seller_name}}</h1>
-                                    <h1>{{n.product_price}}</h1>
+                                    <h1>Sold by: {{n[1].seller_name}}</h1>
+                                    <h1>{{n[0].product_price}}</h1>
                                 </div>
                             </a>
                             <div class='add-buttons'>
-                                <button class='add-cart-button' @click='addToCart(n.product_id)'>Add to Cart</button>
-                                <button class='add-wishlist-button' @click='addToWishlist(n.product_id)'>Add to Wishlist</button>
+                                <button class='add-cart-button' @click='addToCart(n[0].product_id)'>Add to Cart</button>
+                                <button class='add-wishlist-button' @click='addToWishlist(n[0].product_id)'>Add to Wishlist</button>
                             </div>
                         </div>
                     </div>
@@ -54,7 +57,7 @@ export default {
                 }),
 
             }).then(response=>{
-                console.log(response.text())
+                location.href= route('my_cart').url();
             })
         },
 
@@ -78,49 +81,70 @@ export default {
     display:grid;
     align-items: center;
     grid-template-columns: repeat(1,1fr);
-    grid-template-columns: repeat(1,minmax(240px,1fr));
-    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    grid-template-columns: repeat(1,minmax(200px,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
     .product-details{
         flex:1;
         padding:10px;
     }
     .add-buttons{
         flex: 1;
-        display:flex;
-        justify-content: space-between;
+        display:grid;
         align-items: center;
+        gap:.5rem;
+        button{
+            background-color:none;
+            transition: all .3s;
+        }
+        button:hover{
+            background-color:rgba(0,0,0,0.7);
+            color:white;
+        }
     }
     .add-cart-button,.add-wishlist-button{
-        padding:10px;
+        padding:5px;
         border:1px solid black;
         box-shadow: 5px black;
     }
 }
 .show-products-container{
     display:flex;
-    margin: 10vh 0 0 0;
-    .product-filters{
-        flex:1;
+    padding:100px;
+    @media screen and (max-width:1400px){
+        padding:100px 0 0 0;
+    }
+    .product-filter{
+        flex:2;
     }
     .products-container{
-        flex:4;
         display:grid;
-        grid-template-columns: repeat(4,minmax(300px,1fr));
-        
+        grid-template-columns: repeat(4,minmax(250px,1fr));
+        flex:3;
         @media screen and (max-width:1400px){
-            grid-template-columns: repeat(4,minmax(300px,1fr));
-            grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+            grid-template-columns: repeat(4,minmax(250px,1fr));
+            grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
         }
         margin:auto;
-        gap:4rem;
+        gap:1rem;
         .product-card{
-            border:1px solid black;
             padding:20px;
+            display:flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background:none;
+            transition: all .4s;
+            .thumbnail-preview{
+                border-radius: 5px;
+                box-shadow: 1px 1px 6px black;
+            }
+        }
+        .product-card:hover{
+            background:rgba(0,0,0,0.3);
         }
     }
 
     .sidebar{
-        flex:1;
+        flex:2;
     }
 }
 </style>

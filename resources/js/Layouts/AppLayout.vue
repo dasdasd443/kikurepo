@@ -227,12 +227,6 @@ body{
                 input:focus, button:focus{
                     outline: 0;
                 }
-                .category-button{
-                    border-radius: 10px 0 0 10px;
-                }
-                .search-button{
-                    border-radius: 0 10px 10px 0;
-                }
             }
         }
         .user-container{
