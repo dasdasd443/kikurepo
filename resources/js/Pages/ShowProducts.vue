@@ -9,7 +9,7 @@
                             <img src="/storage/product_photos/no-image.png" alt="product_image">
                         </a>
                         <a :href='"/product_details/" + n[0].product_id' v-else>
-                            <img :src='`/storage/product_photos/${n[0].photos_folder}/${n[2].photo_name}`' alt="product_image">
+                            <img :class='`thumbnail-preview`' :src='`/storage/product_photos/${n[0].photos_folder}/${n[2].photo_name}`' alt="product_image">
                         </a>
                         <div class='product-card-content'>
                             <a :href='"/product_details/" + n[0].product_id'>
@@ -92,6 +92,14 @@ export default {
         display:grid;
         align-items: center;
         gap:.5rem;
+        button{
+            background-color:none;
+            transition: all .3s;
+        }
+        button:hover{
+            background-color:rgba(0,0,0,0.7);
+            color:white;
+        }
     }
     .add-cart-button,.add-wishlist-button{
         padding:5px;
@@ -111,7 +119,7 @@ export default {
     .products-container{
         display:grid;
         grid-template-columns: repeat(4,minmax(250px,1fr));
-        flex:1;
+        flex:3;
         @media screen and (max-width:1400px){
             grid-template-columns: repeat(4,minmax(250px,1fr));
             grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
@@ -119,11 +127,19 @@ export default {
         margin:auto;
         gap:1rem;
         .product-card{
-            border:1px solid black;
             padding:20px;
             display:flex;
             flex-direction: column;
             justify-content: space-between;
+            background:none;
+            transition: all .4s;
+            .thumbnail-preview{
+                border-radius: 5px;
+                box-shadow: 1px 1px 6px black;
+            }
+        }
+        .product-card:hover{
+            background:rgba(0,0,0,0.3);
         }
     }
 

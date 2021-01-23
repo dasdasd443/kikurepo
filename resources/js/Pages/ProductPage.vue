@@ -51,24 +51,25 @@
                         <h1 v-else>Out of stock</h1>
                         <h1 id='product-price'>P {{product_details.product_price}}</h1>
                     </div>
+                    <div class='product-buttons'>
+                        <button v-if='product_details.product_stock > 0' class='add-to-cart-button active-add-button' @click='addToCart(product_details.product_id)'>Add to Cart</button>
+                        <button v-else class='add-to-cart-button' disabled>Add to Cart</button>
+                        <button class='add-to-wishlist-button active-add-button' @click='addToWishlist(product_details.product_id)'>Add to Wishlist</button>
+                    </div>
                     <hr>
                     <div class='product-sub-description'>
                         <div class='description-text'>
+                            <h1>Dimensions: {{`${product_details.product_length} x ${product_details.product_width} x ${product_details.product_height} inch`}}</h1>
+                            <br>
+                            <h1>Description: </h1>
                             <h1>{{product_details.product_description}}</h1>
                         </div>
                         <hr>
-                        <a href="#products-description-container">>See more about this product</a>
                     </div>
-                    <div class='product-buttons'>
-                        <button id='add-to-cart-button' @click='addToCart(product_details.product_id)'>Add to Cart</button>
-                        <button id='add-to-wishlist-button' @click='addToWishlist(product_details.product_id)'>Add to Wishlist</button>
-                    </div>
+                    
                 </div>
             </div>
             <hr>
-            <div class='products-description-container' id='products-description-container'>
-                {{product_details.product_details}}
-            </div>
         </template>
     </app-layout>
 </template>
@@ -87,7 +88,6 @@ export default {
     },
     methods: {
         addToCart(product_id) {
-            
             const response = fetch('/add_to_cart',{
                 headers:{
                     'Accept': 'application/json',
@@ -137,13 +137,13 @@ export default {
     margin: 10vh auto;
 }
 .product-price-details{
-    margin: 50px auto;  
+    margin: 20px auto;  
 }
 .product-details-container{
     width:70vw;
     display:grid;
     margin: 10vh auto;
-    gap:3rem;
+    gap:5rem;
     grid-template-columns: repeat(2,1fr);
     grid-template-columns: repeat(2,minmax(300px,1fr));
     grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
@@ -220,33 +220,31 @@ export default {
     .product-details{
         flex:2;
         .product-sub-description{
-            padding:50px;
+            padding:25px;
             .description-text{
-                padding:20px 0 20px 0;
+                padding:10px 0 10px 0;
             }
         }
         .product-buttons{
-            font-size:30px;
+            font-size:15px;
             display:grid;
-            gap:4rem;
             grid-template-columns: repeat(2,1fr);
-            grid-template-columns: repeat(2,minmax(240px,1fr));
-            grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+            grid-template-columns: repeat(2,minmax(200px,1fr));
+            grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
             button{
-                padding:20px;
+                background:rgba(0,0,0,0.3);
+                padding:15px 30px;
                 box-shadow: 3px 3px rgba(0,0,0,0.1);
-                border-radius: 3px 3px 3px 3px;
+                width:200px;
+                margin:10px auto;
+                transition: all .3s;
             }
             button:focus{
                 outline: 0;
             }
-            #add-to-cart-button
-            {
-                background-image: linear-gradient(90deg, #fdcc0d 0%, rgba(255, 208, 0, 0.787) 100%);
-            }
-            #add-to-wishlist-button
-            {
-                background-image: linear-gradient(90deg, #fd950d 0%, rgba(255, 157, 0, 0.787) 100%);
+            .active-add-button:hover{
+                background: rgba(0,0,0,0.7);
+                color:white;
             }
         }
         #product-name{
@@ -257,7 +255,7 @@ export default {
         }
         .product-sub-details{
             display:flex;
-            gap: 1rem;
+            gap: 2rem;
             h1:first-child{
                 margin-right:auto;
             }

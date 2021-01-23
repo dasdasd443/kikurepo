@@ -4106,6 +4106,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -5478,7 +5479,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".products-description-container[data-v-f301a3f6] {\n  width: 70vw;\n  margin: 10vh auto;\n}\n.product-price-details[data-v-f301a3f6] {\n  margin: 50px auto;\n}\n.product-details-container[data-v-f301a3f6] {\n  width: 70vw;\n  display: grid;\n  margin: 10vh auto;\n  gap: 3rem;\n  grid-template-columns: repeat(2, 1fr);\n  grid-template-columns: repeat(2, minmax(300px, 1fr));\n  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n}\n.product-details-container .photos-container[data-v-f301a3f6] {\n  flex: 1;\n}\n.product-details-container .photos-container .display-photo[data-v-f301a3f6] {\n  display: grid;\n  margin: auto;\n  align-items: center;\n  justify-content: center;\n}\n.product-details-container .photos-container .display-photo .photo-collection[data-v-f301a3f6] {\n  display: flex;\n  flex-direction: column;\n  .product-photo-display: none;\n}\n.product-details-container .photos-container .display-photo .photo-collection .product-photo[data-v-f301a3f6] {\n  display: flex;\n}\n.product-details-container .photos-container .display-photo .photo-collection .product-photo .photo-display[data-v-f301a3f6] {\n  margin: auto;\n  position: relative;\n}\n.product-details-container .photos-container .display-photo .photo-collection .product-photo .photo-display .photo-buttons[data-v-f301a3f6] {\n  position: absolute;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  height: 100%;\n  margin: auto;\n  width: 100%;\n}\n.product-details-container .photos-container .display-photo .photo-collection .product-photo .photo-display .photo-buttons button[data-v-f301a3f6] {\n  background-color: rgba(0, 0, 0, 0.3);\n  padding: 10px;\n  transition: all 0.45s;\n}\n.product-details-container .photos-container .display-photo .photo-collection .product-photo .photo-display .photo-buttons button[data-v-f301a3f6]:hover {\n  background-color: rgba(0, 0, 0, 0.6);\n}\n.product-details-container .photos-container .display-photo .photo-collection .product-photo .photo-display .photo-buttons button[data-v-f301a3f6]:focus {\n  outline: none;\n}\n.product-details-container .photos-container .display-photo .photo-collection .product-photo .photo-display .photo[data-v-f301a3f6]:first-child {\n  display: flex;\n}\n.product-details-container .photos-container .display-photo .photo-collection .product-photo .photo-display .photo[data-v-f301a3f6] {\n  display: none;\n  box-shadow: 3px 3px 10px;\n  max-height: 1000px;\n}\n.product-details-container .photos-container .display-photo .photo-collection .photo-selectors[data-v-f301a3f6] {\n  display: flex;\n  margin: auto;\n  justify-content: space-evenly;\n  padding: 20px;\n  width: 100%;\n}\n.product-details-container .photos-container .display-photo .photo-collection .photo-selectors img[data-v-f301a3f6] {\n  flex: 1;\n  height: 50px;\n}\n.product-details-container .photos-container .display-photo .photo-collection .photo-selectors .photos-selection[data-v-f301a3f6] {\n  border: 2px solid transparent;\n  transition: all 0.3s;\n}\n.product-details-container .photos-container .display-photo .photo-collection .photo-selectors .photos-selection[data-v-f301a3f6]:hover {\n  border: 2px solid grey;\n}\n.product-details-container .product-details[data-v-f301a3f6] {\n  flex: 2;\n}\n.product-details-container .product-details .product-sub-description[data-v-f301a3f6] {\n  padding: 50px;\n}\n.product-details-container .product-details .product-sub-description .description-text[data-v-f301a3f6] {\n  padding: 20px 0 20px 0;\n}\n.product-details-container .product-details .product-buttons[data-v-f301a3f6] {\n  font-size: 30px;\n  display: grid;\n  gap: 4rem;\n  grid-template-columns: repeat(2, 1fr);\n  grid-template-columns: repeat(2, minmax(240px, 1fr));\n  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));\n}\n.product-details-container .product-details .product-buttons button[data-v-f301a3f6] {\n  padding: 20px;\n  box-shadow: 3px 3px rgba(0, 0, 0, 0.1);\n  border-radius: 3px 3px 3px 3px;\n}\n.product-details-container .product-details .product-buttons button[data-v-f301a3f6]:focus {\n  outline: 0;\n}\n.product-details-container .product-details .product-buttons #add-to-cart-button[data-v-f301a3f6] {\n  background-image: linear-gradient(90deg, #fdcc0d 0%, rgba(255, 208, 0, 0.787) 100%);\n}\n.product-details-container .product-details .product-buttons #add-to-wishlist-button[data-v-f301a3f6] {\n  background-image: linear-gradient(90deg, #fd950d 0%, rgba(255, 157, 0, 0.787) 100%);\n}\n.product-details-container .product-details #product-name[data-v-f301a3f6] {\n  font-size: 36px;\n}\n.product-details-container .product-details #product-price[data-v-f301a3f6] {\n  font-size: 32px;\n}\n.product-details-container .product-details .product-sub-details[data-v-f301a3f6] {\n  display: flex;\n  gap: 1rem;\n}\n.product-details-container .product-details .product-sub-details h1[data-v-f301a3f6]:first-child {\n  margin-right: auto;\n}", ""]);
+exports.push([module.i, ".products-description-container[data-v-f301a3f6] {\n  width: 70vw;\n  margin: 10vh auto;\n}\n.product-price-details[data-v-f301a3f6] {\n  margin: 20px auto;\n}\n.product-details-container[data-v-f301a3f6] {\n  width: 70vw;\n  display: grid;\n  margin: 10vh auto;\n  gap: 5rem;\n  grid-template-columns: repeat(2, 1fr);\n  grid-template-columns: repeat(2, minmax(300px, 1fr));\n  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n}\n.product-details-container .photos-container[data-v-f301a3f6] {\n  flex: 1;\n}\n.product-details-container .photos-container .display-photo[data-v-f301a3f6] {\n  display: grid;\n  margin: auto;\n  align-items: center;\n  justify-content: center;\n}\n.product-details-container .photos-container .display-photo .photo-collection[data-v-f301a3f6] {\n  display: flex;\n  flex-direction: column;\n  .product-photo-display: none;\n}\n.product-details-container .photos-container .display-photo .photo-collection .product-photo[data-v-f301a3f6] {\n  display: flex;\n}\n.product-details-container .photos-container .display-photo .photo-collection .product-photo .photo-display[data-v-f301a3f6] {\n  margin: auto;\n  position: relative;\n}\n.product-details-container .photos-container .display-photo .photo-collection .product-photo .photo-display .photo-buttons[data-v-f301a3f6] {\n  position: absolute;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  height: 100%;\n  margin: auto;\n  width: 100%;\n}\n.product-details-container .photos-container .display-photo .photo-collection .product-photo .photo-display .photo-buttons button[data-v-f301a3f6] {\n  background-color: rgba(0, 0, 0, 0.3);\n  padding: 10px;\n  transition: all 0.45s;\n}\n.product-details-container .photos-container .display-photo .photo-collection .product-photo .photo-display .photo-buttons button[data-v-f301a3f6]:hover {\n  background-color: rgba(0, 0, 0, 0.6);\n}\n.product-details-container .photos-container .display-photo .photo-collection .product-photo .photo-display .photo-buttons button[data-v-f301a3f6]:focus {\n  outline: none;\n}\n.product-details-container .photos-container .display-photo .photo-collection .product-photo .photo-display .photo[data-v-f301a3f6]:first-child {\n  display: flex;\n}\n.product-details-container .photos-container .display-photo .photo-collection .product-photo .photo-display .photo[data-v-f301a3f6] {\n  display: none;\n  box-shadow: 3px 3px 10px;\n  max-height: 1000px;\n}\n.product-details-container .photos-container .display-photo .photo-collection .photo-selectors[data-v-f301a3f6] {\n  display: flex;\n  margin: auto;\n  justify-content: space-evenly;\n  padding: 20px;\n  width: 100%;\n}\n.product-details-container .photos-container .display-photo .photo-collection .photo-selectors img[data-v-f301a3f6] {\n  flex: 1;\n  height: 50px;\n}\n.product-details-container .photos-container .display-photo .photo-collection .photo-selectors .photos-selection[data-v-f301a3f6] {\n  border: 2px solid transparent;\n  transition: all 0.3s;\n}\n.product-details-container .photos-container .display-photo .photo-collection .photo-selectors .photos-selection[data-v-f301a3f6]:hover {\n  border: 2px solid grey;\n}\n.product-details-container .product-details[data-v-f301a3f6] {\n  flex: 2;\n}\n.product-details-container .product-details .product-sub-description[data-v-f301a3f6] {\n  padding: 25px;\n}\n.product-details-container .product-details .product-sub-description .description-text[data-v-f301a3f6] {\n  padding: 10px 0 10px 0;\n}\n.product-details-container .product-details .product-buttons[data-v-f301a3f6] {\n  font-size: 15px;\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-template-columns: repeat(2, minmax(200px, 1fr));\n  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));\n}\n.product-details-container .product-details .product-buttons button[data-v-f301a3f6] {\n  background: rgba(0, 0, 0, 0.3);\n  padding: 15px 30px;\n  box-shadow: 3px 3px rgba(0, 0, 0, 0.1);\n  width: 200px;\n  margin: 10px auto;\n  transition: all 0.3s;\n}\n.product-details-container .product-details .product-buttons button[data-v-f301a3f6]:focus {\n  outline: 0;\n}\n.product-details-container .product-details .product-buttons .active-add-button[data-v-f301a3f6]:hover {\n  background: rgba(0, 0, 0, 0.7);\n  color: white;\n}\n.product-details-container .product-details #product-name[data-v-f301a3f6] {\n  font-size: 36px;\n}\n.product-details-container .product-details #product-price[data-v-f301a3f6] {\n  font-size: 32px;\n}\n.product-details-container .product-details .product-sub-details[data-v-f301a3f6] {\n  display: flex;\n  gap: 2rem;\n}\n.product-details-container .product-details .product-sub-details h1[data-v-f301a3f6]:first-child {\n  margin-right: auto;\n}", ""]);
 
 // exports
 
@@ -5516,7 +5517,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".product-card-content[data-v-19ad1dac] {\n  display: grid;\n  align-items: center;\n  grid-template-columns: repeat(1, 1fr);\n  grid-template-columns: repeat(1, minmax(200px, 1fr));\n  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));\n}\n.product-card-content .product-details[data-v-19ad1dac] {\n  flex: 1;\n  padding: 10px;\n}\n.product-card-content .add-buttons[data-v-19ad1dac] {\n  flex: 1;\n  display: grid;\n  align-items: center;\n  gap: 0.5rem;\n}\n.product-card-content .add-cart-button[data-v-19ad1dac], .product-card-content .add-wishlist-button[data-v-19ad1dac] {\n  padding: 5px;\n  border: 1px solid black;\n  box-shadow: 5px black;\n}\n.show-products-container[data-v-19ad1dac] {\n  display: flex;\n  padding: 100px;\n}\n@media screen and (max-width: 1400px) {\n.show-products-container[data-v-19ad1dac] {\n    padding: 100px 0 0 0;\n}\n}\n.show-products-container .product-filter[data-v-19ad1dac] {\n  flex: 2;\n}\n.show-products-container .products-container[data-v-19ad1dac] {\n  display: grid;\n  grid-template-columns: repeat(4, minmax(250px, 1fr));\n  flex: 1;\n  margin: auto;\n  gap: 1rem;\n}\n@media screen and (max-width: 1400px) {\n.show-products-container .products-container[data-v-19ad1dac] {\n    grid-template-columns: repeat(4, minmax(250px, 1fr));\n    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));\n}\n}\n.show-products-container .products-container .product-card[data-v-19ad1dac] {\n  border: 1px solid black;\n  padding: 20px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.show-products-container .sidebar[data-v-19ad1dac] {\n  flex: 2;\n}", ""]);
+exports.push([module.i, ".product-card-content[data-v-19ad1dac] {\n  display: grid;\n  align-items: center;\n  grid-template-columns: repeat(1, 1fr);\n  grid-template-columns: repeat(1, minmax(200px, 1fr));\n  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));\n}\n.product-card-content .product-details[data-v-19ad1dac] {\n  flex: 1;\n  padding: 10px;\n}\n.product-card-content .add-buttons[data-v-19ad1dac] {\n  flex: 1;\n  display: grid;\n  align-items: center;\n  gap: 0.5rem;\n}\n.product-card-content .add-buttons button[data-v-19ad1dac] {\n  background-color: none;\n  transition: all 0.3s;\n}\n.product-card-content .add-buttons button[data-v-19ad1dac]:hover {\n  background-color: rgba(0, 0, 0, 0.7);\n  color: white;\n}\n.product-card-content .add-cart-button[data-v-19ad1dac], .product-card-content .add-wishlist-button[data-v-19ad1dac] {\n  padding: 5px;\n  border: 1px solid black;\n  box-shadow: 5px black;\n}\n.show-products-container[data-v-19ad1dac] {\n  display: flex;\n  padding: 100px;\n}\n@media screen and (max-width: 1400px) {\n.show-products-container[data-v-19ad1dac] {\n    padding: 100px 0 0 0;\n}\n}\n.show-products-container .product-filter[data-v-19ad1dac] {\n  flex: 2;\n}\n.show-products-container .products-container[data-v-19ad1dac] {\n  display: grid;\n  grid-template-columns: repeat(4, minmax(250px, 1fr));\n  flex: 3;\n  margin: auto;\n  gap: 1rem;\n}\n@media screen and (max-width: 1400px) {\n.show-products-container .products-container[data-v-19ad1dac] {\n    grid-template-columns: repeat(4, minmax(250px, 1fr));\n    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));\n}\n}\n.show-products-container .products-container .product-card[data-v-19ad1dac] {\n  padding: 20px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  background: none;\n  transition: all 0.4s;\n}\n.show-products-container .products-container .product-card .thumbnail-preview[data-v-19ad1dac] {\n  border-radius: 5px;\n  box-shadow: 1px 1px 6px black;\n}\n.show-products-container .products-container .product-card[data-v-19ad1dac]:hover {\n  background: rgba(0, 0, 0, 0.3);\n}\n.show-products-container .sidebar[data-v-19ad1dac] {\n  flex: 2;\n}", ""]);
 
 // exports
 
@@ -51289,42 +51290,35 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("hr"),
-                _vm._v(" "),
-                _c("div", { staticClass: "product-sub-description" }, [
-                  _c("div", { staticClass: "description-text" }, [
-                    _c("h1", [
-                      _vm._v(_vm._s(_vm.product_details.product_description))
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    { attrs: { href: "#products-description-container" } },
-                    [_vm._v(">See more about this product")]
-                  )
-                ]),
-                _vm._v(" "),
                 _c("div", { staticClass: "product-buttons" }, [
-                  _c(
-                    "button",
-                    {
-                      attrs: { id: "add-to-cart-button" },
-                      on: {
-                        click: function($event) {
-                          return _vm.addToCart(_vm.product_details.product_id)
-                        }
-                      }
-                    },
-                    [_vm._v("Add to Cart")]
-                  ),
+                  _vm.product_details.product_stock > 0
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "add-to-cart-button active-add-button",
+                          on: {
+                            click: function($event) {
+                              return _vm.addToCart(
+                                _vm.product_details.product_id
+                              )
+                            }
+                          }
+                        },
+                        [_vm._v("Add to Cart")]
+                      )
+                    : _c(
+                        "button",
+                        {
+                          staticClass: "add-to-cart-button",
+                          attrs: { disabled: "" }
+                        },
+                        [_vm._v("Add to Cart")]
+                      ),
                   _vm._v(" "),
                   _c(
                     "button",
                     {
-                      attrs: { id: "add-to-wishlist-button" },
+                      staticClass: "add-to-wishlist-button active-add-button",
                       on: {
                         click: function($event) {
                           return _vm.addToWishlist(
@@ -51335,26 +51329,41 @@ var render = function() {
                     },
                     [_vm._v("Add to Wishlist")]
                   )
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "product-sub-description" }, [
+                  _c("div", { staticClass: "description-text" }, [
+                    _c("h1", [
+                      _vm._v(
+                        "Dimensions: " +
+                          _vm._s(
+                            _vm.product_details.product_length +
+                              " x " +
+                              _vm.product_details.product_width +
+                              " x " +
+                              _vm.product_details.product_height +
+                              " inch"
+                          )
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("h1", [_vm._v("Description: ")]),
+                    _vm._v(" "),
+                    _c("h1", [
+                      _vm._v(_vm._s(_vm.product_details.product_description))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("hr")
                 ])
               ])
             ]),
             _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "products-description-container",
-                attrs: { id: "products-description-container" }
-              },
-              [
-                _vm._v(
-                  "\n            " +
-                    _vm._s(_vm.product_details.product_details) +
-                    "\n        "
-                )
-              ]
-            )
+            _c("hr")
           ]
         },
         proxy: true
@@ -53142,6 +53151,7 @@ var render = function() {
                                 },
                                 [
                                   _c("img", {
+                                    class: "thumbnail-preview",
                                     attrs: {
                                       src:
                                         "/storage/product_photos/" +
