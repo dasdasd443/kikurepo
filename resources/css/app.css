@@ -1,3 +1,26 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto';
+}
+.header-container
+{
+    background:#393e46; 
+}
+#authentication-title
+{
+    font-size:42px;
+    color:white;
+}
+.login-container
+{
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2,minmax(50%,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+}

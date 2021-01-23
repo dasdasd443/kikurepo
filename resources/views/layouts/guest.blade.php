@@ -8,7 +8,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;600&display=swap">
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
@@ -17,8 +17,18 @@
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
     </head>
     <body>
-        <div class="font-sans text-gray-900 antialiased">
-            {{ $slot }}
+        <div class="text-gray-900 antialiased">
+            <div class='header-container'>
+                <h1 id='authentication-title'>Kiku Trading</h1>
+            </div>
+            <div class="login-container">
+                <div class='information'>
+                    <h1>Information</h1>
+                </div>
+                <div class="login">
+                    {{ $slot }}
+                </div>
+            </div>
         </div>
     </body>
 </html>
