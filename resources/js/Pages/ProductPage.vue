@@ -6,17 +6,21 @@
                     <div class='display-photo'>
                         <div class='photo-collection' v-if='product_photos.length != 0'>
                             <div class='product-photo'>
-                                <button>X</button>
                                     <div class="photo-display">
                                         <div :class="'photo photo-'+index" v-for='(photo,index) in product_photos' :key='photo.photo_id'>
+
                                             <img :src='"/storage/product_photos/"+product_details.photos_folder+"/" + photo.photo_name' alt="">
+                                            <div class="photo-buttons">
+                                                <button @click='changePhotoDisplay(index - 1)'>&#60;</button>
+                                                <button @click='changePhotoDisplay(index + 1)'>&#62;</button>
+                                            </div>
                                         </div>
+                                        
                                     </div>
-                                <button>Y</button>
                             </div>
                             <div class='photo-selectors'>
-                                <div class="photos-selection" v-for='photo in product_photos' :key='photo.photo_id'>
-                                    <img :src='"/storage/product_photos/"+product_details.photos_folder+"/" + photo.photo_name' alt="">
+                                <div class="photos-selection" v-for='(photo,index) in product_photos' :key='photo.photo_id'>
+                                    <img :class='`photo-thumbnail-${index}`' :src='"/storage/product_photos/"+product_details.photos_folder+"/" + photo.photo_name' alt="" @click='changePhotoDisplay(index)'>
                                 </div>
                             </div>
                         </div>
@@ -73,6 +77,11 @@
 import AppLayout from '@/Layouts/AppLayout'
 
 export default {
+    data() {
+        return {
+            currentPhotoIndex: 0
+        }
+    },
     components: {
         AppLayout
     },
@@ -97,6 +106,25 @@ export default {
         },
         addToWishlist(product_id) {
             console.log(product_id)
+        },
+        changePhotoDisplay(index) {
+            let newIndex = index;
+            if(index < 0 )
+            {
+                newIndex = this.product_photos.length - 1;
+            }
+            else if(index == this.product_photos.length)
+            {
+                newIndex = 0;
+            }
+
+            document.querySelector(`.photo-${this.currentPhotoIndex}`).style.display = 'none';
+            document.querySelector(`.photo-thumbnail-${this.currentPhotoIndex}`).style.border ='2px solid transparent';
+            document.querySelector(`.photo-${newIndex}`).style.display ='flex';
+            document.querySelector(`.photo-thumbnail-${newIndex}`).style.border ='2px solid grey';
+
+            this.currentPhotoIndex = newIndex;
+            
         }
     },
     props:['product_details','product_photos','product_reviews']
@@ -130,20 +158,38 @@ export default {
                 display:flex;
                 flex-direction: column;
                 .product-photo{
-                    flex:1;
-                    display:flex;   
-                    width:100%; 
-                    button{
-                        width:10%;
-                    }
+                    display:flex;  
                     .photo-display{
-                        width:80%;
-                    }
-                    .photo-display div:first-child{
-                        display:block;
-                    }
-                    .photo-display div{
-                        display:none;
+                        margin:auto;
+                        position: relative;
+                        .photo-buttons{
+                            position:absolute;
+                            display:flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            height:100%;
+                            margin:auto;
+                            width:100%;
+                            button{
+                                background-color:rgba(0,0,0,0.3);
+                                padding:10px;
+                                transition: all .45s;
+                            }
+                            button:hover{
+                                background-color:rgba(0,0,0,0.6);
+                            }
+                            button:focus{
+                                outline:none;
+                            }
+                        }
+                        .photo:first-child{
+                            display:flex;
+                        }
+                        .photo{
+                            display:none;
+                            box-shadow: 3px 3px 10px;
+                            max-height:1000px;
+                        }
                     }
                 }
                 .product-photo:{
@@ -151,14 +197,20 @@ export default {
                 }
                 .photo-selectors{
                     display: flex;
-                    width: 80%;
                     margin:auto;    
                     justify-content: space-evenly;
-                    padding:10px;
-                    gap:1rem;
+                    padding:20px;
+                    width:100%;
                     img{
                         flex:1;
-                        height:40px;
+                        height:50px;
+                    }
+                    .photos-selection{
+                        border:2px solid transparent;
+                        transition: all .3s;
+                    }
+                    .photos-selection:hover{
+                        border:2px solid grey;
                     }
                 }
             }
