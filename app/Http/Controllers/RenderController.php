@@ -22,6 +22,13 @@ class RenderController extends Controller
         return Inertia::render('Dashboard');
     }
 
+    public function seller_store()
+    {
+        $store = User::find(Auth::user()->id)->seller()->first();
+        $products = Products::where('seller_id','=',$store->seller_id)->get();
+        return Inertia::render('Profile/SellerStore',['store'=>$store,'products' => $products]);
+    }
+
     public function browse($category = null)
     {   
 
@@ -34,9 +41,9 @@ class RenderController extends Controller
         {
             $category = str_replace("-"," ",$category);
 
-            $category_id = Categories::where('category_name','like','%'.$category.'%')->pluck('category_id');
+            $category_id = Categories::where('category_name','like','%'.$category.'%')->first();
 
-            $products = Products::where('category_id','LIKE',$category_id[0])->get();
+            $products = Products::where('category_id','=',$category_id->category_id)->get();
 
             $products_array = array();
 

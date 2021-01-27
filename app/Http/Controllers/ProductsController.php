@@ -21,4 +21,9 @@ class ProductsController extends Controller
 
         return $product;
     }
+
+    public function addProduct(Request $request)
+    {
+        return json_encode(array($request));
+    }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\RenderController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductsController;
 
 
 /*
@@ -30,5 +31,7 @@ Route::get('/user',[UserController::class,'requestUser'])->name('user');
 Route::post('/secret',[UserController::class,'checkoutPayment'])->name('checkoutPayment');
 Route::post('/add_to_cart',[UserController::class,'addToCart'])->name('addtocart');
 Route::put('/edit_address/{address_id}',[UserController::class,'editAddress'])->name('editAddress');
+Route::post('/add_product',[ProductsController::class,'addProduct'])->name('add_product');
 
-//Route::post('/login',[LoginController::class,'authenticate'])->name('login');
+Route::post('/login',[UserController::class,'authenticate'])->name('login');
+Route::middleware('auth:sanctum','verified')->get('/store',[RenderController::class,'seller_store'])->name('store');

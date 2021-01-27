@@ -22,6 +22,30 @@ class UserController extends Controller
         return redirect('/dashboard');
     }
 
+    public function authenticate(Request $request)
+    {
+        $this->validate($request, [
+                'email' => ['required','email'],
+                'password' => ['required','min:6']
+        ]);
+
+        $user_credentials = array(
+            'email' => $request->email,
+            'password' => $request->password
+        );
+
+        if(Auth::attempt($user_credentials))
+        {
+            return redirect('/');
+        }
+        else
+        {
+            return back()->with('error','There is no existing credentials!');
+        }
+
+        
+    }
+
     public function checkoutPayment(Request $request) 
     {
         // Set your secret key. Remember to switch to your live secret key in production!

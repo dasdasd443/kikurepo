@@ -15,4 +15,9 @@ class Seller extends Model
     {
         return $this->hasMany('App\Models\Products', 'seller_id', 'seller_id');
     }
+
+    public function manager()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'seller_manager');
+    }
 }

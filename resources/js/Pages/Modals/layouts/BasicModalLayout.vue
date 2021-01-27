@@ -61,7 +61,7 @@ export default {
     .popup-content{
         padding:50px;
         display:flex;
-        
+            
     }
 }
 </style>

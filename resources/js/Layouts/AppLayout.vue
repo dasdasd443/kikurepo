@@ -25,7 +25,9 @@
                             <hr/>
                             <div v-if='user_data'>
                                 <span>Account Details</span>
-                                <span>My orders</span>
+                                <span v-if='user_data.user_type == "User"'>My orders</span>
+                                <span v-if='user_data.user_type == "Seller"' @click='store'>My Store</span>
+                                <span v-if='user_data.user_type == "Admin"'>Manage Accounts</span>
                                 <span @click='logout'>Logout</span>
                             </div>
                             <div v-else>
@@ -117,6 +119,11 @@
                     window.location = route('register').url();
                 });
             },
+            store() {
+                axios.get(route('store').url()).then(response => {
+                    window.location = route('store').url();
+                });
+            },
             //Request for categories
 
             async getCategories(){
@@ -127,13 +134,11 @@
 
             //Request for user details
             requestUser() {
-                try{
-                    axios.get(route('user').url()).then(response =>{
-                        this.user_data = response.data;
-                    });
-                }catch(err){
-                    console.log('Not logged in!');
-                }
+                axios.get(route('user').url()).then(response =>{
+                    this.user_data = response.data;
+                    console.log(this.user_data);
+                });
+                
             },
 
             //hover effect of My Account element

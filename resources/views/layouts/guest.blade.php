@@ -17,12 +17,12 @@
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
     </head>
     <body>
-        <div class="">
-            <div class='header-container'>
-                <h1 id='authentication-title'>Kiku Trading</h1>
+        <div class="font-sans text-gray-900 antialiased">
+            <div class="header-container">
+                <h1><a href={{route('/')}}>Kiku Trading</a></h1>
             </div>
             <div class="login-container">
-                <div class='information'>
+                <div class="information">
                     <h1>Information</h1>
                 </div>
                 <div class="login">
