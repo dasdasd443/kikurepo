@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use DB;
+use Validator;
 
 class ProductsController extends Controller
 {
@@ -24,6 +25,14 @@ class ProductsController extends Controller
 
     public function addProduct(Request $request)
     {
-        return json_encode(array($request));
+        $validator = Validator::make($request->all(), [
+            'preview-image' => 'image|required|max:1999',
+            'product-name' => 'required|min:6'
+        ]);
+
+        if($validator->fails()){
+            return json_encode($validator->messages());
+        }
+
     }
 }

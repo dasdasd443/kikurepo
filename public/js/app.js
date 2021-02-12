@@ -3166,8 +3166,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       axios.get(route('user').url()).then(function (response) {
-        _this2.user_data = response.data;
-        console.log(_this2.user_data);
+        _this2.user_data = response.data; //console.log(this.user_data);
       });
     },
     //hover effect of My Account element
@@ -3603,7 +3602,22 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _layouts_BasicModalLayout_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./layouts/BasicModalLayout.vue */ "./resources/js/Pages/Modals/layouts/BasicModalLayout.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _layouts_BasicModalLayout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./layouts/BasicModalLayout.vue */ "./resources/js/Pages/Modals/layouts/BasicModalLayout.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3660,22 +3674,86 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      categories: ''
+    };
+  },
   components: {
-    BasicModalLayout: _layouts_BasicModalLayout_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    BasicModalLayout: _layouts_BasicModalLayout_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   methods: {
     addProduct: function addProduct() {
-      fetch(route('add_product').url(), {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          "X-CSRF-TOKEN": document.head.querySelector("[name=csrf-token]").content
-        },
-        method: 'POST'
-      }).then(function (response) {
-        console.log(response.json());
-      });
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var elem, form, result;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                elem = document.querySelector('#add-product-form');
+                form = new FormData(elem);
+                _context.next = 4;
+                return fetch(route('add_product').url(), {
+                  headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    "X-CSRF-TOKEN": document.head.querySelector("[name=csrf-token]").content
+                  },
+                  method: 'POST',
+                  body: JSON.stringify({
+                    'product-name': form.get('product-name'),
+                    'category': form.get('category'),
+                    'price': form.get('price'),
+                    'sku': form.get('sku'),
+                    'height': form.get('height'),
+                    'length': form.get('length'),
+                    'width': form.get('width'),
+                    'description': form.get('description'),
+                    'details': form.get('details')
+                  })
+                }).then(function (response) {
+                  return response.json();
+                });
+
+              case 4:
+                result = _context.sent;
+                console.log(result);
+
+              case 6:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    getCategories: function getCategories() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return fetch('api/categories').then(function (response) {
+                  return response.json();
+                });
+
+              case 2:
+                _this.categories = _context2.sent;
+
+              case 3:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     }
+  },
+  mounted: function mounted() {
+    this.getCategories();
   }
 });
 
@@ -50860,101 +50938,157 @@ var render = function() {
         key: "content",
         fn: function() {
           return [
-            _c("form", { attrs: { method: "post" } }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "product-name" } }, [
-                  _vm._v("Product Name")
+            _c(
+              "form",
+              {
+                attrs: { method: "post", id: "add-product-form" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.addProduct($event)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "product-preview-image" } }, [
+                    _vm._v("Image")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: {
+                      type: "file",
+                      id: "product-image",
+                      name: "product-image"
+                    }
+                  })
                 ]),
                 _vm._v(" "),
-                _c("input", { attrs: { type: "text", id: "product-name" } })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "category" } }, [
-                  _vm._v("Category")
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "product-name" } }, [
+                    _vm._v("Product Name")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: {
+                      type: "text",
+                      id: "product-name",
+                      name: "product-name"
+                    }
+                  })
                 ]),
                 _vm._v(" "),
-                _c("select", { attrs: { name: "category", id: "category" } }, [
-                  _c("option", { attrs: { value: "Category" } }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "category" } }, [
                     _vm._v("Category")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    { attrs: { name: "category", id: "category" } },
+                    [
+                      _c("option", { attrs: { value: "" } }, [
+                        _vm._v("Select the category")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.categories, function(category) {
+                        return _c(
+                          "option",
+                          {
+                            key: category.category_id,
+                            domProps: { value: category.category_id }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(category.category_name) +
+                                "\n                    "
+                            )
+                          ]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "price" } }, [_vm._v("Price")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "number", id: "price", name: "price" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "sku" } }, [_vm._v("SKU")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "text", id: "sku", name: "sku" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "length" } }, [_vm._v("Length")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "number", id: "length", name: "length" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "width" } }, [_vm._v("Width")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "number", id: "width", name: "width" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "height" } }, [_vm._v("Height")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "number", id: "height", name: "height" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "description" } }, [
+                    _vm._v("Description")
+                  ]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    attrs: {
+                      name: "description",
+                      id: "description",
+                      cols: "30",
+                      rows: "10"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "Details" } }, [
+                    _vm._v("Details")
+                  ]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    attrs: {
+                      name: "details",
+                      id: "Details",
+                      cols: "30",
+                      rows: "10"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group submit" }, [
+                  _c("button", { attrs: { type: "submit" } }, [
+                    _vm._v("Add Product")
                   ])
                 ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "price" } }, [_vm._v("Price")]),
-                _vm._v(" "),
-                _c("input", { attrs: { type: "number", id: "price" } })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "sku" } }, [_vm._v("SKU")]),
-                _vm._v(" "),
-                _c("input", { attrs: { type: "text", id: "sku" } })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "length" } }, [_vm._v("Length")]),
-                _vm._v(" "),
-                _c("input", { attrs: { type: "number", id: "length" } })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "width" } }, [_vm._v("Width")]),
-                _vm._v(" "),
-                _c("input", { attrs: { type: "number", id: "width" } })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "height" } }, [_vm._v("Height")]),
-                _vm._v(" "),
-                _c("input", { attrs: { type: "number", id: "height" } })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "description" } }, [
-                  _vm._v("Description")
-                ]),
-                _vm._v(" "),
-                _c("textarea", {
-                  attrs: {
-                    name: "description",
-                    id: "description",
-                    cols: "30",
-                    rows: "10"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "Details" } }, [_vm._v("Details")]),
-                _vm._v(" "),
-                _c("textarea", {
-                  attrs: {
-                    name: "Details",
-                    id: "Details",
-                    cols: "30",
-                    rows: "10"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group submit" }, [
-                _c(
-                  "button",
-                  {
-                    attrs: { type: "submit" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.addProduct($event)
-                      }
-                    }
-                  },
-                  [_vm._v("Add Product")]
-                )
-              ])
-            ])
+              ]
+            )
           ]
         },
         proxy: true

@@ -136,7 +136,7 @@
             requestUser() {
                 axios.get(route('user').url()).then(response =>{
                     this.user_data = response.data;
-                    console.log(this.user_data);
+                    //console.log(this.user_data);
                 });
                 
             },

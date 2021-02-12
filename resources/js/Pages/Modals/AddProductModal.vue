@@ -5,36 +5,43 @@
             <button @click='$emit("closePopup")'>&times;</button>
         </template>
         <template #content>
-            <form method='post'>
+            <form method='post' id='add-product-form' @submit.prevent='addProduct'>
+                <div class="form-group">
+                    <label for="product-preview-image">Image</label>
+                    <input type="file" id='product-image' name='product-image'>
+                </div>
                 <div class="form-group">
                     <label for="product-name">Product Name</label>
-                    <input type="text" id='product-name'>
+                    <input type="text" id='product-name' name='product-name'>
                 </div>
                 <div class="form-group">
                     <label for="category">Category</label>
                     <select name="category" id="category">
-                        <option value="Category">Category</option>
+                        <option value="">Select the category</option>
+                        <option v-for='category in categories' :key='category.category_id' :value='category.category_id'>
+                            {{category.category_name}}
+                        </option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="price">Price</label>
-                    <input type="number" id='price'>
+                    <input type="number" id='price' name='price'>
                 </div>
                 <div class="form-group">
                     <label for="sku">SKU</label>
-                    <input type="text" id='sku'>
+                    <input type="text" id='sku' name='sku'>
                 </div>
                 <div class="form-group">
                     <label for="length">Length</label>
-                    <input type="number" id='length'>
+                    <input type="number" id='length' name='length'>
                 </div>
                 <div class="form-group">
                     <label for="width">Width</label>
-                    <input type="number" id='width'>
+                    <input type="number" id='width' name='width'>
                 </div>
                 <div class="form-group">
                     <label for="height">Height</label>
-                    <input type="number" id='height'>
+                    <input type="number" id='height' name='height'>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
@@ -42,10 +49,10 @@
                 </div>
                 <div class="form-group">
                     <label for="Details">Details</label>
-                    <textarea name="Details" id="Details" cols="30" rows="10"></textarea>
+                    <textarea name="details" id="Details" cols="30" rows="10"></textarea>
                 </div>
                 <div class="form-group submit">
-                    <button type='submit' @click.prevent='addProduct'>Add Product</button>
+                    <button type='submit' >Add Product</button>
                 </div>
             </form>
         </template>
@@ -55,22 +62,50 @@
 <script>
 import BasicModalLayout from './layouts/BasicModalLayout.vue'
 export default {
+    data() {
+        return {
+            categories: ''
+        }
+    },
     components: {
         BasicModalLayout
     },
     methods: {
-        addProduct() {
-            fetch(route('add_product').url(),{ 
+        async addProduct() {
+            const elem = document.querySelector('#add-product-form');
+            const form = new FormData(elem)
+            const result = await fetch(route('add_product').url(),{ 
                 headers:{
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     "X-CSRF-TOKEN": document.head.querySelector("[name=csrf-token]").content
                 },
-                method: 'POST'
-            }).then( response =>{
-                console.log(response.json());
+                method: 'POST',
+                body: JSON.stringify({
+                    'product-name': form.get('product-name'),
+                    'category': form.get('category'),
+                    'price': form.get('price'),
+                    'sku': form.get('sku'),
+                    'height': form.get('height'),
+                    'length': form.get('length'),
+                    'width': form.get('width'),
+                    'description': form.get('description'),
+                    'details': form.get('details'),
+                })
+            }).then(response => {
+                return response.json()
+            });
+
+            console.log(result)
+        },
+        async getCategories() {
+            this.categories = await fetch('api/categories').then( response => {
+                return response.json();
             });
         }
+    },
+    mounted() {
+        this.getCategories()
     }
 }
 </script>

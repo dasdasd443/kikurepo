@@ -23,7 +23,14 @@
             </div>
             <div class="login-container">
                 <div class="information">
-                    <h1>Information</h1>
+                    <div class="kiku">
+                        <h1>Kiku</h1>
+                        <small>Refurbish your house</small>
+                    </div>
+                    <div class="trading">
+                        <h1>Trading</h1>
+                        <small>with Furnitures that will make you feel at home</small>
+                    </div>
                 </div>
                 <div class="login">
                     {{ $slot }}
