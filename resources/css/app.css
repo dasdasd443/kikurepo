@@ -11,23 +11,91 @@
 .header-container
 {
     background:#393e46; 
+    
 }
-#authentication-title
-{
-    font-size:42px;
+.header-container h1{
     color:white;
 }
 .login-container
 {
-    display:grid;
-    grid-template-columns: repeat(2,1fr);
-    grid-template-columns: repeat(2,minmax(50%,1fr));
-    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-    background:black;
+    display:flex;
 }
-
-x-guest-layout{
-    background:red;
+.login-container h1
+{
+    color:black;
+    font-size:12rem ;
 }
-
+.information{
+    flex:1;
+    display:flex;
+    flex-direction: column;
+    position: relative;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */  
+    top:10vh;
+}
+.information h1{
+    background-image:linear-gradient(#393e464f 0%, #393e46 100%);
+    background-clip:text;
+    color:transparent;
+}
+.kiku{
+    position: absolute;
+    display:flex;
+    width:100vw;
+    
+}
+.kiku small{
+    position: absolute;
+    top:11rem;
+    left:22rem;
+    font-size: 1.3rem;
+}
+.trading{
+    top:9rem;
+    left:11px;
+    position: absolute;
+}
+.trading small{
+    position:absolute;
+    font-size:1.3rem;
+    top:14rem;
+    left:3rem;
+}
+.login{
+    flex:2;
+    z-index:1;
+}
+.login-div
+{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    height:100vh;
+}
+.login-form
+{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:50%;
+    border:1px solid grey;
+    position:relative;
+    top:25vh;
+    border-radius: 5px 5px 5px 5px;
+}
+.login-form form{
+    width:70%;
+    padding:20px;
+}
+@media screen and (max-width:1300px)
+{
+    .login-form
+    {
+        width:100%;
+    }
+}
 
