@@ -5,7 +5,6 @@
             <div class='logo'>
                 <h1 class='logo-title'>KIKU<small>
                     Trading Company</small></h1>
-                
             </div>
         </template>
     </app-layout>

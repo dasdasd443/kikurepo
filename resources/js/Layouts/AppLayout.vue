@@ -22,7 +22,6 @@
                     <div class='account-details' @mouseover="displayAccountDiv" @mouseleave='notDisplayAccountDiv'>
                         <h1>My account</h1>
                         <div class='account-target'>
-                            <hr/>
                             <div v-if='user_data'>
                                 <span>Account Details</span>
                                 <span v-if='user_data.user_type == "User"'>My orders</span>
@@ -43,7 +42,6 @@
         <div class='bg-white shadow categories-container'>
             <h1>Browse by Categories: </h1>
             <div class='category-list'>
-                <h1></h1>
                 <h1 v-for='category in static_categories' :key='category.name'>
                     <a :href='"/browse/" + category.value'>
                         {{category.name}}
@@ -95,7 +93,6 @@
                     {name: "Clocks", value: "clocks"},
                     {name: "Antiques", value: "antiques"},
                     {name: "Dolls and Figurative Items", value: "dolls-and-figurative-items"},
-                    {name: "Fashion and Jewelry", value: "fashion-and-jewelry"},
                 ]
             }
         },
@@ -144,13 +141,11 @@
             //hover effect of My Account element
             displayAccountDiv(){
                 let account = document.querySelector('.account-target').style;
-
-                account.display =  'block';
+                account.opacity =  '1';
             },
             notDisplayAccountDiv(){
                 let account = document.querySelector('.account-target').style;
-
-                account.display =  'none';
+                account.opacity =  '0';
             }
         },
         mounted() {
@@ -183,8 +178,9 @@ body{
     }
     .category-list{
         display:flex;
-        gap:2rem;
+        gap:1rem;
         align-items: center;
+        justify-content: space-between;
         h1{
             cursor:pointer;
         }
@@ -192,6 +188,7 @@ body{
     .categories-container{
         display:flex;
         align-items: center;
+        gap:1rem;
         overflow-x:hidden;
     }
     .header-container{
@@ -245,17 +242,20 @@ body{
                     cursor: pointer;
                 }
                 .account-target{
+                    display:block;
+                    opacity:0;
+                    border:1px solid grey;
+                    transition:all .3s;
                     hr{
                         border-color:black;
                         width: 100%;
                         margin: 10px 0 10px 0;
                     }
                     position: absolute;
-                    display:none;
                     z-index: 2;
                     background-color:rgba(255,255,255,1);
                     color:black;
-                    margin: 2px 0 0 -100px;
+                    margin: 2px 0 0 -95px;
                     border-radius: 5px 0 5px 5px;
                     width:200px;
                     padding:10px;
@@ -271,7 +271,6 @@ body{
                 }
             }
             .account-details:hover{
-                border:1px solid white;
             }
 
         }
